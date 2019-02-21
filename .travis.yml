@@ -1,0 +1,9 @@
+dist: trusty
+sudo: true
+language: c
+services:
+- docker
+jobs:
+  include:
+    - script: ./.travis/build.sh
+      if: branch = master
