@@ -11,11 +11,11 @@ if [ ! -f .travis.yml ]; then
 fi
 
 if [ -z ${DEVEL+x} ]; then
-    declare -a ARCHITECTURES=(i386 armhf aarch64 amd64)
+	declare -a ARCHITECTURES=(i386 armhf aarch64 amd64)
 else
-    declare -a ARCHITECTURES=(amd64)
-    unset DOCKER_PASSWORD
-    unset DOCKER_USERNAME
+	declare -a ARCHITECTURES=(amd64)
+	unset DOCKER_PASSWORD
+	unset DOCKER_USERNAME
 fi
 
 # Start paravirtualization
@@ -25,16 +25,16 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 for repo in builder base; do
 	for ARCH in "${ARCHITECTURES[@]}"; do
 		eval docker build \
-	     		--build-arg ARCH="${ARCH}-v3.9" \
-	     		--tag "netdata/${repo}:${ARCH}" \
-	     		--file "${repo}/Dockerfile" ./
+			--build-arg ARCH="${ARCH}-v3.9" \
+			--tag "netdata/${repo}:${ARCH}" \
+			--file "${repo}/Dockerfile" ./
 	done
 done
 
 # There is no reason to continue if we cannot log in to docker hub
 if [ -z ${DOCKER_USERNAME+x} ] || [ -z ${DOCKER_PASSWORD+x} ]; then
-    echo "No docker hub username or password specified. Exiting without pushing images to registry"
-    exit 0
+	echo "No docker hub username or password specified. Exiting without pushing images to registry"
+	exit 0
 fi
 
 # Login to docker hub to allow futher operations
