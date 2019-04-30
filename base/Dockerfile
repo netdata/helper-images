@@ -17,4 +17,5 @@ RUN apk --no-cache add curl \
                        py-mysqldb \
                        py-psycopg2 \
                        py-yaml \
-                       python
+                       python \
+                       util-linux
