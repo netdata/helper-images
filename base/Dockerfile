@@ -1,5 +1,9 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
-# author  : paulfantom
+# This image is used to speed up build process for official netdata images.
+#
+# Copyright: SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : paulfantom
+# Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
 
 # This image is used to speed up build process for official netdata images.
 
@@ -19,3 +23,6 @@ RUN apk --no-cache add curl \
                        py-yaml \
                        python \
                        util-linux
+
+# Add nut dependency from alpine-edge
+RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
