@@ -37,6 +37,7 @@ RUN mkdir -p /opt/src && wget -O /opt/src/judy.tar.gz http://downloads.sourcefor
     && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
     # Build Judy
     && cd /opt/src/judy-${JUDY_VER} \
+    && autoreconf -ivf \
     && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure \
     && make \
     # Install Judy
