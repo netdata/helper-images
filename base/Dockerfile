@@ -16,6 +16,7 @@ ENV JUDY_VER 1.0.5
 RUN apk --no-cache add curl \
                        fping \
                        jq \
+                       libmnl \
                        libuuid \
                        lm_sensors \
                        netcat-openbsd \
@@ -25,6 +26,7 @@ RUN apk --no-cache add curl \
                        py-yaml \
                        python \
                        util-linux \
+                       zlib \
                        libuv \
                        lz4 \
                        openssl
