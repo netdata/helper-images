@@ -28,9 +28,9 @@ RUN apk --no-cache add alpine-sdk \
                        python \
                        util-linux-dev \
                        zlib-dev \
-                       libuv \
-                       lz4 \
-                       openssl
+                       libuv-dev \
+                       lz4-dev \
+                       openssl-dev
 
 # Judy doesnt seem to be available on the repositories, download manually and install it
 RUN if [ "${ARCH}" == "aarch64" ]; then mkdir -p /opt/src \
