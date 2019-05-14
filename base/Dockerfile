@@ -10,6 +10,8 @@
 ARG ARCH=amd64-v3.9
 FROM multiarch/alpine:${ARCH} as builder
 
+ENV JUDY_VER 1.0.5
+
 # Install some prerequisites
 RUN apk --no-cache add curl \
                        fping \
@@ -22,7 +24,10 @@ RUN apk --no-cache add curl \
                        py-psycopg2 \
                        py-yaml \
                        python \
-                       util-linux
+                       util-linux \
+                       libuv \
+                       lz4 \
+                       openssl
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing

@@ -1,7 +1,11 @@
-#!/bin/bash
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Author  : Pawel Krupa (paulfantom)
+#!/usr/bin/env bash
+#
 # Cross-arch docker build helper script
+#
+# Copyright: SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : Pawel Krupa (paulfantom)
+# Author : Paul Emm. Katsoulakis <paul@netdata.cloud>
 
 set -e
 
@@ -9,6 +13,8 @@ if [ ! -f .travis.yml ]; then
 	echo "Run as ./.travis/$(basename "$0") from top level directory of git repository"
 	exit 1
 fi
+
+echo "Initiating helper image building"
 
 if [ -z ${DEVEL+x} ]; then
 	declare -a ARCHITECTURES=(i386 armhf aarch64 amd64)
@@ -24,8 +30,10 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # Build images using multi-arch Dockerfile.
 for repo in builder base; do
 	for ARCH in "${ARCHITECTURES[@]}"; do
+		BUILD_ARCH="${ARCH}-v3.9"
+		echo "Building docker image ${repo}:${BUILD_ARCH}"
 		eval docker build \
-			--build-arg ARCH="${ARCH}-v3.9" \
+			--build-arg ARCH="${BUILD_ARCH}" \
 			--tag "netdata/${repo}:${ARCH}" \
 			--file "${repo}/Dockerfile" ./
 	done
@@ -43,6 +51,9 @@ echo "$DOCKER_PASSWORD" | docker --config /tmp/docker login -u "$DOCKER_USERNAME
 # Push images to registry
 for repo in builder base; do
 	for ARCH in "${ARCHITECTURES[@]}"; do
+		echo "Publishing image ${repo}:${ARCH}"
 		docker --config /tmp/docker push "netdata/${repo}:${ARCH}"
 	done
 done
+
+echo "Done!"
