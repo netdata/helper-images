@@ -30,9 +30,10 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # Build images using multi-arch Dockerfile.
 for repo in builder base; do
 	for ARCH in "${ARCHITECTURES[@]}"; do
-		echo "Building docker image ${repo}:${ARCH}"
+		BUILD_ARCH="${ARCH}-v3.9"
+		echo "Building docker image ${repo}:${BUILD_ARCH}"
 		eval docker build \
-			--build-arg ARCH="${ARCH}-v3.9" \
+			--build-arg ARCH="${BUILD_ARCH}" \
 			--tag "netdata/${repo}:${ARCH}" \
 			--file "${repo}/Dockerfile" ./
 	done
