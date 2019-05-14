@@ -33,11 +33,20 @@ RUN apk --no-cache add curl \
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 # Judy doesnt seem to be available on the repositories, download manually and install it
-RUN mkdir -p /opt/src && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
+RUN if [ "${ARCH}" == "aarch64" ]; then mkdir -p /opt/src \
+    && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
     && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
-    # Build Judy
+    && cd /opt/src/judy-${JUDY_VER} \
+    && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure --build=aarch64-unknown-linux-gnu \
+    && make \
+    && make install; \
+    # non aarch64 branch
+    else mkdir -p /opt/src \
+    && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
+    && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
     && cd /opt/src/judy-${JUDY_VER} \
     && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure \
     && make \
-    # Install Judy
-    && make install
+    && make install; \
+    fi;
+
