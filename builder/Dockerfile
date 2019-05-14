@@ -33,7 +33,7 @@ RUN apk --no-cache add alpine-sdk \
                        openssl-dev
 
 # Judy doesnt seem to be available on the repositories, download manually and install it
-RUN if [ "${ARCH}" == "aarch64-v3.9" ]; then mkdir -p /opt/src \
+RUN if [ "${ARCH}" == "aarch64" ]; then mkdir -p /opt/src \
     && echo "Executing ${ARCH} build, adding exceptional option --build for judy" \
     && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
     && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
