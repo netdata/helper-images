@@ -33,21 +33,20 @@ RUN apk --no-cache add alpine-sdk \
                        openssl-dev
 
 # Judy doesnt seem to be available on the repositories, download manually and install it
-RUN if [ "${ARCH}" == "aarch64" ]; then mkdir -p /opt/src \
-    && echo "Executing ${ARCH} build, adding exceptional option --build for judy" \
-    && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
-    && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
-    && cd /opt/src/judy-${JUDY_VER} \
+RUN if [ "${ARCH}" == "aarch64" ]; then \
+    echo "Executing ${ARCH} build, adding exceptional option --build for judy" \
+    && wget -O /judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
+    && cd / && tar -xf judy.tar.gz && rm judy.tar.gz \
+    && cd /judy-${JUDY_VER} \
     && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure --build=aarch64-unknown-linux-gnu \
     && make \
     && make install; \
     # non aarch64 branch
-    else mkdir -p /opt/src \
-    && wget -O /opt/src/judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
-    && cd /opt/src && tar -xf judy.tar.gz && rm judy.tar.gz \
-    && cd /opt/src/judy-${JUDY_VER} \
+    else \
+    wget -O /judy.tar.gz http://downloads.sourceforge.net/project/judy/judy/Judy-${JUDY_VER}/Judy-${JUDY_VER}.tar.gz \
+    && cd / && tar -xf judy.tar.gz && rm judy.tar.gz \
+    && cd /judy-${JUDY_VER} \
     && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure \
     && make \
     && make install; \
     fi;
-
