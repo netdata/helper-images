@@ -19,4 +19,4 @@ RUN apt-get update && \
                        curl \
                        bats \
                        wget \
-                       rm -rf /var/lib/apt/lists/*
+                       && rm -rf /var/lib/apt/lists/*
