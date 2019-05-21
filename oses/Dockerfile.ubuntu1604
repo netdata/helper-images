@@ -18,4 +18,4 @@ RUN apt-get update && \
                        pkg-config \
                        curl \
                        wget \
-                       rm -rf /var/lib/apt/lists/*
+                       && rm -rf /var/lib/apt/lists/*
