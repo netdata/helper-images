@@ -1,3 +1,25 @@
 FROM alpine:latest
 
-RUN apk add bash gcc make autoconf automake pkgconfig zlib-dev libuuid git libmnl-dev util-linux-dev build-base wget
+RUN apk --no-cache add alpine-sdk \
+                       autoconf \
+                       automake \
+                       bash \
+                       build-base \
+                       curl \
+                       jq \
+                       libmnl-dev \
+                       libuuid \
+                       lm_sensors \
+                       netcat-openbsd \
+                       nodejs \
+                       pkgconfig \
+                       py-mysqldb \
+                       py-psycopg2 \
+                       py-yaml \
+                       python \
+                       util-linux-dev \
+                       zlib-dev \
+                       libuv-dev \
+                       lz4-dev \
+                       openssl-dev \
+                       git
