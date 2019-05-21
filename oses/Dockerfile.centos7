@@ -1,3 +1,23 @@
 FROM centos:7
 
-RUN yum install -y gcc make autoconf automake pkg-config zlib-devel libuuid-devel git wget
+RUN yum install -y epel-release
+RUN yum install -y autoconf automake \
+                        curl \
+                        gcc \
+                        git \
+                        libmnl-devel \
+                        libuuid-devel \
+                        openssl-devel \
+                        libuv-devel \
+                        lz4-devel \
+                        Judy-devel \
+                        lm_sensors \
+                        make \
+                        MySQL-python \
+                        nc \
+                        pkgconfig \
+                        python \
+                        python-psycopg2 \
+                        PyYAML \
+                        zlib-devel \
+                        wget
