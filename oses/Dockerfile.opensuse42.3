@@ -1,0 +1,25 @@
+FROM library/opensuse:42.3
+
+RUN zypper update -y
+
+RUN zypper install -y wget \
+                      curl \
+                      cups \
+                      freeipmi-devel \
+                      libmnl-devel \
+                      tar \
+                      sudo \
+                      libnetfilter_acct1 \
+                      gcc \
+                      make \
+                      automake \
+                      autoconf \
+                      lz4 \
+                      cups-devel \
+                      libuuid-devel \
+                      libJudy1 \
+                      libmnl0 \
+                      pkgconfig \
+                      git \
+                      libopenssl-devel \
+                      libnetfilter_acct-devel
