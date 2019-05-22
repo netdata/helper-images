@@ -1,0 +1,18 @@
+FROM archlinux/base:latest
+
+RUN pacman -Sy
+
+RUN pacman --noconfirm --needed -S Judy-devel \
+                                   autoconf \
+                                   autoconf-archive \
+                                   autogen \
+                                   automake \
+                                   gcc \
+                                   make \
+                                   git \
+                                   libuv-devel \
+                                   lz4-devel \
+                                   netcat \
+                                   openssl-devel \
+                                   pkgconfig \
+                                   python
