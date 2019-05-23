@@ -2,8 +2,7 @@ FROM archlinux/base:latest
 
 RUN pacman -Sy
 
-RUN pacman --noconfirm --needed -S Judy-devel \
-                                   autoconf \
+RUN pacman --noconfirm --needed -S autoconf \
                                    autoconf-archive \
                                    autogen \
                                    automake \
@@ -11,7 +10,7 @@ RUN pacman --noconfirm --needed -S Judy-devel \
                                    make \
                                    git \
                                    libuv \
-                                   lz4-devel \
+                                   lz4 \
                                    netcat \
                                    openssl \
                                    pkgconfig \
