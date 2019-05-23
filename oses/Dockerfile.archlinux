@@ -10,9 +10,9 @@ RUN pacman --noconfirm --needed -S Judy-devel \
                                    gcc \
                                    make \
                                    git \
-                                   libuv-devel \
+                                   libuv \
                                    lz4-devel \
                                    netcat \
-                                   openssl-devel \
+                                   openssl \
                                    pkgconfig \
                                    python
