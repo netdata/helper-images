@@ -16,4 +16,5 @@ RUN apt-get install -y zlib1g-dev \
                        automake \
                        pkg-config \
                        curl \
+                       bats \
                        wget
