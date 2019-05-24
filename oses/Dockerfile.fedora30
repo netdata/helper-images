@@ -20,4 +20,6 @@ RUN dnf install -y autoconf automake \
                         python-psycopg2 \
                         PyYAML \
                         zlib-devel \
-                        wget
+                        wget \
+                        procps \
+                        findutils
