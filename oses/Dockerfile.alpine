@@ -22,4 +22,5 @@ RUN apk --no-cache add alpine-sdk \
                        libuv-dev \
                        lz4-dev \
                        openssl-dev \
-                       git
+                       git \
+                       libvirt-daemon

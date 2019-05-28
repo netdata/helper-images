@@ -1,4 +1,4 @@
-FROM opensuse/leap:42.3
+FROM opensuse/tumbleweed:latest
 
 RUN zypper update -y
 

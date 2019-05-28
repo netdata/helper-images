@@ -1,7 +1,7 @@
-FROM centos:7
+FROM fedora:31
 
-RUN yum install -y epel-release
-RUN yum install -y autoconf automake \
+RUN dnf update -y
+RUN dnf install -y autoconf automake \
                         curl \
                         gcc \
                         git \
@@ -21,4 +21,5 @@ RUN yum install -y autoconf automake \
                         PyYAML \
                         zlib-devel \
                         wget \
-                        libvirt-client
+                        procps \
+                        findutils

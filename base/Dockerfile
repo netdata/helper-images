@@ -30,7 +30,8 @@ RUN apk --no-cache add curl \
                        libuv \
                        openssl \
                        lz4 \
-                       lz4-libs
+                       lz4-libs \
+                       libvirt-daemon
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing

@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:wheezy
 
 RUN apt-get update
 RUN apt-get install -y zlib1g-dev \
@@ -16,5 +16,4 @@ RUN apt-get install -y zlib1g-dev \
                        automake \
                        pkg-config \
                        curl \
-                       wget \
-                       libvirt-bin
+                       wget

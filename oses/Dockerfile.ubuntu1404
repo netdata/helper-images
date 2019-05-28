@@ -1,8 +1,9 @@
-FROM debian:stretch
+FROM ubuntu:14.04
 
-RUN apt-get update
-RUN apt-get install -y zlib1g-dev \
+RUN apt-get update && \
+    apt-get install -y zlib1g-dev \
                        uuid-dev \
+                       libuv1-dev \
                        liblz4-dev \
                        libjudy-dev \
                        libssl-dev \
@@ -17,4 +18,4 @@ RUN apt-get install -y zlib1g-dev \
                        pkg-config \
                        curl \
                        wget \
-                       libvirt-bin
+                       && rm -rf /var/lib/apt/lists/*
