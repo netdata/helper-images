@@ -14,4 +14,5 @@ RUN pacman --noconfirm --needed -S autoconf \
                                    netcat \
                                    openssl \
                                    pkgconfig \
-                                   python
+                                   python \
+                                   libvirt

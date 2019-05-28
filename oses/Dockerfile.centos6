@@ -20,4 +20,5 @@ RUN yum install -y autoconf automake \
                         python-psycopg2 \
                         PyYAML \
                         zlib-devel \
-                        wget
+                        wget \
+                        libvirt-client
