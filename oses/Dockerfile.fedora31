@@ -1,0 +1,25 @@
+FROM fedora:31
+
+RUN dnf update -y
+RUN dnf install -y autoconf automake \
+                        curl \
+                        gcc \
+                        git \
+                        libmnl-devel \
+                        libuuid-devel \
+                        openssl-devel \
+                        libuv-devel \
+                        lz4-devel \
+                        Judy-devel \
+                        lm_sensors \
+                        make \
+                        MySQL-python \
+                        nc \
+                        pkgconfig \
+                        python \
+                        python-psycopg2 \
+                        PyYAML \
+                        zlib-devel \
+                        wget \
+                        procps \
+                        findutils
