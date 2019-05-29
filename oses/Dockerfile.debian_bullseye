@@ -17,4 +17,4 @@ RUN apt-get install -y zlib1g-dev \
                        pkg-config \
                        curl \
                        wget \
-                       libvirt-bin
+                       libvirt-clients
