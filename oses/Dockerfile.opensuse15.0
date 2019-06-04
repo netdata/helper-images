@@ -17,7 +17,7 @@ RUN zypper install -y wget \
                       lz4 \
                       cups-devel \
                       libuuid-devel \
-                      libJudy1 \
+                      judy-devel \
                       libmnl0 \
                       pkgconfig \
                       git \
