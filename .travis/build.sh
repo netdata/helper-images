@@ -16,10 +16,18 @@ fi
 
 echo "Initiating helper image building"
 
-if [ -z ${DEVEL+x} ]; then
+if [ ! -z ${ARCH+x} ]; then
+	# Specified architecture
+	declare -a ARCHITECTURES=(${ARCH})
+elif [ -z ${DEVEL+x} ]; then
+	# Default architectures
 	declare -a ARCHITECTURES=(i386 armhf aarch64 amd64)
 else
+	# Devel amd64 only
 	declare -a ARCHITECTURES=(amd64)
+fi
+
+if [ ! -z ${DEVEL+x} ]; then
 	unset DOCKER_PASSWORD
 	unset DOCKER_USERNAME
 fi
