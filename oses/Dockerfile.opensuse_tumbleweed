@@ -2,6 +2,8 @@ FROM opensuse/tumbleweed:latest
 
 RUN zypper update -y
 
+RUN zypper install -y --oldpackage libcrypt1-4.4.3-2.3.x86_64
+
 RUN zypper install -y wget \
                       curl \
                       cups \
