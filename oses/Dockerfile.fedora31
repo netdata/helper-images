@@ -13,10 +13,10 @@ RUN dnf install -y autoconf automake \
                         Judy-devel \
                         lm_sensors \
                         make \
-                        MySQL-python \
                         nc \
                         pkgconfig \
                         python \
+                        python-mysql \
                         python-psycopg2 \
                         PyYAML \
                         zlib-devel \
