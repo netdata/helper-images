@@ -13,10 +13,10 @@ RUN apk --no-cache add alpine-sdk \
                        netcat-openbsd \
                        nodejs \
                        pkgconfig \
-                       py-mysqldb \
-                       py-psycopg2 \
-                       py-yaml \
-                       python \
+                       py3-mysql \
+                       py3-psycopg2 \
+                       py3-yaml \
+                       python3 \
                        util-linux-dev \
                        zlib-dev \
                        libuv-dev \
