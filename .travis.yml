@@ -2,8 +2,13 @@ dist: trusty
 sudo: true
 language: c
 services:
-- docker
-jobs:
-  include:
-    - script: ./.travis/build.sh
-      if: branch = master
+  - docker
+env:
+  - ARCH=i386
+  - ARCH=armhf
+  - ARCH=aarch64
+  - ARCH=amd64
+branches:
+  only:
+  - master
+script: ./.travis/build.sh
