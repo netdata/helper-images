@@ -15,8 +15,8 @@ fi
 
 # If the changelog was not updated on the host, assume this is a
 # development build and update the changelog appropriately.
-sed -i 's/PREVIOUS_PACKAGE_VERSION/0/g' debian/changelog
-sed -i 's/PREVIOUS_PACKAGE_DATE/1970-01-01/g' debian/changelog
+sed -i "s/PREVIOUS_PACKAGE_VERSION/${VERSION}/g" debian/changelog
+sed -i "s/PREVIOUS_PACKAGE_DATE/${BUILD_DATE}/g" debian/changelog
 
 # pre/post options are after 1.18.8, is simpler to just check help for their existence than parsing version
 if dpkg-buildpackage --help | grep "\-\-post\-clean" 2> /dev/null > /dev/null; then
