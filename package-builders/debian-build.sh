@@ -8,7 +8,7 @@ if [ -z "${BUILD_DATE}" ] ; then
     BUILD_DATE="$(date +%F)"
 fi
 
-cd /host/netdata || exit 1
+cd /netdata || exit 1
 
 ln -sf contrib/debian debian || exit 1
 
@@ -30,4 +30,4 @@ else
 fi
 
 # Copy the built packages back to the host.
-cp -a /host/*.deb /host/netdata/ || exit 1
+cp -a /*.deb /netdata/ || exit 1
