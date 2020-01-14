@@ -8,6 +8,9 @@ ENV EMAIL=$EMAIL
 ENV FULLNAME=$FULLNAME
 ENV VERSION=$VERSION
 
+# This is needed to ensure package installs don't prompt for any user input.
+ARG DEBIAN_FRONTEND=noninteractive
+
 ADD package-builders/debian-build.sh /build.sh
 RUN chmod +x /build.sh
 
