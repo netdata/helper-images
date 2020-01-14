@@ -10,7 +10,7 @@ fi
 
 cd /netdata || exit 1
 
-ln -sf contrib/debian debian || exit 1
+cp -a contrib/debian debian || exit 1
 
 # If there's a specific control file for this OS release, use it
 if [ -e "debian/control.${CODENAME}" ] ; then
@@ -31,3 +31,5 @@ fi
 
 # Copy the built packages back to the host.
 cp -a /*.deb /netdata/ || exit 1
+
+rm -rf debian || exit 1
