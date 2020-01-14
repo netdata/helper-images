@@ -1,16 +1,8 @@
 FROM debian:bullseye
 
-ARG builder_email=bot@netdata.cloud
-ENV EMAIL=$builder_email
-
-ARG builder_fullname="Netdata Builder"
-ENV FULLNAME=$builder_fullname
-
-ARG builder_version=0
-ENV VERSION=$builder_version
-
-ARG builder_date=1970-01-01
-ENV BUILD_DATE=$builder_date
+ARG EMAIL=bot@netdata.cloud
+ARG FULLNAME="Netdata Builder"
+ARG VERSION=0
 
 ADD package-builders/debian-build.sh /build.sh
 RUN chmod +x /build.sh
