@@ -4,6 +4,10 @@ ARG EMAIL=bot@netdata.cloud
 ARG FULLNAME="Netdata Builder"
 ARG VERSION=0
 
+ENV EMAIL=$EMAIL
+ENV FULLNAME=$FULLNAME
+ENV VERSION=$VERSION
+
 ADD package-builders/debian-build.sh /build.sh
 RUN chmod +x /build.sh
 
