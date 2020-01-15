@@ -1,0 +1,49 @@
+FROM opensuse/leap:15.0
+
+ARG VERSION=0
+
+ENV VERSION=$VERSION
+
+ADD package-builders/suse-build.sh /build.sh
+RUN chmod +x /build.sh
+
+RUN zypper update -y
+RUN zypper install -y autoconf \
+                      autoconf-archive \
+                      autogen \
+                      automake \
+                      cups \
+                      cups-devel \
+                      cups-devel \
+                      curl \
+                      diffutils \
+                      freeipmi-devel \
+                      freeipmi-devel \
+                      gcc \
+                      gcc-c++ \
+                      git \
+                      json-glib-devel \
+                      judy-devel \
+                      liblz4-devel \
+                      libmnl0 \
+                      libmnl-devel \
+                      libnetfilter_acct1 \
+                      libnetfilter_acct-devel \
+                      libopenssl-devel \
+                      libuv-devel \
+                      libuuid-devel \
+                      make \
+                      netcat-openbsd \
+                      patch \
+                      pkgconfig \
+                      protobuf-c \
+                      protobuf-devel \
+                      rpm-build \
+                      rpm-devel \
+                      rpmdevtools \
+                      snappy-devel \
+                      sudo \
+                      tar \
+                      wget
+
+RUN mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
