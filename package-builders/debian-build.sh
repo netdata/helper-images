@@ -5,7 +5,7 @@
 CODENAME="$(awk -F"[)(]+" '/VERSION=/ {print $2}' /etc/os-release | cut -f 1 -d ' ' | tr '[:upper:]' '[:lower:]')"
 
 if [ -z "${BUILD_DATE}" ]; then
-	BUILD_DATE="$(date +%F)"
+	BUILD_DATE="$(date -R)"
 fi
 
 # Run the builds in an isolated source directory.
