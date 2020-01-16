@@ -15,7 +15,7 @@ ADD package-builders/debian-build.sh /build.sh
 RUN chmod +x /build.sh
 
 RUN echo deb http://archive.debian.org/debian/ jessie-backports main contrib non-free >> /etc/apt/sources.list.d/99-archived.list
-RUN apt-get update -y -o Aquire::Check-Valid-Until=false
+RUN apt-get update -y -o Acquire::Check-Valid-Until=false
 RUN apt-get install -y autoconf \
                        autoconf-archive \
                        autogen \
