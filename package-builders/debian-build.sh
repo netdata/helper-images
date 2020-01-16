@@ -29,7 +29,10 @@ else
 	dpkg-buildpackage -b -us -uc || exit 1
 fi
 
-# Copy the built packages back to the host.
-cp -a /*.deb /netdata/ || exit 1
+# Copy the built packages to /netdata/artifacts (which may be bind-mounted)
+# Also ensure /netdata/artifacts exists and create it if it doesn't
+[ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
+cp -a /*.deb /netdata/artifacts/ || exit 1
 
+# Cleanup
 rm -rf debian || exit 1
