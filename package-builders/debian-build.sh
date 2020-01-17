@@ -8,7 +8,11 @@ if [ -z "${BUILD_DATE}" ]; then
 	BUILD_DATE="$(date +%F)"
 fi
 
-cd /netdata || exit 1
+# Run the builds in an isolated source directory.
+# This removes the need for cleanup, and ensures anything the build does
+# doesn't muck with the user's sources.
+cp -a /netdata /usr/src || exit 1
+cd /usr/src/netdata || exit 1
 
 cp -a contrib/debian debian || exit 1
 
@@ -32,7 +36,9 @@ fi
 # Copy the built packages to /netdata/artifacts (which may be bind-mounted)
 # Also ensure /netdata/artifacts exists and create it if it doesn't
 [ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
-cp -a /*.deb /netdata/artifacts/ || exit 1
+cp -a /usr/src/*.deb /netdata/artifacts/ || exit 1
 
-# Cleanup
-rm -rf debian || exit 1
+# Correct ownership of the artifacts.
+# Without this, the artifacts directory and it's contents end up owned
+# by root instead of the local user on Linux boxes
+chown -R --reference=/netdata /netdata/artifacts
