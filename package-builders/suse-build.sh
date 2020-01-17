@@ -20,4 +20,4 @@ sed -i "s/@PACKAGE_VERSION@/${VERSION}/g" /usr/src/packages/SPECS/netdata.spec |
 rpmbuild -bb --rebuild /usr/src/packages/SPECS/netdata.spec || exit 1
 
 [ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
-find /usr/src/packages/RPMS/ -type f -name '*.rpm' -exec cp '{}' /netdata \; || exit 1
+find /usr/src/packages/RPMS/ -type f -name '*.rpm' -exec cp '{}' /netdata/artifacts \; || exit 1
