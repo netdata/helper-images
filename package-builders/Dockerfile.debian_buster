@@ -2,7 +2,7 @@ FROM debian:buster
 
 ARG EMAIL=bot@netdata.cloud
 ARG FULLNAME="Netdata Builder"
-ARG VERSION=0
+ARG VERSION=0.1
 
 ENV EMAIL=$EMAIL
 ENV FULLNAME=$FULLNAME

@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM ubuntu:18.04
 
 ARG EMAIL=bot@netdata.cloud
 ARG FULLNAME="Netdata Builder"
@@ -8,7 +8,7 @@ ENV EMAIL=$EMAIL
 ENV FULLNAME=$FULLNAME
 ENV VERSION=$VERSION
 
-# This is needed to ensure package installs don't prompt for any user input.
+# This is needed to keep package installs from prompting about configuration.
 ARG DEBIAN_FRONTEND=noninteractive
 
 ADD package-builders/debian-build.sh /build.sh
