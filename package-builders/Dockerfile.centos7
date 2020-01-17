@@ -1,0 +1,53 @@
+FROM centos:7
+
+ARG VERSION=0.1
+
+ENV VERSION=$VERSION
+
+ADD package-builders/fedora-build.sh /build.sh
+RUN chmod +x /build.sh
+
+RUN yum update -y
+# We need to install the EPEL repo separately from everything else,
+# otherwise we won't get all of our dependencies.
+RUN yum install -y epel-release
+RUN yum install -y autoconf \
+                   autoconf-archive \
+                   autogen \
+                   automake \
+                   bash \
+                   cups-devel \
+                   curl \
+                   diffutils \
+                   findutils \
+                   freeipmi-devel \
+                   gcc \
+                   gcc-c++ \
+                   git \
+                   json-c-devel \
+                   Judy-devel \
+                   libmnl-devel \
+                   libnetfilter_acct-devel \
+                   libuuid-devel \
+                   libuv-devel \
+                   lm_sensors \
+                   lz4-devel \
+                   make \
+                   nc \
+                   openssl-devel \
+                   patch \
+                   pkgconfig \
+                   procps \
+                   protobuf-c-devel \
+                   protobuf-compiler \
+                   protobuf-devel \
+                   python \
+                   PyYAML \
+                   rpm-build \
+                   rpm-devel \
+                   rpmdevtools \
+                   snappy-devel \
+                   wget \
+                   zlib-devel
+
+RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
