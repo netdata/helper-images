@@ -1,11 +1,12 @@
-FROM opensuse/leap:15.0
+# NB: This is using a renamed/aliases image:
+#     $ docker tag opensuse/leap:15.0 opensuse:15.0
+FROM opensuse:15.0
 
 ARG VERSION=0.1
 
 ENV VERSION=$VERSION
 
 ADD package-builders/suse-build.sh /build.sh
-RUN chmod +x /build.sh
 
 RUN zypper update -y
 RUN zypper install -y autoconf \
