@@ -4,11 +4,10 @@ ARG VERSION=0.1
 
 ENV VERSION=$VERSION
 
-ADD package-builders/fedora-build.sh /build.sh
-RUN chmod +x /build.sh
+COPY package-builders/fedora-build.sh /build.sh
 
-RUN dnf update -y
-RUN dnf install -y autoconf \
+RUN dnf update -y && \
+	dnf install -y autoconf \
                    autoconf-archive \
                    autogen \
                    automake \
