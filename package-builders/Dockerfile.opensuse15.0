@@ -1,6 +1,4 @@
-# NB: This is using a renamed/aliases image:
-#     $ docker tag opensuse/leap:15.0 opensuse:15.0
-FROM opensuse:15.0
+FROM opensuse/leap:15.0
 
 ARG VERSION=0.1
 
