@@ -50,4 +50,6 @@ RUN yum install -y autoconf \
                    wget \
                    zlib-devel
 
+RUN yum clean all
+
 RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS

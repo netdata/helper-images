@@ -46,4 +46,6 @@ RUN dnf update -y && \
                    wget \
                    zlib-devel
 
+RUN rm -rf /var/cache/dnf
+
 RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS

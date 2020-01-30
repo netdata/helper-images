@@ -45,4 +45,6 @@ RUN zypper install -y autoconf \
                       tar \
                       wget
 
+RUN zypper clean && rm -rf /var/cache/zypp/*/*
+
 RUN mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
