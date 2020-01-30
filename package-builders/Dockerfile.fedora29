@@ -4,11 +4,10 @@ ARG VERSION=0.1
 
 ENV VERSION=$VERSION
 
-ADD package-builders/fedora-build.sh /build.sh
-RUN chmod +x /build.sh
+COPY package-builders/fedora-build.sh /build.sh
 
-RUN dnf update -y
-RUN dnf install -y autoconf \
+RUN dnf update -y && \
+    dnf install -y autoconf \
                    autoconf-archive \
                    autogen \
                    automake \
@@ -20,7 +19,7 @@ RUN dnf install -y autoconf \
                    freeipmi-devel \
                    gcc \
                    gcc-c++ \
-                   git \
+                   git-core \
                    json-c-devel \
                    Judy-devel \
                    libmnl-devel \
@@ -30,7 +29,6 @@ RUN dnf install -y autoconf \
                    lm_sensors \
                    lz4-devel \
                    make \
-                   nc \
                    openssl-devel \
                    patch \
                    pkgconfig \
@@ -38,15 +36,11 @@ RUN dnf install -y autoconf \
                    protobuf-c-devel \
                    protobuf-compiler \
                    protobuf-devel \
-                   python \
-                   PyYAML \
                    rpm-build \
                    rpm-devel \
                    rpmdevtools \
                    snappy-devel \
                    wget \
-                   zlib-devel
-
-RUN rm -rf /var/cache/dnf
-
-RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+                   zlib-devel && \
+    rm -rf /var/cache/dnf && \
+    mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS

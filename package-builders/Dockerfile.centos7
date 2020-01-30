@@ -4,14 +4,13 @@ ARG VERSION=0.1
 
 ENV VERSION=$VERSION
 
-ADD package-builders/fedora-build.sh /build.sh
-RUN chmod +x /build.sh
+COPY package-builders/fedora-build.sh /build.sh
 
-RUN yum update -y
 # We need to install the EPEL repo separately from everything else,
 # otherwise we won't get all of our dependencies.
-RUN yum install -y epel-release
-RUN yum install -y autoconf \
+RUN yum install -y epel-release && \
+    yum update -y && \
+    yum install -y autoconf \
                    autoconf-archive \
                    autogen \
                    automake \
@@ -23,7 +22,7 @@ RUN yum install -y autoconf \
                    freeipmi-devel \
                    gcc \
                    gcc-c++ \
-                   git \
+                   git-core \
                    json-c-devel \
                    Judy-devel \
                    libmnl-devel \
@@ -33,7 +32,6 @@ RUN yum install -y autoconf \
                    lm_sensors \
                    lz4-devel \
                    make \
-                   nc \
                    openssl-devel \
                    patch \
                    pkgconfig \
@@ -41,15 +39,11 @@ RUN yum install -y autoconf \
                    protobuf-c-devel \
                    protobuf-compiler \
                    protobuf-devel \
-                   python \
-                   PyYAML \
                    rpm-build \
                    rpm-devel \
                    rpmdevtools \
                    snappy-devel \
                    wget \
-                   zlib-devel
-
-RUN yum clean all
-
-RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+                   zlib-devel && \
+    yum clean all && \
+    mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
