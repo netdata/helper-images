@@ -4,23 +4,21 @@ ARG VERSION=0.1
 
 ENV VERSION=$VERSION
 
-ADD package-builders/suse-build.sh /build.sh
+COPY package-builders/suse-build.sh /build.sh
 
-RUN zypper update -y
-RUN zypper install -y autoconf \
+RUN zypper update -y && \
+    zypper install -y autoconf \
                       autoconf-archive \
                       autogen \
                       automake \
                       cups \
                       cups-devel \
-                      cups-devel \
                       curl \
                       diffutils \
                       freeipmi-devel \
-                      freeipmi-devel \
                       gcc \
                       gcc-c++ \
-                      git \
+                      git-core \
                       json-glib-devel \
                       judy-devel \
                       liblz4-devel \
@@ -32,19 +30,16 @@ RUN zypper install -y autoconf \
                       libuv-devel \
                       libuuid-devel \
                       make \
-                      netcat-openbsd \
                       patch \
-                      pkgconfig \
+                      pkg-config \
                       protobuf-c \
                       protobuf-devel \
                       rpm-build \
                       rpm-devel \
                       rpmdevtools \
                       snappy-devel \
-                      sudo \
                       tar \
-                      wget
-
-RUN zypper clean && rm -rf /var/cache/zypp/*/*
-
-RUN mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
+                      wget && \
+    zypper clean && \
+    rm -rf /var/cache/zypp/*/* && \
+    mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
