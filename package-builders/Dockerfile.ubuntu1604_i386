@@ -11,10 +11,9 @@ ENV VERSION=$VERSION
 # This is needed to keep package installs from prompting about configuration.
 ARG DEBIAN_FRONTEND=noninteractive
 
-ADD package-builders/debian-build.sh /build.sh
-RUN chmod +x /build.sh
+COPY package-builders/debian-build.sh /build.sh
 
-RUN apt-get update
+RUN apt-get update && \
 RUN apt-get install -y --no-install-recommends autoconf \
                        autoconf-archive \
                        autogen \
@@ -27,7 +26,7 @@ RUN apt-get install -y --no-install-recommends autoconf \
                        dpkg-dev \
                        g++ \
                        gcc \
-                       git \
+                       git-core \
                        git-buildpackage \
                        libcups2-dev \
                        libdistro-info-perl \
@@ -47,6 +46,6 @@ RUN apt-get install -y --no-install-recommends autoconf \
                        protobuf-compiler \
                        uuid-dev \
                        wget \
-                       zlib1g-dev
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+                       zlib1g-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
