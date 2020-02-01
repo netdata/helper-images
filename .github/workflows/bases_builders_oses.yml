@@ -14,5 +14,5 @@ jobs:
       run: |
         ./.github/build.sh
       env:
-        ARCH=${{ matrix.arch }}
+        - ARCH=${{ matrix.arch }}
       shell: bash
