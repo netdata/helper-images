@@ -1,0 +1,37 @@
+---
+name: Docker
+on: [pull_request]
+jobs:
+  packagebuilders:
+    name: Build Image
+    strategy:
+      matrix:
+        os:
+          - centos7
+          - debian_bullseye
+          - debian_bullseye_i386
+          - debian_buster
+          - debian_buster_i386
+          - debian_jessie
+          - debian_jessie_i386
+          - debian_stretch
+          - debian_stretch_i386
+          - fedora29
+          - fedora30
+          - fedora31
+          - opensuse15
+          - opensuse15
+          - ubuntu1604
+          - ubuntu1604_i386
+          - ubuntu1804
+          - ubuntu1804_i386
+          - ubuntu1904
+          - ubuntu1904_i386
+          - ubuntu1910
+          - ubuntu1910_i386
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build
+        run: docker build -f ./package-builders/Dockerfile.${{ matrix.os}} -t netdata/package-buidlers:${{ matrix.os}} ./
