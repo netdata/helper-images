@@ -1,0 +1,50 @@
+FROM i386/ubuntu:19.04
+
+ARG EMAIL=bot@netdata.cloud
+ARG FULLNAME="Netdata Builder"
+ARG VERSION=0.1
+
+ENV EMAIL=$EMAIL
+ENV FULLNAME=$FULLNAME
+ENV VERSION=$VERSION
+
+# This is needed to keep package installs from prompting about configuration.
+ARG DEBIAN_FRONTEND=noninteractive
+
+ADD package-builders/debian-build.sh /build.sh
+RUN chmod +x /build.sh
+
+RUN apt-get update
+RUN apt-get install -y autoconf \
+                       autoconf-archive \
+                       autogen \
+                       automake \
+                       build-essential \
+                       curl \
+                       dh-autoreconf \
+                       dh-make \
+                       dh-systemd \
+                       dpkg-dev \
+                       g++ \
+                       gcc \
+                       git \
+                       git-buildpackage \
+                       libcups2-dev \
+                       libdistro-info-perl \
+                       libipmimonitoring-dev \
+                       libjson-c-dev \
+                       libjudy-dev \
+                       liblz4-dev \
+                       libmnl-dev \
+                       libnetfilter-acct-dev \
+                       libprotobuf-dev \
+                       libprotoc-dev \
+                       libsnappy-dev \
+                       libssl-dev \
+                       libuv1-dev \
+                       make \
+                       pkg-config \
+                       protobuf-compiler \
+                       uuid-dev \
+                       wget \
+                       zlib1g-dev
