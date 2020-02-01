@@ -19,8 +19,8 @@ jobs:
           - fedora29
           - fedora30
           - fedora31
-          - opensuse15
-          - opensuse15
+          - opensuse15.0
+          - opensuse15.1
           - ubuntu1604
           - ubuntu1604_i386
           - ubuntu1804
