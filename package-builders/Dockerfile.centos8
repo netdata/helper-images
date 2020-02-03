@@ -1,0 +1,56 @@
+FROM centos:8
+
+ARG VERSION=0.1
+
+ENV VERSION=$VERSION
+
+ADD package-builders/fedora-build.sh /build.sh
+
+RUN yum install -y 'dnf-command(config-manager)'
+RUN yum config-manager --set-enabled PowerTools
+RUN yum install -y epel-release
+RUN yum install -y https://extras.getpagespeed.com/release-el8-latest.rpm
+RUN yum update -y
+RUN yum install -y autoconf \
+                   autoconf-archive \
+                   autogen \
+                   automake \
+                   bash \
+                   cups-devel \
+                   curl \
+                   diffutils \
+                   findutils \
+                   freeipmi-devel \
+                   gcc \
+                   gcc-c++ \
+                   git \
+                   json-c-devel \
+                   # XXX: Upstream package in PowerTools is broken/missing but its there to be downloaded *shrugs*
+                   http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/Judy-devel-1.0.5-18.module_el8.1.0+217+4d875839.x86_64.rpm \
+                   libmnl-devel \
+                   # FIXME: broken / Missing
+                   # XXX: Can't (currently) find a CentOS 8 package for this :/
+                   #libnetfilter_acct-devel \
+                   libuuid-devel \
+                   libuv-devel \
+                   lm_sensors \
+                   lz4-devel \
+                   make \
+                   nc \
+                   openssl-devel \
+                   patch \
+                   pkgconfig \
+                   procps \
+                   protobuf-c-devel \
+                   protobuf-compiler \
+                   protobuf-devel \
+                   python3 \
+                   python3-pyyaml \
+                   rpm-build \
+                   rpm-devel \
+                   rpmdevtools \
+                   snappy-devel \
+                   wget \
+                   zlib-devel
+
+RUN mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
