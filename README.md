@@ -1,5 +1,8 @@
 # Docker images for CI system
 
+![CI](https://github.com/netdata/helper-images/workflows/CI/badge.svg)
+![Docker](https://github.com/netdata/helper-images/workflows/Docker/badge.svg)
+
 Those images are used in our CI and build pipelines. They are not suitable for production usage.
 
 ### Image building
