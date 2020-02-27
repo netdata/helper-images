@@ -21,6 +21,7 @@ RUN echo deb http://archive.debian.org/debian/ jessie-backports main contrib non
                        automake \
                        build-essential \
                        ca-certificates \
+                       cmake \
                        curl \
                        dh-autoreconf \
                        dh-make \

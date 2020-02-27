@@ -12,6 +12,7 @@ RUN dnf update -y && \
                    autogen \
                    automake \
                    bash \
+                   cmake \
                    cups-devel \
                    curl \
                    diffutils \
