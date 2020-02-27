@@ -29,7 +29,8 @@ RUN apk --no-cache add alpine-sdk \
                        libuv-dev \
                        lz4-dev \
                        openssl-dev \
-                       libgcrypt-dev
+                       libgcrypt-dev \
+                       cmake
 
 # Judy doesnt seem to be available on the repositories, download manually and install it
 ENV JUDY_VER 1.0.5
