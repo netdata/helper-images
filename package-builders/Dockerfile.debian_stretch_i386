@@ -19,6 +19,7 @@ RUN apt-get update && \
                        autogen \
                        automake \
                        build-essential \
+                       ca-certificates \
                        cmake \
                        curl \
                        dh-autoreconf \
@@ -30,14 +31,20 @@ RUN apt-get update && \
                        git-buildpackage \
                        libcups2-dev \
                        libdistro-info-perl \
+                       libipmimonitoring-dev \
+                       libjson-c-dev \
                        libjudy-dev \
                        liblz4-dev \
                        libmnl-dev \
                        libnetfilter-acct-dev \
+                       libprotobuf-dev \
+                       libprotoc-dev \
+                       libsnappy-dev \
                        libssl-dev \
                        libuv1-dev \
                        make \
                        pkg-config \
+                       protobuf-compiler \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \

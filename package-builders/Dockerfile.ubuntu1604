@@ -19,6 +19,7 @@ RUN apt-get update && \
                        autogen \
                        automake \
                        build-essential \
+                       ca-certificates \
                        cmake \
                        curl \
                        dh-autoreconf \
