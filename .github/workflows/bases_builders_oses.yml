@@ -1,18 +1,27 @@
+---
+# Builds our base Docker iamges that it used to build the Production Docker Image(s)
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    brnaches:
+      - 'master'
+  pull_request:
 jobs:
   build:
-    name: Build and Test Builder/Base and OS Lifecycle tests for ${{ matrix.arch }}
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [i386, armhf, aarch64, amd64]
+        arch:
+          - i386
+          - armhf
+          - aarch64
+          - amd64
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Run build.sh
-      run: |
-        ./.github/build.sh
-      env:
-        ARCH: ${{ matrix.arch }}
-      shell: bash
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run build.sh
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          ./.github/scripts/build.sh

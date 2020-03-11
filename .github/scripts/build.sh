@@ -11,9 +11,9 @@ set -e
 
 echo "Initiating helper image building"
 
-if [ ! -z ${ARCH+x} ]; then
+if [ -n "${ARCH}" ]; then
   # Specified architecture
-  declare -a ARCHITECTURES=(${ARCH})
+  read -r -a ARCHITECTURES <<< "${ARCH}"
 elif [ -z ${DEVEL+x} ]; then
   # Default architectures
   declare -a ARCHITECTURES=(i386 armhf aarch64 amd64)
@@ -22,7 +22,7 @@ else
   declare -a ARCHITECTURES=(amd64)
 fi
 
-if [ ! -z ${DEVEL+x} ]; then
+if [ -n "${DEVEL}" ] || [ -n "${DEBUG}" ]; then
   unset DOCKER_PASSWORD
   unset DOCKER_USERNAME
 fi
@@ -43,20 +43,20 @@ for repo in builder base; do
 done
 
 # There is no reason to continue if we cannot log in to docker hub
-if [ -z ${DOCKER_USERNAME+x} ] || [ -z ${DOCKER_PASSWORD+x} ]; then
+if [ -z "${DOCKER_USERNAME}" ] || [ -z "${DOCKER_PASSWORD}" ]; then
   echo "No docker hub username or password specified. Exiting without pushing images to registry"
   exit 0
 fi
 
 # Login to docker hub to allow futher operations
-echo "$DOCKER_PASSWORD" | docker --config /tmp/docker login -u "$DOCKER_USERNAME" --password-stdin
+echo "${DOCKER_PASSWORD}" | docker --config /dev/null login -u "${DOCKER_USERNAME}" --password-stdin
 
 # Push images to registry
 for repo in builder base; do
   for ARCH in "${ARCHITECTURES[@]}"; do
     echo "Publishing image ${repo}:${ARCH}"
-    docker --config /tmp/docker push "netdata/${repo}:${ARCH}"
+    docker --config /dev/null push "netdata/${repo}:${ARCH}"
   done
 done
 
-echo "Done!"
+echo "All Done!"
