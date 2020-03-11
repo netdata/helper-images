@@ -15,7 +15,6 @@ jobs:
           - alpine
           - archlinux
           - centos7
-          - debian_bookworm
           - debian_bullseye
           - debian_buster
           - debian_jessie
