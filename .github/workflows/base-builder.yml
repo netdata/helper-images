@@ -1,6 +1,6 @@
 ---
-# Builds our base Docker iamges that it used to build the Production Docker Image(s)
-name: CI
+# Builds our base and builder Docker iamges that it used to build the Production Docker Image(s)
+name: Base Builder
 on:
   push:
     brnaches:
@@ -24,4 +24,4 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
         run: |
-          ./.github/scripts/build.sh
+          ./.github/scripts/build-base-builder-multiarch-images.sh
