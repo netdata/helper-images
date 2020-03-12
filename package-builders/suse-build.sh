@@ -12,7 +12,8 @@ cp -a /netdata "/usr/src/packages/SOURCES/netdata-${VERSION}" || exit 1
 # We still use release tarballs for release builds, but that's handled
 # outside of the container.
 sed -i 's/^Source.*$//g' /usr/src/packages/SPECS/netdata.spec || exit 1
-sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rf %{_topdir}\/SOURCES\/netdata-%{version} BUILD/g' /usr/src/packages/SPECS/netdata.spec || exit 1
+sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rfT %{_topdir}\/SOURCES\/netdata-%{version} BUILD/g' /usr/src/packages/SPECS/netdata.spec || exit 1
+sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${VERSION}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
