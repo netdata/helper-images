@@ -49,13 +49,13 @@ if [ -z "${DOCKER_USERNAME}" ] || [ -z "${DOCKER_PASSWORD}" ]; then
 fi
 
 # Login to docker hub to allow futher operations
-echo "${DOCKER_PASSWORD}" | docker --config /dev/null login -u "${DOCKER_USERNAME}" --password-stdin
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
 # Push images to registry
 for repo in builder base; do
   for ARCH in "${ARCHITECTURES[@]}"; do
     echo "Publishing image ${repo}:${ARCH}"
-    docker --config /dev/null push "netdata/${repo}:${ARCH}"
+    docker push "netdata/${repo}:${ARCH}"
   done
 done
 
