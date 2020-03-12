@@ -2,6 +2,8 @@
 # Builds our base and builder Docker iamges that it used to build the Production Docker Image(s)
 name: Base Builder
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     brnaches:
       - 'master'
@@ -22,6 +24,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Run build.sh
         env:
+          DOCKER_USERNAME: netdatabot
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           ARCH: ${{ matrix.arch }}
         run: |
           ./.github/scripts/build-base-builder-multiarch-images.sh
