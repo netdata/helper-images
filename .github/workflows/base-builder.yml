@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     name: Build
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
     runs-on: ubuntu-latest
     strategy:
       matrix:

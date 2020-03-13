@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     name: Build
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
     strategy:
       matrix:
         os:
@@ -41,7 +42,7 @@ jobs:
         run: |
           docker build -f ./package-builders/Dockerfile.${{ matrix.os}} -t netdata/package-buidlers:${{ matrix.os}} ./
       - name: Publish
-        if: github.actor == 'repo-owner'
+        if: (github.event_name == 'schedule' || github.event_name == 'push') && github.repository == 'netdata/helper-images'
         env:
           DOCKER_USERNAME: netdatabot
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
