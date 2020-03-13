@@ -41,6 +41,7 @@ jobs:
         run: |
           docker build -f ./package-builders/Dockerfile.${{ matrix.os}} -t netdata/package-buidlers:${{ matrix.os}} ./
       - name: Publish
+        if: github.actor == 'repo-owner'
         env:
           DOCKER_USERNAME: netdatabot
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
