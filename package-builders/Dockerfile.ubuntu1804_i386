@@ -1,17 +1,11 @@
 FROM i386/ubuntu:18.04
 
-ARG EMAIL=bot@netdata.cloud
-ARG FULLNAME="Netdata Builder"
-ARG VERSION=0.1
-
-ENV EMAIL=$EMAIL
-ENV FULLNAME=$FULLNAME
-ENV VERSION=$VERSION
+ENV EMAIL=bot@netdata.cloud
+ENV FULLNAME="Netdata Builder"
+ENV VERSION=0.1
 
 # This is needed to keep package installs from prompting about configuration.
-ARG DEBIAN_FRONTEND=noninteractive
-
-COPY package-builders/debian-build.sh /build.sh
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends autoconf \
@@ -25,6 +19,7 @@ RUN apt-get update && \
                        dh-autoreconf \
                        dh-make \
                        dh-systemd \
+                       systemd \
                        dpkg-dev \
                        g++ \
                        gcc \
@@ -51,3 +46,7 @@ RUN apt-get update && \
                        zlib1g-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY package-builders/debian-build.sh /build.sh
+
+CMD ["/build.sh"]
