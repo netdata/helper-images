@@ -47,6 +47,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/debian-build.sh /build.sh
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/build.sh"]
