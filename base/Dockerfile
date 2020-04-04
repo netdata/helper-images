@@ -24,6 +24,7 @@ RUN apk --no-cache add curl \
                        py-mysqldb \
                        py-psycopg2 \
                        py-yaml \
+                       py-pip \
                        python \
                        util-linux \
                        zlib \
@@ -34,6 +35,9 @@ RUN apk --no-cache add curl \
                        libvirt-daemon \
                        libgcrypt \
                        shadow
+
+# Add Python dependencies from PyPi using `pip` we have not APK(s) for:
+RUN pip install pymongo
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
