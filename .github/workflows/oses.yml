@@ -31,7 +31,6 @@ jobs:
           - opensuse_tumbleweed
           - ubuntu1604
           - ubuntu1804
-          - ubuntu1904
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
