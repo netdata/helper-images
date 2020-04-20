@@ -35,10 +35,8 @@ RUN apk --no-cache add curl \
                        lz4-libs \
                        libvirt-daemon \
                        libgcrypt \
-                       shadow
-
+                       shadow && \
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install pymongo
-
+    pip install pymongo && \
 # Add nut dependency from alpine-edge
-RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
+    apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
