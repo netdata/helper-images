@@ -14,6 +14,7 @@ RUN apk --no-cache add alpine-sdk \
                        build-base \
                        curl \
                        jq \
+                       json-c-dev \
                        libmnl-dev \
                        libuuid \
                        lm_sensors \
