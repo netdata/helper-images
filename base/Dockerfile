@@ -16,6 +16,7 @@ ENV JUDY_VER 1.0.5
 RUN apk --no-cache add curl \
                        fping \
                        jq \
+                       json-c \
                        libmnl \
                        libuuid \
                        lm_sensors \
