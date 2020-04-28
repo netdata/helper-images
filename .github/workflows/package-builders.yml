@@ -27,6 +27,7 @@ jobs:
           - debian9_i386
           - fedora30
           - fedora31
+          - fedora32
           - opensuse15.1
           - ubuntu1604
           - ubuntu1604_i386
