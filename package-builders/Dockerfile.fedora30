@@ -1,10 +1,6 @@
 FROM fedora:30
 
-ARG VERSION=0.1
-
 ENV VERSION=$VERSION
-
-COPY package-builders/fedora-build.sh /build.sh
 
 RUN dnf update -y && \
     dnf install -y autoconf \
@@ -45,3 +41,9 @@ RUN dnf update -y && \
                    zlib-devel && \
     rm -rf /var/cache/dnf && \
     mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/fedora-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]
