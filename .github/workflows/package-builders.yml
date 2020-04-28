@@ -34,6 +34,7 @@ jobs:
           - ubuntu1804_i386
           - ubuntu1910
           - ubuntu1910_i386
+          - ubuntu2004
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
