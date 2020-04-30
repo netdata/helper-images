@@ -29,13 +29,13 @@ jobs:
           - fedora31
           - fedora32
           - opensuse15.1
-          - ubuntu1604
-          - ubuntu1604_i386
-          - ubuntu1804
-          - ubuntu1804_i386
-          - ubuntu1910
-          - ubuntu1910_i386
-          - ubuntu2004
+          - ubuntu16.04
+          - ubuntu16.04_i386
+          - ubuntu18.04
+          - ubuntu18.04_i386
+          - ubuntu19.10
+          - ubuntu19.10_i386
+          - ubuntu20.04
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
