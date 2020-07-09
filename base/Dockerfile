@@ -37,6 +37,9 @@ RUN apk --no-cache add curl \
                        libgcrypt \
                        shadow
 
+# Dependency for mongoDB exporter
+RUN apk --no-cache add --upgrade mongo-c-driver-dev --repository=http://dl-cdn.alpinelinux.org/alpine/v3.11/community/
+
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
 RUN pip install pymongo
 

@@ -33,6 +33,9 @@ RUN apk --no-cache add alpine-sdk \
                        libgcrypt-dev \
                        cmake
 
+# Dependencies to build libmongoc
+RUN apk --no-cache add --upgrade mongo-c-driver-dev --repository=http://dl-cdn.alpinelinux.org/alpine/v3.11/community/
+
 # External dependencies (bundled to avoid network access)
 COPY deps /deps
 
