@@ -7,7 +7,7 @@
 
 # This image is used to speed up build process for official netdata images.
 
-ARG ARCH=amd64-v3.9
+ARG ARCH=amd64-v3.12
 FROM multiarch/alpine:${ARCH} as builder
 
 ENV JUDY_VER 1.0.5
@@ -22,11 +22,10 @@ RUN apk --no-cache add curl \
                        lm_sensors \
                        netcat-openbsd \
                        nodejs \
-                       py-mysqldb \
-                       py-psycopg2 \
                        py-yaml \
                        py-pip \
-                       python \
+                       python3 \
+                       python3-dev \
                        util-linux \
                        zlib \
                        libuv \
@@ -35,13 +34,15 @@ RUN apk --no-cache add curl \
                        lz4-libs \
                        libvirt-daemon \
                        libgcrypt \
-                       shadow
-
-# Dependency for mongoDB exporter
-RUN apk --no-cache add --upgrade mongo-c-driver-dev --repository=http://dl-cdn.alpinelinux.org/alpine/v3.11/community/
+                       shadow \
+                       mariadb-dev \
+                       postgresql-dev \
+                       gcc \
+                       musl-dev \
+                       mongo-c-driver-dev
 
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install pymongo
+RUN pip install pymongo mysqlclient psycopg2
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing

@@ -3,7 +3,7 @@
 
 # This image is used to speed up build process for official netdata images.
 
-ARG ARCH=amd64-v3.9
+ARG ARCH=amd64-v3.12
 FROM multiarch/alpine:${ARCH} as builder
 
 # Install prerequisites
@@ -21,20 +21,31 @@ RUN apk --no-cache add alpine-sdk \
                        netcat-openbsd \
                        nodejs \
                        pkgconfig \
-                       py-mysqldb \
-                       py-psycopg2 \
                        py-yaml \
-                       python \
+                       py-pip \
+                       python3 \
+                       python3-dev \
                        util-linux-dev \
                        zlib-dev \
                        libuv-dev \
                        lz4-dev \
                        openssl-dev \
                        libgcrypt-dev \
-                       cmake
+                       mariadb-dev \
+                       cmake \
+                       mongo-c-driver-dev
 
-# Dependencies to build libmongoc
-RUN apk --no-cache add --upgrade mongo-c-driver-dev --repository=http://dl-cdn.alpinelinux.org/alpine/v3.11/community/
+# Add Python dependencies from PyPi using `pip` we have not APK(s) for:
+RUN pip install mysqlclient 
+
+# Instaling psycopg2 requires additional alpine packages
+# Removing dependencies again after psycopg2 has been installed
+RUN apk add --no-cache --virtual .build-deps \
+    gcc \
+    musl-dev \
+    postgresql-dev \
+    && pip install --no-cache-dir psycopg2 \
+    && apk del --no-cache .build-deps
 
 # External dependencies (bundled to avoid network access)
 COPY deps /deps
