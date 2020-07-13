@@ -21,7 +21,6 @@ RUN apk --no-cache add alpine-sdk \
                        netcat-openbsd \
                        nodejs \
                        pkgconfig \
-                       py-yaml \
                        py-pip \
                        python3 \
                        python3-dev \
@@ -36,7 +35,7 @@ RUN apk --no-cache add alpine-sdk \
                        mongo-c-driver-dev
 
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install mysqlclient 
+RUN pip install mysqlclient PyYAML
 
 # Instaling psycopg2 requires additional alpine packages
 # Removing dependencies again after psycopg2 has been installed
