@@ -23,7 +23,8 @@ RUN yum install -y 'dnf-command(config-manager)' && \
                    git \
                    json-c-devel \
                    # XXX: Upstream package in PowerTools is broken/missing but its there to be downloaded *shrugs*
-                   http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/Judy-devel-1.0.5-18.module_el8.1.0+217+4d875839.x86_64.rpm \
+                   #http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/Judy-devel-1.0.5-18.module_el8.1.0+217+4d875839.x86_64.rpm \
+                   https://rpmfind.net/linux/centos/8-stream/PowerTools/x86_64/os/Packages/Judy-devel-1.0.5-18.module_el8.1.0+217+4d875839.x86_64.rpm \
                    libmnl-devel \
                    # FIXME: broken / Missing
                    # XXX: Can't (currently) find a CentOS 8 package for this :/
