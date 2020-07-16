@@ -41,7 +41,7 @@ RUN apk --no-cache add curl \
                        mongo-c-driver-dev
 
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install pymongo mysqlclient psycopg2 PyYAML
+RUN pip install pymongo mysqlclient psycopg2
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
