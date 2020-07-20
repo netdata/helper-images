@@ -33,7 +33,7 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # Build images using multi-arch Dockerfile.
 for repo in builder base; do
   for ARCH in "${ARCHITECTURES[@]}"; do
-    BUILD_ARCH="${ARCH}-v3.9"
+    BUILD_ARCH="${ARCH}-v3.12"
     echo "Building docker image ${repo}:${BUILD_ARCH}"
     eval docker build \
       --build-arg ARCH="${BUILD_ARCH}" \
