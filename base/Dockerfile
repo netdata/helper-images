@@ -38,6 +38,7 @@ RUN apk --no-cache add curl \
                        postgresql-dev \
                        gcc \
                        musl-dev \
+                       msmtp \
                        mongo-c-driver-dev
 
 # Add Python dependencies from PyPi using `pip` we have not APK(s) for:
