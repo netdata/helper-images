@@ -22,9 +22,6 @@ RUN apk --no-cache add curl \
                        lm_sensors \
                        netcat-openbsd \
                        nodejs \
-                       py-pip \
-                       python3 \
-                       python3-dev \
                        util-linux \
                        zlib \
                        libuv \
@@ -34,15 +31,11 @@ RUN apk --no-cache add curl \
                        libvirt-daemon \
                        libgcrypt \
                        shadow \
-                       mariadb-dev \
-                       postgresql-dev \
-                       gcc \
-                       musl-dev \
                        msmtp \
-                       mongo-c-driver-dev
-
-# Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install pymongo mysqlclient psycopg2
+                       postgresql-client \
+                       mongo-c-driver \
+                       python3 \
+                       py3-pip
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
