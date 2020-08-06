@@ -32,7 +32,6 @@ RUN apk --no-cache add alpine-sdk \
                        libgcrypt-dev \
                        mariadb-dev \
                        cmake \
-                       gcc \
                        musl-dev \
                        postgresql-dev \
                        mongo-c-driver-dev
