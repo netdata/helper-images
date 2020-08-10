@@ -21,7 +21,7 @@ RUN apk --no-cache add alpine-sdk \
                        netcat-openbsd \
                        nodejs \
                        pkgconfig \
-                       py-pip \
+                       py3-pip \
                        python3 \
                        python3-dev \
                        util-linux-dev \
@@ -32,19 +32,14 @@ RUN apk --no-cache add alpine-sdk \
                        libgcrypt-dev \
                        mariadb-dev \
                        cmake \
+                       musl-dev \
+                       postgresql-dev \
                        mongo-c-driver-dev
 
-# Add Python dependencies from PyPi using `pip` we have not APK(s) for:
-RUN pip install mysqlclient
-
-# Instaling psycopg2 requires additional alpine packages
-# Removing dependencies again after psycopg2 has been installed
-RUN apk add --no-cache --virtual .build-deps \
-    gcc \
-    musl-dev \
-    postgresql-dev \
-    && pip install --no-cache-dir psycopg2 \
-    && apk del --no-cache .build-deps
+# Add Python dependencies from PyPi using `pip`
+COPY builder/requirements.txt /tmp/requirements.txt
+RUN pip install wheel && \
+    pip wheel -w /wheels -r /tmp/requirements.txt
 
 # External dependencies (bundled to avoid network access)
 COPY deps /deps
