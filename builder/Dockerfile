@@ -16,6 +16,7 @@ RUN apk --no-cache add alpine-sdk \
                        jq \
                        json-c-dev \
                        libmnl-dev \
+                       libtool \
                        libuuid \
                        lm_sensors \
                        netcat-openbsd \
