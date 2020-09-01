@@ -45,26 +45,6 @@ RUN pip install wheel && \
 # External dependencies (bundled to avoid network access)
 COPY deps /deps
 
-# Judy doesnt seem to be available on the repositories, download manually and install it
-ENV JUDY_VER 1.0.5
-RUN if [ "${ARCH}" == "aarch64" ]; then \
-    echo "Executing ${ARCH} build, adding exceptional option --build for judy" \
-    && cp /deps/Judy-${JUDY_VER}.tar.gz /judy.tar.gz \
-    && cd / && tar -xf judy.tar.gz && rm judy.tar.gz \
-    && cd /judy-${JUDY_VER} \
-    && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure --build=aarch64-unknown-linux-gnu --prefix=/deps \
-    && make \
-    && make install; \
-    # non aarch64 branch
-    else \
-    cp /deps/Judy-${JUDY_VER}.tar.gz /judy.tar.gz \
-    && cd / && tar -xf judy.tar.gz && rm judy.tar.gz \
-    && cd /judy-${JUDY_VER} \
-    && CFLAGS="-O2 -s" CXXFLAGS="-O2 -s" ./configure --prefix=/deps \
-    && make \
-    && make install; \
-    fi;
-
 # freeipmi
 ENV FREEIPMI_VER 1.6.4
 COPY builder/patches/freeipmi-argp-redefine.patch /freeipmi-${FREEIPMI_VER}/
