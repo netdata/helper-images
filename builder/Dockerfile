@@ -36,8 +36,8 @@ RUN apk --no-cache add alpine-sdk \
                        musl-dev \
                        postgresql-dev \
                        mongo-c-driver-dev \
-                       protobuf \
-                       snappy
+                       protobuf-dev \
+                       snappy-dev
 
 # Add Python dependencies from PyPi using `pip`
 COPY builder/requirements.txt /tmp/requirements.txt
