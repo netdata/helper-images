@@ -35,7 +35,9 @@ RUN apk --no-cache add curl \
                        postgresql-client \
                        mongo-c-driver \
                        python3 \
-                       py3-pip
+                       py3-pip \
+                       protobuf \
+                       snappy
 
 # Add nut dependency from alpine-edge
 RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
