@@ -21,11 +21,8 @@ jobs:
           - debian11_i386
           - debian10
           - debian10_i386
-          - debian8
-          - debian8_i386
           - debian9
           - debian9_i386
-          - fedora30
           - fedora31
           - fedora32
           - opensuse15.1
@@ -33,8 +30,6 @@ jobs:
           - ubuntu16.04_i386
           - ubuntu18.04
           - ubuntu18.04_i386
-          - ubuntu19.10
-          - ubuntu19.10_i386
           - ubuntu20.04
     runs-on: ubuntu-latest
     steps:
