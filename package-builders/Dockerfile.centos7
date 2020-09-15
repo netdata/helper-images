@@ -15,15 +15,16 @@ RUN yum install -y epel-release && \
                    cups-devel \
                    curl \
                    diffutils \
+                   elfutils-libelf-devel \
                    findutils \
                    freeipmi-devel \
                    gcc \
                    gcc-c++ \
                    git-core \
                    json-c-devel \
-                   Judy-devel \
                    libmnl-devel \
                    libnetfilter_acct-devel \
+                   libtool \
                    libuuid-devel \
                    libuv-devel \
                    lm_sensors \

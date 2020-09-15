@@ -26,6 +26,7 @@ RUN apt-get update && \
                        git-buildpackage \
                        libcups2-dev \
                        libdistro-info-perl \
+                       libelf-dev \
                        libipmimonitoring-dev \
                        libjson-c-dev \
                        libjudy-dev \
@@ -36,6 +37,7 @@ RUN apt-get update && \
                        libprotoc-dev \
                        libsnappy-dev \
                        libssl-dev \
+                       libtool \
                        libuv1-dev \
                        make \
                        pkg-config \
