@@ -30,6 +30,7 @@ RUN apk --no-cache add curl \
                        lz4-libs \
                        libvirt-daemon \
                        libgcrypt \
+                       iproute2 \
                        shadow \
                        msmtp \
                        postgresql-client \
