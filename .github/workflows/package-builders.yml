@@ -23,8 +23,8 @@ jobs:
           - debian10_i386
           - debian9
           - debian9_i386
-          - fedora31
           - fedora32
+          - fedora33
           - opensuse15.1
           - opensuse15.2
           - ubuntu16.04
@@ -32,6 +32,7 @@ jobs:
           - ubuntu18.04
           - ubuntu18.04_i386
           - ubuntu20.04
+          - ubuntu20.10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
