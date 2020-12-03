@@ -41,4 +41,4 @@ RUN apk --no-cache add curl \
                        snappy
 
 # Add nut dependency from alpine-edge
-RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
+RUN apk --no-cache add nut lm-sensors --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
