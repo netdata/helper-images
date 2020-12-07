@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # author  : paulfantom
+# author  : Austin S. Hemmelgarn <austiN@netdata.cloud>
 
 # This image is used to speed up build process for official netdata images.
 
-ARG ARCH=amd64-v3.12
-FROM multiarch/alpine:${ARCH} as builder
+FROM alpine:3.12 as builder
 
 # Install prerequisites
 RUN apk --no-cache add alpine-sdk \

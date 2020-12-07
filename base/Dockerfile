@@ -1,16 +1,14 @@
 # This image is used to speed up build process for official netdata images.
 #
-# Copyright: SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright: 2019 and later Netdata Incorporated
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
-# Author : paulfantom
 # Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
+# Author : Austin S. Hemmelgarn <austiN@netdata.cloud>
 
 # This image is used to speed up build process for official netdata images.
 
-ARG ARCH=amd64-v3.12
-FROM multiarch/alpine:${ARCH} as builder
-
-ENV JUDY_VER 1.0.5
+FROM alpine:3.12 as builder
 
 # Install some prerequisites
 RUN apk --no-cache add curl \
