@@ -50,15 +50,11 @@ COPY deps /deps
 # freeipmi
 ENV FREEIPMI_VER 1.6.4
 COPY builder/patches/freeipmi-argp-redefine.patch /freeipmi-${FREEIPMI_VER}/
-RUN cp /deps/freeipmi-${FREEIPMI_VER}.tar.gz /freeipmi.tar.gz \
-    && cd / \
-    && tar -xf freeipmi.tar.gz \
-    && rm freeipmi.tar.gz \
+RUN tar -xf /deps/freeipmi-${FREEIPMI_VER}.tar.gz -C /\
     && cd /freeipmi-${FREEIPMI_VER} \
     && patch -p 0 < freeipmi-argp-redefine.patch \
     && rm freeipmi-argp-redefine.patch \
-    && CPPFLAGS="-Dgetmsg\(a,b,c,d\)=errno=-1,-1 -Dputmsg\(a,b,c,d\)=errno=-1,-1" ./configure --prefix=/deps \
-    && make \
+    && CPPFLAGS="-Dgetmsg\(a,b,c,d\)=errno=-1,-1 -Dputmsg\(a,b,c,d\)=errno=-1,-1" ./configure --prefix=/deps --disable-dependency-tracking --with-gnu-ld \
+    && make -j2 \
     && make install \
-    && cd / \
     && rm -rf /freeipmi-${FREEIPMI_VER}
