@@ -48,3 +48,4 @@ jobs:
             netdata/${{ matrix.image }}:i386
             netdata/${{ matrix.image }}:armhf
             netdata/${{ matrix.image }}:aarch64
+            netdata/${{ matrix.image }}:latest
