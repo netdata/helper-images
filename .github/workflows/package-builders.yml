@@ -25,9 +25,7 @@ jobs:
           - opensuse15.1
           - opensuse15.2
           - ubuntu16.04
-          - ubuntu16.04_i386
           - ubuntu18.04
-          - ubuntu18.04_i386
           - ubuntu20.04
           - ubuntu20.10
         include:
