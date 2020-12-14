@@ -21,6 +21,7 @@ RUN apt-get update && \
                        dh-systemd \
                        systemd \
                        dpkg-dev \
+                       g++ \
                        gcc \
                        git-core \
                        git-buildpackage \
