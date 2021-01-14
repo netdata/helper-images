@@ -29,6 +29,7 @@ RUN dnf update -y && \
                    #libnetfilter_acct-devel \
                    libtool \
                    libuuid-devel \
+                   libwebsockets-devel \
                    libuv-devel \
                    lm_sensors \
                    lz4-devel \
