@@ -37,6 +37,11 @@ jobs:
         with:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Prepare Cache
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.image }}
       - name: Docker Build
         uses: docker/build-push-action@v2
         with:
@@ -49,3 +54,9 @@ jobs:
             netdata/${{ matrix.image }}:armhf
             netdata/${{ matrix.image }}:aarch64
             netdata/${{ matrix.image }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+      - name: Cleanup Cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
