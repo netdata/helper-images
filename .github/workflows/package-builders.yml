@@ -22,7 +22,6 @@ jobs:
           - debian11
           - fedora32
           - fedora33
-          - opensuse15.1
           - opensuse15.2
           - ubuntu16.04
           - ubuntu18.04
@@ -42,8 +41,6 @@ jobs:
           - distro: fedora32
             arches: linux/amd64
           - distro: fedora33
-            arches: linux/amd64
-          - distro: opensuse15.1
             arches: linux/amd64
           - distro: opensuse15.2
             arches: linux/amd64
