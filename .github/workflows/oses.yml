@@ -15,22 +15,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - alpine
-          - archlinux
           - centos7
-          - debian_bullseye
-          - debian_buster
-          - debian_jessie
-          - debian_stretch
-          - fedora29
-          - fedora30
-          - fedora31
-          - opensuse15.0
-          - opensuse15.1
-          - opensuse42.3
-          - opensuse_tumbleweed
-          - ubuntu1604
-          - ubuntu1804
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
