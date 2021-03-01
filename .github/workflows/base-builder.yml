@@ -38,7 +38,7 @@ jobs:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Prepare Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ matrix.image }}
