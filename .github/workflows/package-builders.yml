@@ -28,29 +28,29 @@ jobs:
           - ubuntu20.04
           - ubuntu20.10
         include:
-          - distro: centos7
+          - os: centos7
             arches: linux/amd64
-          - distro: centos8
+          - os: centos8
             arches: linux/amd64
-          - distro: debian9
+          - os: debian9
             arches: linux/amd64,linux/i386
-          - distro: debian10
+          - os: debian10
             arches: linux/amd64,linux/i386
-          - distro: debian11
+          - os: debian11
             arches: linux/amd64,linux/i386
-          - distro: fedora32
+          - os: fedora32
             arches: linux/amd64
-          - distro: fedora33
+          - os: fedora33
             arches: linux/amd64
-          - distro: opensuse15.2
+          - os: opensuse15.2
             arches: linux/amd64
-          - distro: ubuntu16.04
+          - os: ubuntu16.04
             arches: linux/amd64,linux/i386
-          - distro: ubuntu18.04
+          - os: ubuntu18.04
             arches: linux/amd64,linux/i386
-          - distro: ubuntu20.04
+          - os: ubuntu20.04
             arches: linux/amd64
-          - distro: ubuntu20.10
+          - os: ubuntu20.10
             arches: linux/amd64
     runs-on: ubuntu-latest
     steps:
