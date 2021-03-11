@@ -8,49 +8,50 @@ RUN dnf distro-sync -y --nodocs && \
     dnf install -y --nodocs 'dnf-command(config-manager)' && \
     dnf config-manager --set-enabled powertools && \
     dnf clean packages && \
-    dnf install -y --nodocs autoconf \
-                            autoconf-archive \
-                            autogen \
-                            automake \
-                            bash \
-                            cmake \
-                            cups-devel \
-                            curl \
-                            diffutils \
-                            elfutils-libelf-devel \
-                            findutils \
-                            freeipmi-devel \
-                            gcc \
-                            gcc-c++ \
-                            git \
-                            json-c-devel \
-                            libmnl-devel \
-                            # FIXME: broken / Missing
-                            # XXX: Can't (currently) find a CentOS 8 package for this :/
-                            #libnetfilter_acct-devel \
-                            libtool \
-                            libuuid-devel \
-                            libwebsockets-devel \
-                            libuv-devel \
-                            lm_sensors \
-                            lz4-devel \
-                            make \
-                            nc \
-                            openssl-devel \
-                            patch \
-                            pkgconfig \
-                            procps \
-                            protobuf-c-devel \
-                            protobuf-compiler \
-                            protobuf-devel \
-                            python3 \
-                            python3-pyyaml \
-                            rpm-build \
-                            rpm-devel \
-                            rpmdevtools \
-                            snappy-devel \
-                            wget \
-                            zlib-devel && \
+    dnf install -y --nodocs --setopt=install_weak_deps=False \
+        autoconf \
+        autoconf-archive \
+        autogen \
+        automake \
+        bash \
+        cmake \
+        cups-devel \
+        curl \
+        diffutils \
+        elfutils-libelf-devel \
+        findutils \
+        freeipmi-devel \
+        gcc \
+        gcc-c++ \
+        git \
+        json-c-devel \
+        libmnl-devel \
+        # FIXME: broken / Missing
+        # XXX: Can't (currently) find a CentOS 8 package for this :/
+        #libnetfilter_acct-devel \
+        libtool \
+        libuuid-devel \
+        libwebsockets-devel \
+        libuv-devel \
+        lm_sensors \
+        lz4-devel \
+        make \
+        nc \
+        openssl-devel \
+        patch \
+        pkgconfig \
+        procps \
+        protobuf-c-devel \
+        protobuf-compiler \
+        protobuf-devel \
+        python3 \
+        python3-pyyaml \
+        rpm-build \
+        rpm-devel \
+        rpmdevtools \
+        snappy-devel \
+        wget \
+        zlib-devel && \
     rm -rf /var/cache/dnf && \
     mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
 
