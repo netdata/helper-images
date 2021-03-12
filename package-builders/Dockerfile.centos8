@@ -8,7 +8,7 @@ RUN dnf distro-sync -y --nodocs && \
     dnf install -y --nodocs 'dnf-command(config-manager)' && \
     dnf config-manager --set-enabled powertools && \
     dnf clean packages && \
-    dnf install -y --nodocs --setopt=install_weak_deps=False \
+    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         autoconf \
         autoconf-archive \
         autogen \
