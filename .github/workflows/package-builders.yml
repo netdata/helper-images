@@ -29,29 +29,29 @@ jobs:
           - ubuntu20.10
         include:
           - os: centos7
-            arches: linux/amd64
+            arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: centos8
-            arches: linux/amd64
+            arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: debian9
-            arches: linux/amd64,linux/i386
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian10
-            arches: linux/amd64,linux/i386
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian11
-            arches: linux/amd64,linux/i386
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: fedora32
-            arches: linux/amd64
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora33
-            arches: linux/amd64
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.2
-            arches: linux/amd64
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: ubuntu16.04
-            arches: linux/amd64,linux/i386
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu18.04
-            arches: linux/amd64,linux/i386
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
-            arches: linux/amd64
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.10
-            arches: linux/amd64
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
