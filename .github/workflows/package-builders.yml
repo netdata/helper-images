@@ -22,11 +22,13 @@ jobs:
           - debian11
           - fedora32
           - fedora33
+          - fedora34
           - opensuse15.2
           - ubuntu16.04
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu20.10
+          - ubuntu21.04
         include:
           - os: centos7
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
@@ -42,6 +44,8 @@ jobs:
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora33
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: fedora34
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.2
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: ubuntu16.04
@@ -51,6 +55,8 @@ jobs:
           - os: ubuntu20.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.10
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: ubuntu21.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
     runs-on: ubuntu-latest
     steps:
