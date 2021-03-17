@@ -2,7 +2,9 @@
 
 cp /netdata/netdata.spec.in /root/rpmbuild/SPECS/netdata.spec || exit 1
 
-cp -a /netdata "/root/rpmbuild/SOURCES/netdata-${VERSION}" || exit 1
+pkg_version="$(echo "${VERSION}" | tr - .)"
+
+cp -a /netdata "/root/rpmbuild/SOURCES/netdata-${pkg_version}" || exit 1
 
 # These next few steps prep the spec file for building with local sources.
 # Without this, we would have to create a tarball of the local sources
@@ -16,7 +18,7 @@ sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rfT %{_
 sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # This updates the version in the spec file appropriately.
-sed -i "s/@PACKAGE_VERSION@/${VERSION}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
+sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 rpmbuild -bb --rebuild /root/rpmbuild/SPECS/netdata.spec || exit 1
 
