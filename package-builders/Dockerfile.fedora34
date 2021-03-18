@@ -1,0 +1,53 @@
+FROM fedora:33
+
+ENV VERSION=$VERSION
+
+RUN dnf distro-sync -y --nodocs && \
+    dnf clean -y packages && \
+    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
+        autoconf \
+        autoconf-archive \
+        autogen \
+        automake \
+        bash \
+        cmake \
+        cups-devel \
+        curl \
+        diffutils \
+        elfutils-libelf-devel \
+        findutils \
+        freeipmi-devel \
+        gcc \
+        gcc-c++ \
+        git-core \
+        json-c-devel \
+        Judy-devel \
+        libmnl-devel \
+        libnetfilter_acct-devel \
+        libtool \
+        libuuid-devel \
+        libuv-devel \
+        libwebsockets-devel \
+        lz4-devel \
+        make \
+        openssl-devel \
+        patch \
+        pkgconfig \
+        procps \
+        protobuf-c-devel \
+        protobuf-compiler \
+        protobuf-devel \
+        rpm-build \
+        rpm-devel \
+        rpmdevtools \
+        snappy-devel \
+        wget \
+        zlib-devel && \
+    rm -rf /var/cache/dnf && \
+    mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/fedora-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]
