@@ -43,6 +43,7 @@ RUN zypper update -y && \
                       wget && \
     zypper clean && \
     rm -rf /var/cache/zypp/*/* && \
+    c_rehash && \
     mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
 
 COPY package-builders/entrypoint.sh /entrypoint.sh

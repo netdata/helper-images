@@ -47,6 +47,7 @@ RUN apt-get update && \
                        wget \
                        zlib1g-dev && \
     apt-get clean && \
+    c_rehash && \
     rm -rf /var/lib/apt/lists/*
 
 COPY package-builders/entrypoint.sh /entrypoint.sh

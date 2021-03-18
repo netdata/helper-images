@@ -31,6 +31,7 @@ RUN dnf distro-sync -y --nodocs && \
         lz4-devel \
         make \
         openssl-devel \
+        openssl-perl \
         patch \
         pkgconfig \
         procps \
@@ -44,6 +45,7 @@ RUN dnf distro-sync -y --nodocs && \
         wget \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
+    c_rehash && \
     mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
