@@ -58,6 +58,7 @@ jobs:
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu21.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+      max-parallel: 8
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
