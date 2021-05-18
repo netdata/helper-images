@@ -20,6 +20,9 @@ sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /root/rpmbu
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
+# Properly mark the installation type.
+echo "binpkg-rpm-${DISTRO}-${DISTRO_VERSION}-$(uname -m)" > system/.install-type
+
 rpmbuild -bb --rebuild /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # Copy the built packages to /netdata/artifacts (which may be bind-mounted)
