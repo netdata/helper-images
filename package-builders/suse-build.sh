@@ -21,7 +21,11 @@ sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /usr/src/pa
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
 
 # Properly mark the installation type.
-echo "binpkg-rpm-${DISTRO}-${DISTRO_VERSION}-$(uname -m)" > system/.install-type
+cat > system/.install-type <<-EOF
+	INSTALL_TYPE='binpkg-rpm'
+	PREBUILT_ARCH='$(uname -m)'
+	PREBUILT_DISTRO='${DISTRO} ${DISTRO_VERSION}'
+	EOF
 
 rpmbuild -bb --rebuild /usr/src/packages/SPECS/netdata.spec || exit 1
 
