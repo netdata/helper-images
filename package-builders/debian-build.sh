@@ -26,6 +26,13 @@ fi
 sed -i "s/PREVIOUS_PACKAGE_VERSION/${VERSION}/g" debian/changelog
 sed -i "s/PREVIOUS_PACKAGE_DATE/${BUILD_DATE}/g" debian/changelog
 
+# Properly mark the installation type.
+cat > system/.install-type <<-EOF
+	INSTALL_TYPE='binpkg-deb'
+	PREBUILT_ARCH='$(uname -m)'
+	PREBUILT_DISTRO='${DISTRO} ${DISTRO_VERSION}'
+	EOF
+
 # pre/post options are after 1.18.8, is simpler to just check help for their existence than parsing version
 if dpkg-buildpackage --help | grep "\-\-post\-clean" 2> /dev/null > /dev/null; then
   dpkg-buildpackage --post-clean --pre-clean -b -us -uc || exit 1
