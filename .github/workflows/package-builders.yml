@@ -23,6 +23,7 @@ jobs:
           - fedora33
           - fedora34
           - opensuse15.2
+          - opensuse15.3
           - ubuntu16.04
           - ubuntu18.04
           - ubuntu20.04
@@ -44,6 +45,8 @@ jobs:
           - os: fedora34
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.2
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+          - os: opensuse15.3
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: ubuntu16.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
