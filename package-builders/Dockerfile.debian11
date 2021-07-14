@@ -27,6 +27,7 @@ RUN apt-get update && \
                        libcups2-dev \
                        libdistro-info-perl \
                        libelf-dev \
+                       libfreeipmi-dev \
                        libipmimonitoring-dev \
                        libjson-c-dev \
                        libjudy-dev \
