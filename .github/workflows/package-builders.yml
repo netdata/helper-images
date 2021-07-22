@@ -27,7 +27,6 @@ jobs:
           - ubuntu16.04
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu20.10
           - ubuntu21.04
         include:
           - os: centos7
@@ -53,8 +52,6 @@ jobs:
           - os: ubuntu18.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu20.10
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu21.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
