@@ -8,6 +8,12 @@ if [ -z "${BUILD_DATE}" ]; then
   BUILD_DATE="$(date -R)"
 fi
 
+# If libipmimonitoring.pc is borked, fix it.
+if [ -e "/usr/lib/$(uname -m)-linux-gnu/pkgconfig/libipmimonitoring.pc/libipmimonitoring.pc" ] ; then
+  mv "/usr/lib/$(uname -m)-linux-gnu/pkgconfig/libipmimonitoring.pc" tmp/libipmimonitoring
+  mv tmp/libipmimonitoring/libipmimonitoring.pc "/usr/lib/$(uname -m)-linux-gnu/pkgconfig"
+fi
+
 # Run the builds in an isolated source directory.
 # This removes the need for cleanup, and ensures anything the build does
 # doesn't muck with the user's sources.
