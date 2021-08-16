@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:10
 
 ENV EMAIL=bot@netdata.cloud
 ENV FULLNAME="Netdata Builder"

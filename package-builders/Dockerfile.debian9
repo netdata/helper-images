@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:9
 
 ENV EMAIL=bot@netdata.cloud
 ENV FULLNAME="Netdata Builder"

@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:11
 
 ENV EMAIL=bot@netdata.cloud
 ENV FULLNAME="Netdata Builder"
