@@ -50,7 +50,7 @@ RUN apt-get update && \
     c_rehash && \
     rm -rf /var/lib/apt/lists/*
 
-COPY package-builders/entrypoint.sh /build.sh
+COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/debian-build.sh /build.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
