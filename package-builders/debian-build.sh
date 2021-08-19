@@ -9,10 +9,13 @@ if [ -z "${BUILD_DATE}" ]; then
 fi
 
 # If libipmimonitoring.pc is borked, fix it.
-if [ -e "/usr/lib/$(uname -m)-linux-gnu/pkgconfig/libipmimonitoring.pc/libipmimonitoring.pc" ] ; then
-  mv "/usr/lib/$(uname -m)-linux-gnu/pkgconfig/libipmimonitoring.pc" tmp/libipmimonitoring
-  mv tmp/libipmimonitoring/libipmimonitoring.pc "/usr/lib/$(uname -m)-linux-gnu/pkgconfig"
-fi
+for path in $(pkg-config --variable pc_path pkg-config | tr ':' ' '); do
+  if [ -e "${path}/libipmimonitoring.pc/libipmimonitoring.pc" ] ; then
+    mv "${path}/libipmimonitoring.pc" tmp/libipmimonitoring
+    mv tmp/libipmimonitoring/libipmimonitoring.pc "${path}"
+    break
+  fi
+done
 
 # Run the builds in an isolated source directory.
 # This removes the need for cleanup, and ensures anything the build does
