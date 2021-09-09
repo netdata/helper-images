@@ -34,27 +34,27 @@ jobs:
           - os: centos8
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: debian9
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian10
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian11
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linuxs390x,linux/mips64le,linux/arm/v5
           - os: fedora33
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
           - os: fedora34
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
           - os: opensuse15.2
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+            arches: linux/amd64,linux/arm64/v8,linux/ppc64le
           - os: opensuse15.3
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+            arches: linux/amd64,linux/arm64/v8,linux/ppc64le
           - os: ubuntu16.04
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
           - os: ubuntu18.04
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
           - os: ubuntu20.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
           - os: ubuntu21.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le # possibly linux/s390x
       max-parallel: 8
     runs-on: ubuntu-latest
     steps:
