@@ -3,8 +3,6 @@ FROM centos:8
 ENV VERSION=$VERSION
 
 RUN dnf distro-sync -y --nodocs && \
-    dnf install -y --nodocs epel-release && \
-    dnf install -y --nodocs http://repo.okay.com.mx/centos/8/x86_64/release/okay-release-1-5.el8.noarch.rpm && \
     dnf install -y --nodocs 'dnf-command(config-manager)' && \
     dnf config-manager --set-enabled powertools && \
     dnf clean packages && \
@@ -31,7 +29,6 @@ RUN dnf distro-sync -y --nodocs && \
         #libnetfilter_acct-devel \
         libtool \
         libuuid-devel \
-        libwebsockets-devel \
         libuv-devel \
         lm_sensors \
         lz4-devel \

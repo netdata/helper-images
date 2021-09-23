@@ -2,8 +2,6 @@ FROM centos:7
 
 ENV VERSION=$VERSION
 
-# We need to install the EPEL repo separately from everything else,
-# otherwise we won't get all of our dependencies.
 RUN yum install -y epel-release && \
     yum update -y && \
     yum install -y autoconf \
