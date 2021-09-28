@@ -9,8 +9,8 @@ on:
       - 'master'
   pull_request:
 jobs:
-  build:
-    name: Build
+  build-check:
+    name: Build Check
     if: github.event_name == 'pull_request' || github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
     runs-on: ubuntu-latest
     strategy:
@@ -21,42 +21,73 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Check if we should push images
-        if: (github.event_name == 'schedule' || github.event_name == 'push')
-        run: echo 'PUSH_IMAGES=true' >> $GITHUB_ENV
-      - name: Check if we should push images
-        if: github.event_name == 'pull_request'
-        run: echo 'PUSH_IMAGES=false' >> $GITHUB_ENV
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Test Build
+        uses: docker/build-push-action@v2
+        with:
+          load: false
+          push: false
+          tags: netdata/${{ matrix.image }}:test
+          file: ./${{ matrix.image }}/Dockerfile
+
+  pr-checks:
+    name: PR Checks
+    if: github.event_name == 'pull_request'
+    needs: build-check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - base
+          - builder
+        platforms:
+          - linux/i386
+          - linux/arm/v7
+          - linux/arm64/v8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup QEMU
+        if: matrix.platforms != 'linux/i386'
+        uses: docker/setup-qemu-action@v1
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          platforms: ${{ matrix.platforms }}
+          load: false
+          push: false
+          tags: netdata/${{ matrix.image }}:test
+          file: ./${{ matrix.image }}/Dockerfile
+
+  publish:
+    name: Publish Images
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
+    needs: build-check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - base
+          - builder
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v1
       - name: Docker Hub Login
-        if: env.PUSH_IMAGES == 'true'
         uses: docker/login-action@v1
         with:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Prepare Cache
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ matrix.image }}
       - name: Docker Build
         uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64
           push: ${{ env.PUSH_IMAGES }}
           file: ./${{ matrix.image }}/Dockerfile
-          tags: |
-            netdata/${{ matrix.image }}:amd64
-            netdata/${{ matrix.image }}:i386
-            netdata/${{ matrix.image }}:armhf
-            netdata/${{ matrix.image }}:aarch64
-            netdata/${{ matrix.image }}:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-      - name: Cleanup Cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          tags: netdata/${{ matrix.image }}:latest
