@@ -84,7 +84,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup QEMU
-        if: matrix.platforms != 'linux/i386'
+        if: matrix.platform != 'linux/i386'
         uses: docker/setup-qemu-action@v1
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v1
