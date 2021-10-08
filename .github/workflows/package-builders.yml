@@ -23,6 +23,7 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
           - ubuntu18.04
@@ -57,6 +58,7 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
           - ubuntu18.04
@@ -72,6 +74,7 @@ jobs:
           - {os: centos8, platform: linux/arm/v7}
           - {os: fedora33, platform: linux/i386}
           - {os: fedora34, platform: linux/i386}
+          - {os: fedora35, platform: linux/i386}
           - {os: opensuse15.2, platform: linux/i386}
           - {os: opensuse15.2, platform: linux/arm/v7}
           - {os: opensuse15.3, platform: linux/i386}
@@ -112,6 +115,7 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
           - ubuntu18.04
@@ -132,6 +136,8 @@ jobs:
           - os: fedora33
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora34
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: fedora35
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.2
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
