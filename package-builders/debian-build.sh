@@ -4,6 +4,9 @@
 # The use of cut and tr here is to handle Ubuntu's multi-word codenames with capital letters.
 CODENAME="$(awk -F"[)(]+" '/VERSION=/ {print $2}' /etc/os-release | cut -f 1 -d ' ' | tr '[:upper:]' '[:lower:]')"
 
+# Explicitly opt out of LTO, we don’t want it.
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
+
 if [ -z "${BUILD_DATE}" ]; then
   BUILD_DATE="$(date -R)"
 fi
