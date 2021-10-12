@@ -8,6 +8,9 @@ on:
     branches:
       - 'master'
   pull_request:
+concurrency:
+  group: package-builders-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build-check:
     name: Build Check
