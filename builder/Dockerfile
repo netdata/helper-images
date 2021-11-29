@@ -4,7 +4,7 @@
 
 # This image is used to speed up build process for official netdata images.
 
-FROM alpine:3.12 as builder
+FROM alpine:3.15.0 as builder
 
 # Install prerequisites
 RUN apk --no-cache add alpine-sdk \
