@@ -8,6 +8,9 @@ on:
     branches:
       - 'master'
   pull_request:
+concurrency:
+  group: package-builders-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build-check:
     name: Build Check
@@ -23,8 +26,11 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
+          - oraclelinux8
+          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.04
@@ -57,8 +63,11 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
+          - oraclelinux8
+          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.04
@@ -72,10 +81,15 @@ jobs:
           - {os: centos8, platform: linux/arm/v7}
           - {os: fedora33, platform: linux/i386}
           - {os: fedora34, platform: linux/i386}
+          - {os: fedora35, platform: linux/i386}
           - {os: opensuse15.2, platform: linux/i386}
           - {os: opensuse15.2, platform: linux/arm/v7}
           - {os: opensuse15.3, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/arm/v7}
+          - {os: oraclelinux8, platform: linux/i386}
+          - {os: oraclelinux8, platform: linux/arm/v7}
+          - {os: rockylinux8, platform: linux/i386}
+          - {os: rockylinux8, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu21.04, platform: linux/i386}
           - {os: ubuntu21.10, platform: linux/i386}
@@ -112,8 +126,11 @@ jobs:
           - debian11
           - fedora33
           - fedora34
+          - fedora35
           - opensuse15.2
           - opensuse15.3
+          - oraclelinux8
+          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.04
@@ -133,10 +150,16 @@ jobs:
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora34
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: fedora35
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.2
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: opensuse15.3
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+          - os: oraclelinux8
+            arches: linux/amd64,linux/arm64/v8 # No other platforms
+          - os: rockylinux8
+            arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: ubuntu18.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
