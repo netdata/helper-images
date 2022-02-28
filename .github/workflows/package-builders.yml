@@ -20,21 +20,20 @@ jobs:
       matrix:
         os:
           - centos7
-          - centos8
           - debian9
           - debian10
           - debian11
-          - fedora33
           - fedora34
           - fedora35
-          - opensuse15.2
+          - fedora36
           - opensuse15.3
+          - opensuse15.4
           - oraclelinux8
           - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.04
           - ubuntu21.10
+          - ubuntu22.04
       max-parallel: 8
     steps:
       - name: Checkout
@@ -57,42 +56,43 @@ jobs:
     strategy:
       matrix:
         os:
-          - centos8
+          - centos7
           - debian9
           - debian10
           - debian11
-          - fedora33
           - fedora34
           - fedora35
-          - opensuse15.2
+          - fedora36
           - opensuse15.3
+          - opensuse15.4
           - oraclelinux8
           - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.04
           - ubuntu21.10
+          - ubuntu22.04
         platform:
           - linux/i386
           - linux/arm/v7
           - linux/arm64/v8
         exclude: # don’t try to run these specific combinations
-          - {os: centos8, platform: linux/i386}
-          - {os: centos8, platform: linux/arm/v7}
-          - {os: fedora33, platform: linux/i386}
+          - {os: centos7, platform: linux/i386}
+          - {os: centos7, platform: linux/arm/v7}
+          - {os: centos7, platform: linux/arm64/v8}
           - {os: fedora34, platform: linux/i386}
           - {os: fedora35, platform: linux/i386}
-          - {os: opensuse15.2, platform: linux/i386}
-          - {os: opensuse15.2, platform: linux/arm/v7}
+          - {os: fedora36, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/arm/v7}
+          - {os: opensuse15.4, platform: linux/i386}
+          - {os: opensuse15.4, platform: linux/arm/v7}
           - {os: oraclelinux8, platform: linux/i386}
           - {os: oraclelinux8, platform: linux/arm/v7}
           - {os: rockylinux8, platform: linux/i386}
           - {os: rockylinux8, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
-          - {os: ubuntu21.04, platform: linux/i386}
           - {os: ubuntu21.10, platform: linux/i386}
+          - {os: ubuntu22.04, platform: linux/i386}
       max-parallel: 8
     steps:
       - name: Checkout
@@ -120,41 +120,38 @@ jobs:
       matrix:
         os:
           - centos7
-          - centos8
           - debian9
           - debian10
           - debian11
-          - fedora33
           - fedora34
           - fedora35
-          - opensuse15.2
+          - fedora36
           - opensuse15.3
+          - opensuse15.4
           - oraclelinux8
           - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.04
           - ubuntu21.10
+          - ubuntu22.04
         include:
           - os: centos7
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
-          - os: centos8
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: debian9
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian10
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian11
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
-          - os: fedora33
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora34
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora35
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: opensuse15.2
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+          - os: fedora36
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.3
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+          - os: opensuse15.4
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: oraclelinux8
             arches: linux/amd64,linux/arm64/v8 # No other platforms
@@ -164,9 +161,9 @@ jobs:
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu21.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu21.10
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: ubuntu22.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
       max-parallel: 8
     steps:
