@@ -1,4 +1,4 @@
-FROM opensuse/leap:15.2
+FROM opensuse/leap:15.4
 
 ENV VERSION=0.1
 
@@ -49,5 +49,5 @@ RUN zypper update -y && \
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/suse-build.sh /build.sh
 
-ENTRYPOINT ["/entrypoint.sh"] 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/build.sh"]
