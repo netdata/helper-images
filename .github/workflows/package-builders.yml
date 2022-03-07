@@ -37,7 +37,7 @@ jobs:
       max-parallel: 8
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v1
       - name: Docker Build
@@ -96,7 +96,7 @@ jobs:
       max-parallel: 8
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup QEMU
         if: matrix.platform != 'linux/i386'
         uses: docker/setup-qemu-action@v1
@@ -168,7 +168,7 @@ jobs:
       max-parallel: 8
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
       - name: Setup Buildx
