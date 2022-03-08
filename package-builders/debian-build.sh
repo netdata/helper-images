@@ -24,6 +24,7 @@ done
 # This removes the need for cleanup, and ensures anything the build does
 # doesn't muck with the user's sources.
 cp -a /netdata /usr/src || exit 1
+rm -rf /usr/src/netdata/.git || exit 1
 cd /usr/src/netdata || exit 1
 
 cp -a contrib/debian debian || exit 1

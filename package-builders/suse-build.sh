@@ -5,6 +5,7 @@ cp /netdata/netdata.spec.in /usr/src/packages/SPECS/netdata.spec || exit 1
 pkg_version="$(echo "${VERSION}" | tr - .)"
 
 cp -a /netdata "/usr/src/packages/SOURCES/netdata-${pkg_version}" || exit 1
+rm -rf "/usr/src/packages/SOURCES/netdata-${pkg_version}/.git" || exit 1
 
 # These next few steps prep the spec file for building with local sources.
 # Without this, we would have to create a tarball of the local sources
