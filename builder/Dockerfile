@@ -12,32 +12,31 @@ RUN apk --no-cache add alpine-sdk \
                        automake \
                        bash \
                        build-base \
+                       cmake \
                        curl \
                        jq \
                        json-c-dev \
+                       libgcrypt-dev \
                        libmnl-dev \
                        libtool \
                        libuuid \
+                       libuv-dev \
                        lm_sensors \
+                       lz4-dev \
+                       mariadb-dev \
+                       mongo-c-driver-dev \
+                       musl-dev \
                        netcat-openbsd \
-                       nodejs \
+                       openssl-dev \
                        pkgconfig \
+                       postgresql-dev \
+                       protobuf-dev \
                        py3-pip \
                        python3 \
                        python3-dev \
+                       snappy-dev \
                        util-linux-dev \
-                       zlib-dev \
-                       libuv-dev \
-                       lz4-dev \
-                       openssl-dev \
-                       libgcrypt-dev \
-                       mariadb-dev \
-                       cmake \
-                       musl-dev \
-                       postgresql-dev \
-                       mongo-c-driver-dev \
-                       protobuf-dev \
-                       snappy-dev
+                       zlib-dev
 
 # Add Python dependencies from PyPi using `pip`
 COPY builder/requirements.txt /tmp/requirements.txt
