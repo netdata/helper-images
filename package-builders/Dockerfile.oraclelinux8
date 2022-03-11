@@ -23,6 +23,7 @@ RUN dnf distro-sync -y --nodocs && \
         gcc-c++ \
         git \
         json-c-devel \
+        libatomic \
         libmnl-devel \
         libtool \
         libuuid-devel \

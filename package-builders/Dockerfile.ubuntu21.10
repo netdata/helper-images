@@ -24,6 +24,7 @@ RUN apt-get update && \
                        gcc \
                        git-core \
                        git-buildpackage \
+                       libatomic1 \
                        libcups2-dev \
                        libdistro-info-perl \
                        libelf-dev \
