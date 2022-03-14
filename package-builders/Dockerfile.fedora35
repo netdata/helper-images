@@ -22,6 +22,7 @@ RUN dnf distro-sync -y --nodocs && \
         git-core \
         json-c-devel \
         Judy-devel \
+        libatomic \
         libmnl-devel \
         libnetfilter_acct-devel \
         libtool \
