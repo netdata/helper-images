@@ -28,7 +28,6 @@ RUN apk --no-cache add apcupsd \
                        mongo-c-driver \
                        msmtp \
                        netcat-openbsd \
-                       nodejs \
                        openssl \
                        postgresql-client \
                        protobuf \
