@@ -19,6 +19,7 @@ jobs:
     strategy:
       matrix:
         os:
+          - almalinux8
           - centos7
           - debian9
           - debian10
@@ -29,7 +30,6 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
-          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
@@ -56,6 +56,7 @@ jobs:
     strategy:
       matrix:
         os:
+          - almalinux8
           - centos7
           - debian9
           - debian10
@@ -66,7 +67,6 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
-          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
@@ -76,6 +76,8 @@ jobs:
           - linux/arm/v7
           - linux/arm64/v8
         exclude: # don’t try to run these specific combinations
+          - {os: almalinux8, platform: linux/i386}
+          - {os: almalinux8, platform: linux/arm/v7}
           - {os: centos7, platform: linux/i386}
           - {os: centos7, platform: linux/arm/v7}
           - {os: centos7, platform: linux/arm64/v8}
@@ -88,8 +90,6 @@ jobs:
           - {os: opensuse15.4, platform: linux/arm/v7}
           - {os: oraclelinux8, platform: linux/i386}
           - {os: oraclelinux8, platform: linux/arm/v7}
-          - {os: rockylinux8, platform: linux/i386}
-          - {os: rockylinux8, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu21.10, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
@@ -119,6 +119,7 @@ jobs:
     strategy:
       matrix:
         os:
+          - almalinux8
           - centos7
           - debian9
           - debian10
@@ -129,12 +130,13 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
-          - rockylinux8
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
           - ubuntu22.04
         include:
+          - os: almalinux8
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: centos7
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: debian9
@@ -154,8 +156,6 @@ jobs:
           - os: opensuse15.4
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: oraclelinux8
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: rockylinux8
             arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: ubuntu18.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
