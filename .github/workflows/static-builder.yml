@@ -1,0 +1,82 @@
+---
+# Builds the Docker images we use for producing our static builds.
+name: Static Builder
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    brnaches:
+      - 'master'
+  pull_request:
+concurrency:
+  group: static-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-check:
+    name: Build Check
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Test Build
+        uses: docker/build-push-action@v2
+        with:
+          load: false
+          push: false
+          tags: netdata/static-builder:test
+          file: ./static-builder/Dockerfile
+
+  pr-checks:
+    name: PR Checks
+    if: github.event_name == 'pull_request'
+    needs: build-check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platforms:
+          - linux/arm/v7
+          - linux/arm64/v8
+          - linux/ppc64le
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          platforms: ${{ matrix.platforms }}
+          load: false
+          push: false
+          tags: netdata/static-builder:test
+          file: ./static-builder/Dockerfile
+
+  publish:
+    name: Publish Images
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
+    needs: build-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Docker Hub Login
+        uses: docker/login-action@v1
+        with:
+          username: netdatabot
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker Build
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
+          push: true
+          file: ./static-builder/Dockerfile
+          tags: netdata/static-builder:latest
