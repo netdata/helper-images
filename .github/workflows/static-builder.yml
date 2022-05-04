@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '0 0 * * *'
   push:
-    brnaches:
+    branches:
       - 'master'
   pull_request:
 concurrency:
