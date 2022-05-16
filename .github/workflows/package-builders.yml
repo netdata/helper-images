@@ -20,6 +20,7 @@ jobs:
       matrix:
         os:
           - almalinux8
+          - almalinux9
           - centos7
           - debian9
           - debian10
@@ -57,6 +58,7 @@ jobs:
       matrix:
         os:
           - almalinux8
+          - almalinux9
           - centos7
           - debian9
           - debian10
@@ -78,6 +80,8 @@ jobs:
         exclude: # don’t try to run these specific combinations
           - {os: almalinux8, platform: linux/i386}
           - {os: almalinux8, platform: linux/arm/v7}
+          - {os: almalinux9, platform: linux/i386}
+          - {os: almalinux9, platform: linux/arm/v7}
           - {os: centos7, platform: linux/i386}
           - {os: centos7, platform: linux/arm/v7}
           - {os: centos7, platform: linux/arm64/v8}
@@ -120,6 +124,7 @@ jobs:
       matrix:
         os:
           - almalinux8
+          - almalinux9
           - centos7
           - debian9
           - debian10
@@ -137,6 +142,8 @@ jobs:
         include:
           - os: almalinux8
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
+          - os: almalinux9
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: centos7
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: debian9
