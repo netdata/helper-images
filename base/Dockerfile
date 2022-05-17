@@ -13,7 +13,6 @@ FROM alpine:3.15 as builder
 # Install some prerequisites
 RUN apk --no-cache add apcupsd \
                        curl \
-                       fping \
                        iproute2 \
                        jq \
                        json-c \
@@ -38,5 +37,9 @@ RUN apk --no-cache add apcupsd \
                        util-linux \
                        zlib
 
-# Add nut dependency from alpine-edge
-RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
+# Add extra dependencies from alpine-edge
+RUN apk --no-cache \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+        add nut \
+            fping
