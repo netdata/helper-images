@@ -39,4 +39,4 @@ RUN apk --no-cache add apcupsd \
                        zlib
 
 # Add nut dependency from alpine-edge
-RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
+RUN apk --no-cache add nut --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
