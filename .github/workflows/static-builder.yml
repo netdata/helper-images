@@ -37,6 +37,7 @@ jobs:
     strategy:
       matrix:
         platforms:
+          - linux/386
           - linux/arm/v7
           - linux/arm64/v8
           - linux/ppc64le
@@ -76,7 +77,7 @@ jobs:
       - name: Docker Build
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
+          platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
           push: true
           file: ./static-builder/Dockerfile
           tags: netdata/static-builder:latest

@@ -13,6 +13,7 @@ RUN apk add --no-cache \
     git \
     gnutls-dev \
     gzip \
+    jq \
     libelf-static \
     libmnl-dev \
     libnetfilter_acct-dev \
