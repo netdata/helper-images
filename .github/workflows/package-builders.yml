@@ -31,6 +31,7 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
+          - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
@@ -69,6 +70,7 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
+          - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
@@ -94,6 +96,8 @@ jobs:
           - {os: opensuse15.4, platform: linux/arm/v7}
           - {os: oraclelinux8, platform: linux/i386}
           - {os: oraclelinux8, platform: linux/arm/v7}
+          - {os: oraclelinux9, platform: linux/i386}
+          - {os: oraclelinux9, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu21.10, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
@@ -135,6 +139,7 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
+          - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
@@ -163,6 +168,8 @@ jobs:
           - os: opensuse15.4
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: oraclelinux8
+            arches: linux/amd64,linux/arm64/v8 # No other platforms
+          - os: oraclelinux9
             arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: ubuntu18.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
