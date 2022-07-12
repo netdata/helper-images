@@ -139,7 +139,7 @@ jobs:
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
-          - oraclelinux8
+          - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
           - ubuntu21.10
