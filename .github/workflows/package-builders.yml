@@ -25,9 +25,9 @@ jobs:
           - debian9
           - debian10
           - debian11
-          - fedora34
           - fedora35
           - fedora36
+          - fedora37
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
@@ -64,9 +64,9 @@ jobs:
           - debian9
           - debian10
           - debian11
-          - fedora34
           - fedora35
           - fedora36
+          - fedora37
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
@@ -87,9 +87,9 @@ jobs:
           - {os: centos7, platform: linux/i386}
           - {os: centos7, platform: linux/arm/v7}
           - {os: centos7, platform: linux/arm64/v8}
-          - {os: fedora34, platform: linux/i386}
           - {os: fedora35, platform: linux/i386}
           - {os: fedora36, platform: linux/i386}
+          - {os: fedora37, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/arm/v7}
           - {os: opensuse15.4, platform: linux/i386}
@@ -133,9 +133,9 @@ jobs:
           - debian9
           - debian10
           - debian11
-          - fedora34
           - fedora35
           - fedora36
+          - fedora37
           - opensuse15.3
           - opensuse15.4
           - oraclelinux8
@@ -157,11 +157,11 @@ jobs:
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian11
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
-          - os: fedora34
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora35
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora36
+            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: fedora37
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.3
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
