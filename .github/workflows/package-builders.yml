@@ -88,6 +88,7 @@ jobs:
           - {os: fedora35, platform: linux/i386}
           - {os: fedora36, platform: linux/i386}
           - {os: fedora37, platform: linux/i386}
+          - {os: fedora37, platform: linux/arm/v7}
           - {os: opensuse15.3, platform: linux/i386}
           - {os: opensuse15.3, platform: linux/arm/v7}
           - {os: opensuse15.4, platform: linux/i386}
@@ -158,7 +159,7 @@ jobs:
           - os: fedora36
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: fedora37
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.3
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: opensuse15.4
