@@ -36,6 +36,7 @@ jobs:
           - ubuntu20.04
           - ubuntu22.04
       max-parallel: 8
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -100,6 +101,7 @@ jobs:
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
       max-parallel: 8
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -175,6 +177,7 @@ jobs:
           - os: ubuntu22.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
       max-parallel: 8
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3
