@@ -34,7 +34,6 @@ jobs:
           - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.10
           - ubuntu22.04
       max-parallel: 8
     steps:
@@ -73,7 +72,6 @@ jobs:
           - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.10
           - ubuntu22.04
         platform:
           - linux/i386
@@ -99,7 +97,6 @@ jobs:
           - {os: oraclelinux9, platform: linux/i386}
           - {os: oraclelinux9, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
-          - {os: ubuntu21.10, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
       max-parallel: 8
     steps:
@@ -142,7 +139,6 @@ jobs:
           - oraclelinux9
           - ubuntu18.04
           - ubuntu20.04
-          - ubuntu21.10
           - ubuntu22.04
         include:
           - os: almalinux8
@@ -174,8 +170,6 @@ jobs:
           - os: ubuntu18.04
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu21.10
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu22.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
