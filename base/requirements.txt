@@ -1,3 +1,2 @@
 pymongo
 mysqlclient
-psycopg2
