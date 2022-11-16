@@ -12,8 +12,11 @@ RUN apk --no-cache add alpine-sdk \
                        automake \
                        bash \
                        build-base \
+                       bison \
                        cmake \
                        curl \
+                       flex \
+                       fts-dev \
                        jq \
                        json-c-dev \
                        libgcrypt-dev \

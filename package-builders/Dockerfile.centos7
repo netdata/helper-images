@@ -9,12 +9,16 @@ RUN yum install -y epel-release && \
                    autogen \
                    automake \
                    bash \
+                   bison \
+                   bison-devel \
                    cmake \
                    cups-devel \
                    curl \
                    diffutils \
                    elfutils-libelf-devel \
                    findutils \
+                   flex \
+                   flex-devel \
                    freeipmi-devel \
                    gcc \
                    gcc-c++ \

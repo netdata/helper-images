@@ -6,9 +6,12 @@ RUN apk add --no-cache \
     automake \
     bash \
     binutils \
+    bison \
     cmake \
     curl \
     elfutils-dev \
+    flex \
+    fts-dev \
     gcc \
     git \
     gnutls-dev \
