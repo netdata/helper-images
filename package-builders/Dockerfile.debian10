@@ -12,6 +12,7 @@ RUN apt-get update && \
                        autoconf-archive \
                        autogen \
                        automake \
+                       bison \
                        build-essential \
                        ca-certificates \
                        cmake \
@@ -19,12 +20,12 @@ RUN apt-get update && \
                        dh-autoreconf \
                        dh-make \
                        dh-systemd \
-                       systemd \
                        dpkg-dev \
+                       flex \
                        g++ \
                        gcc \
-                       git-core \
                        git-buildpackage \
+                       git-core \
                        libatomic1 \
                        libcups2-dev \
                        libdistro-info-perl \
@@ -44,6 +45,7 @@ RUN apt-get update && \
                        make \
                        pkg-config \
                        protobuf-compiler \
+                       systemd \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \

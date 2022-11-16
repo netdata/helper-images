@@ -11,12 +11,14 @@ RUN dnf distro-sync -y --nodocs && \
         autoconf-archive \
         automake \
         bash \
+        bison \
         cmake \
         cups-devel \
         curl \
         diffutils \
         elfutils-libelf-devel \
         findutils \
+        flex \
         freeipmi-devel \
         gcc \
         gcc-c++ \

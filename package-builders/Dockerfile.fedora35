@@ -9,6 +9,7 @@ RUN dnf distro-sync -y --nodocs && \
         autoconf-archive \
         autogen \
         automake \
+        bison \
         bash \
         cmake \
         cups-devel \
@@ -16,6 +17,7 @@ RUN dnf distro-sync -y --nodocs && \
         diffutils \
         elfutils-libelf-devel \
         findutils \
+        flex \
         freeipmi-devel \
         gcc \
         gcc-c++ \
