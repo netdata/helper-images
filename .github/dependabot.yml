@@ -14,3 +14,8 @@ updates:
     directory: /builder
     schedule:
       interval: weekly
+
+  - package-ecosystem: docker
+    directory: /static-builder
+    schedule:
+      interval: weekly
