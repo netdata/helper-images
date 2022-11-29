@@ -4,7 +4,7 @@
 
 # This image is used to speed up build process for official netdata images.
 
-FROM alpine:3.16 as builder
+FROM alpine:3.17 as builder
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
@@ -22,7 +22,6 @@ RUN apk --no-cache add alpine-sdk \
                        cmake \
                        curl \
                        flex \
-                       fts-dev \
                        jq \
                        json-c-dev \
                        libgcrypt-dev \
@@ -35,6 +34,7 @@ RUN apk --no-cache add alpine-sdk \
                        mariadb-dev \
                        mongo-c-driver-dev \
                        musl-dev \
+                       musl-fts-dev \
                        netcat-openbsd \
                        openssl-dev \
                        pkgconfig \
