@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.16
 
 RUN apk add --no-cache \
     alpine-sdk \
@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     curl \
     elfutils-dev \
     flex \
+    fts-dev \
     gcc \
     git \
     gnutls-dev \
@@ -25,7 +26,6 @@ RUN apk add --no-cache \
     lz4-dev \
     lz4-static \
     make \
-    musl-fts-dev \
     ncurses \
     netcat-openbsd \
     openssh \
