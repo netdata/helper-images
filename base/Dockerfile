@@ -8,11 +8,12 @@
 
 # This image is used to speed up build process for official netdata images.
 
-FROM alpine:3.16 as builder
+FROM alpine:3.17 as builder
 
 # Install some prerequisites
 RUN apk --no-cache add apcupsd \
                        curl \
+                       fping \
                        iproute2 \
                        jq \
                        json-c \
@@ -27,6 +28,7 @@ RUN apk --no-cache add apcupsd \
                        mongo-c-driver \
                        msmtp \
                        netcat-openbsd \
+                       nut \
                        openssl \
                        postgresql-client \
                        protobuf \
@@ -38,8 +40,7 @@ RUN apk --no-cache add apcupsd \
                        zlib
 
 # Add extra dependencies from alpine-edge
-RUN apk --no-cache \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-        add nut \
-            fping
+#RUN apk --no-cache \
+#        --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+#        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+#        add
