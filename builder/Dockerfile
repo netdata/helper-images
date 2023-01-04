@@ -41,11 +41,6 @@ RUN apk --no-cache add alpine-sdk \
                        util-linux-dev \
                        zlib-dev
 
-# Add Python dependencies from PyPi using `pip`
-COPY builder/requirements.txt /tmp/requirements.txt
-RUN pip install wheel && \
-    pip wheel -w /wheels -r /tmp/requirements.txt
-
 # External dependencies (bundled to avoid network access)
 COPY deps /deps
 
