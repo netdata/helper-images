@@ -41,5 +41,4 @@ RUN apk --no-cache add apcupsd \
 RUN apk --no-cache \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-        add nut \
-            fping
+        add nut
