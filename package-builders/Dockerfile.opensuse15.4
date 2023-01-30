@@ -1,5 +1,11 @@
 FROM opensuse/leap:15.4
 
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for openSUSE Leap 15.4"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for openSUSE Leap 15.4"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
 ENV VERSION=0.1
 
 RUN zypper update -y && \

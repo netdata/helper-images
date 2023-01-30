@@ -10,6 +10,12 @@
 
 FROM alpine:3.16 as builder
 
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Docker Base Image"
+LABEL org.opencontainers.image.description="Base image for official Netdata Agent Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
 # Install some prerequisites
 RUN apk --no-cache add apcupsd \
                        curl \
