@@ -74,6 +74,12 @@ jobs:
         with:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: GitHub Container Registry Login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker Build
         uses: docker/build-push-action@v3
         with:
