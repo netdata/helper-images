@@ -186,6 +186,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Quay.io Login
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
+          password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
       - name: Docker Build
         uses: docker/build-push-action@v3
         with:
