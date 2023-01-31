@@ -198,4 +198,4 @@ jobs:
           platforms: ${{ matrix.arches }}
           push: true
           file: ./package-builders/Dockerfile.${{ matrix.os }}
-          tags: netdata/package-builders:${{ matrix.os }}
+          tags: netdata/package-builders:${{ matrix.os }},ghcr.io/netdata/package-builders:${{ matrix.os }},quay.io/netdata/package-builders:${{ matrix.os }}
