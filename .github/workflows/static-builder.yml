@@ -74,10 +74,22 @@ jobs:
         with:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: GitHub Container Registry Login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Quay.io Login
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
+          password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
       - name: Docker Build
         uses: docker/build-push-action@v3
         with:
           platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
           push: true
           file: ./static-builder/Dockerfile
-          tags: netdata/static-builder:latest
+          tags: netdata/static-builder:latest,ghcr.io/netdata/static-builder:latest,quay.io/netdata/static-builder:latest

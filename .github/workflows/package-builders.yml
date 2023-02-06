@@ -180,10 +180,22 @@ jobs:
         with:
           username: netdatabot
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: GitHub Container Registry Login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Quay.io Login
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
+          password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
       - name: Docker Build
         uses: docker/build-push-action@v3
         with:
           platforms: ${{ matrix.arches }}
           push: true
           file: ./package-builders/Dockerfile.${{ matrix.os }}
-          tags: netdata/package-builders:${{ matrix.os }}
+          tags: netdata/package-builders:${{ matrix.os }},ghcr.io/netdata/package-builders:${{ matrix.os }},quay.io/netdata/package-builders:${{ matrix.os }}
