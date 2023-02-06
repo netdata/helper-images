@@ -41,7 +41,7 @@ jobs:
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v2
       - name: Docker Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           load: false
           push: false
@@ -106,7 +106,7 @@ jobs:
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           platforms: ${{ matrix.platform }}
           load: false
@@ -193,7 +193,7 @@ jobs:
           username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
           password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
       - name: Docker Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           platforms: ${{ matrix.arches }}
           push: true
