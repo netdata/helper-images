@@ -1,5 +1,11 @@
 FROM alpine:3.16
 
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Static Builder Image"
+LABEL org.opencontainers.image.description="Builder image for creating static builds of the Netdata Agent"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
 RUN apk add --no-cache \
     alpine-sdk \
     autoconf \

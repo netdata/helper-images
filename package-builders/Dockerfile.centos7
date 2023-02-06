@@ -1,5 +1,11 @@
 FROM centos:7
 
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for CentOS 7"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for CentOS 7"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
 ENV VERSION=$VERSION
 
 RUN yum install -y epel-release && \

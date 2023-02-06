@@ -6,6 +6,12 @@
 
 FROM alpine:3.16 as builder
 
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Docker Builder Image"
+LABEL org.opencontainers.image.description="Builder image for official Netdata Agent Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
 # Install prerequisites
 RUN apk --no-cache add alpine-sdk \
                        autoconf \
