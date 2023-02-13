@@ -25,7 +25,7 @@ RUN apk add --no-cache \
     jq \
     libelf-static \
     libmnl-dev \
-    libnetfilter_acct-dev \
+    libmnl-static \
     libtool \
     libuv-dev \
     libuv-static \
