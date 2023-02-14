@@ -24,6 +24,7 @@ jobs:
           - centos7
           - debian10
           - debian11
+          - debian12
           - fedora36
           - fedora37
           - opensuse15.4
@@ -61,6 +62,7 @@ jobs:
           - centos7
           - debian10
           - debian11
+          - debian12
           - fedora36
           - fedora37
           - opensuse15.4
@@ -127,6 +129,7 @@ jobs:
           - centos7
           - debian10
           - debian11
+          - debian12
           - fedora35
           - fedora36
           - fedora37
@@ -147,6 +150,8 @@ jobs:
           - os: debian10
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: debian11
+            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
+          - os: debian12
             arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
           - os: fedora36
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
