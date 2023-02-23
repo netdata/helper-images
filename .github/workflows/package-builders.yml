@@ -21,6 +21,7 @@ jobs:
         os:
           - almalinux8
           - almalinux9
+          - amazonlinux2
           - centos7
           - debian10
           - debian11
@@ -59,6 +60,7 @@ jobs:
         os:
           - almalinux8
           - almalinux9
+          - amazonlinux2
           - centos7
           - debian10
           - debian11
@@ -81,6 +83,8 @@ jobs:
           - {os: almalinux8, platform: linux/arm/v7}
           - {os: almalinux9, platform: linux/i386}
           - {os: almalinux9, platform: linux/arm/v7}
+          - {os: amazonlinux2, platform: linux/i386}
+          - {os: amazonlinux2, platform: linux/arm/v7}
           - {os: centos7, platform: linux/i386}
           - {os: centos7, platform: linux/arm/v7}
           - {os: centos7, platform: linux/arm64/v8}
@@ -126,6 +130,7 @@ jobs:
         os:
           - almalinux8
           - almalinux9
+          - amazonlinux2
           - centos7
           - debian10
           - debian11
@@ -145,6 +150,8 @@ jobs:
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
           - os: almalinux9
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+          - os: amazonlinux2
+            arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: centos7
             arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
           - os: debian10
