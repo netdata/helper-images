@@ -45,22 +45,8 @@ RUN apk --no-cache add alpine-sdk \
                        python3-dev \
                        snappy-dev \
                        util-linux-dev \
-                       zlib-dev
-
-# External dependencies (bundled to avoid network access)
-COPY deps /deps
-
-# freeipmi
-ENV FREEIPMI_VER 1.6.4
-COPY builder/patches/freeipmi-argp-redefine.patch /freeipmi-${FREEIPMI_VER}/
-RUN if [ "$(uname -m)" != "ppc64le" ]; then \
-    tar -xf /deps/freeipmi-${FREEIPMI_VER}.tar.gz -C /\
-    && cd /freeipmi-${FREEIPMI_VER} \
-    && patch -p 0 < freeipmi-argp-redefine.patch \
-    && rm freeipmi-argp-redefine.patch \
-    && CPPFLAGS="-Dgetmsg\(a,b,c,d\)=errno=-1,-1 -Dputmsg\(a,b,c,d\)=errno=-1,-1" ./configure --prefix=/deps --disable-dependency-tracking --with-gnu-ld \
-    && make -j2 \
-    && make install \
-    && rm -rf /freeipmi-${FREEIPMI_VER} \
-    && exit 0 ; \
-    else exit 0; fi; exit 1
+                       zlib-dev && \
+    mkdir -p /deps/etc && \
+    if [ "$(uname -m)" != "ppc64le" ]; then \
+        apk --no-cache add freeipmi-dev || exit 1 ; \
+    fi

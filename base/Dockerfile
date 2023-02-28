@@ -43,7 +43,10 @@ RUN apk --no-cache add apcupsd \
                        shadow \
                        snappy \
                        util-linux \
-                       zlib
+                       zlib && \
+    if [ "$(uname -m)" != "ppc64le" ]; then \
+        apk --no-cache add freeipmi freeipmi-libs || exit 1 ; \
+    fi
 
 # Add extra dependencies from alpine-edge
 #RUN apk --no-cache \
