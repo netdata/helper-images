@@ -28,7 +28,7 @@ jobs:
           - debian12
           - fedora36
           - fedora37
-          - opensuse-tumbleweed
+          - opensuse_tumbleweed
           - opensuse15.4
           - oraclelinux8
           - oraclelinux9
@@ -68,7 +68,7 @@ jobs:
           - debian12
           - fedora36
           - fedora37
-          - opensuse-tumbleweed
+          - opensuse_tumbleweed
           - opensuse15.4
           - oraclelinux8
           - oraclelinux9
@@ -96,8 +96,8 @@ jobs:
           - {os: fedora37, platform: linux/arm/v7}
           - {os: opensuse15.4, platform: linux/i386}
           - {os: opensuse15.4, platform: linux/arm/v7}
-          - {os: opensuse-tumbleweed, platform: linux/i386}
-          - {os: opensuse-tumbleweed, platform: linux/arm/v7}
+          - {os: opensuse_tumbleweed, platform: linux/i386}
+          - {os: opensuse_tumbleweed, platform: linux/arm/v7}
           - {os: oraclelinux8, platform: linux/i386}
           - {os: oraclelinux8, platform: linux/arm/v7}
           - {os: oraclelinux9, platform: linux/i386}
@@ -142,7 +142,7 @@ jobs:
           - fedora35
           - fedora36
           - fedora37
-          - opensuse-tumbleweed
+          - opensuse_tumbleweed
           - opensuse15.4
           - oraclelinux8
           - oraclelinux9
@@ -171,7 +171,7 @@ jobs:
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: opensuse15.4
             arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
-          - os: opensuse-tumbleweed
+          - os: opensuse_tumbleweed
             arches: linux/amd64,linux/arm64/v8 # possibly linux/arm/v7, linux/ppc64le
           - os: oraclelinux8
             arches: linux/amd64,linux/arm64/v8 # No other platforms
