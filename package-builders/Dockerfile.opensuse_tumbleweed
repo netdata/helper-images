@@ -1,4 +1,4 @@
-FROM registry.opensuse.org/bci/bci-init
+FROM opensuse/tumbleweed
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
