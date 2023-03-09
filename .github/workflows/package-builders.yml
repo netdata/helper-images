@@ -139,7 +139,6 @@ jobs:
           - debian10
           - debian11
           - debian12
-          - fedora35
           - fedora36
           - fedora37
           - opensuse_tumbleweed
