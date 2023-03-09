@@ -1,0 +1,62 @@
+FROM opensuse/tumbleweed:latest
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for openSUSE Tumbleweed"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for openSUSE Tumbleweed"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV VERSION=$VERSION
+
+RUN zypper update -y && \
+    zypper install -y autoconf \
+                      autoconf-archive \
+                      autogen \
+                      automake \
+                      bison \
+                      cmake \
+                      cups \
+                      cups-devel \
+                      curl \
+                      diffutils \
+                      flex \
+                      freeipmi-devel \
+                      gcc \
+                      gcc-c++ \
+                      git-core \
+                      json-glib-devel \
+                      judy-devel \
+                      libatomic1 \
+                      libelf-devel \
+                      liblz4-devel \
+                      libjson-c-devel \
+                      libmnl0 \
+                      libmnl-devel \
+                      libnetfilter_acct1 \
+                      libnetfilter_acct-devel \
+                      libopenssl-devel \
+                      libtool \
+                      libuv-devel \
+                      libuuid-devel \
+                      libwebsockets-devel \
+                      make \
+                      patch \
+                      pkg-config \
+                      protobuf-c \
+                      protobuf-devel \
+                      rpm-build \
+                      rpm-devel \
+                      rpmdevtools \
+                      snappy-devel \
+                      tar \
+                      wget && \
+    zypper clean && \
+    rm -rf /var/cache/zypp/*/* && \
+    c_rehash && \
+    mkdir -p /usr/src/packages/BUILD /usr/src/packages/RPMS /usr/src/packages/SOURCES /usr/src/packages/SPECS /usr/src/packages/SRPMS
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/suse-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]
