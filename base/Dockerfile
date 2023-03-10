@@ -33,6 +33,7 @@ RUN apk --no-cache add apcupsd \
                        lz4-libs \
                        mongo-c-driver \
                        msmtp \
+                       ncurses \
                        netcat-openbsd \
                        nut \
                        openssl \
