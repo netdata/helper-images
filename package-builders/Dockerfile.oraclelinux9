@@ -29,6 +29,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         gcc-c++ \
         git \
         json-c-devel \
+        libyaml-devel \
         libatomic \
         libmnl-devel \
         libtool \

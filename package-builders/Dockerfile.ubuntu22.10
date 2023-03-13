@@ -37,6 +37,7 @@ RUN apt-get update && \
                        libelf-dev \
                        libipmimonitoring-dev \
                        libjson-c-dev \
+                       libyaml-dev \
                        libjudy-dev \
                        liblz4-dev \
                        libmnl-dev \

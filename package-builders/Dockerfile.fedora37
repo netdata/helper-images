@@ -29,6 +29,7 @@ RUN dnf distro-sync -y --nodocs && \
         gcc-c++ \
         git-core \
         json-c-devel \
+        libyaml-dev \
         Judy-devel \
         libatomic \
         libmnl-devel \

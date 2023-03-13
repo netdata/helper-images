@@ -28,6 +28,7 @@ RUN yum update -y && \
                    gcc-c++ \
                    git-core \
                    json-c-devel \
+                   libyaml-devel \
                    libatomic \
                    libmnl-devel \
                    libnetfilter_acct-devel \

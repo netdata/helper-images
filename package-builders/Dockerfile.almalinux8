@@ -31,6 +31,7 @@ RUN dnf distro-sync -y --nodocs && \
         gcc-c++ \
         git \
         json-c-devel \
+        libyaml-devel \
         libatomic \
         libmnl-devel \
         # FIXME: broken / Missing
