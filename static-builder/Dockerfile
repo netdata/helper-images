@@ -30,6 +30,8 @@ RUN apk add --no-cache \
     libuv-static \
     lz4-dev \
     lz4-static \
+    yaml-dev \
+    yaml-static \
     make \
     musl-fts-dev \
     ncurses \

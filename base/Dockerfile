@@ -23,6 +23,7 @@ RUN apk --no-cache add apcupsd \
                        iproute2 \
                        jq \
                        json-c \
+                       yaml \
                        libgcrypt \
                        libmnl \
                        libuuid \
