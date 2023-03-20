@@ -37,7 +37,6 @@ RUN yum install -y epel-release && \
                    libtool \
                    libuuid-devel \
                    libuv-devel \
-                   libwebsockets-devel \
                    lm_sensors \
                    lz4-devel \
                    make \
