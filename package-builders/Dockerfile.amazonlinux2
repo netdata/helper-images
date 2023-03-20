@@ -35,7 +35,6 @@ RUN yum update -y && \
                    libtool \
                    libuuid-devel \
                    libuv-devel \
-                   libwebsockets-devel \
                    lm_sensors \
                    lz4-devel \
                    make \

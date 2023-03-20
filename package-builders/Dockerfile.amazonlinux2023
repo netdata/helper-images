@@ -1,22 +1,21 @@
-FROM fedora:36
+FROM amazonlinux:2023
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
-LABEL org.opencontainers.image.title="Netdata Package Builder for Fedora 36"
-LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Fedora 36"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Amazon Linux 2023"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Amazon Linux 2023"
 LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV VERSION=$VERSION
 
 RUN dnf distro-sync -y --nodocs && \
-    dnf clean -y packages && \
-    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
+    dnf clean packages && \
+    dnf install -y --nodocs --allowerasing --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         autoconf \
         autoconf-archive \
-        autogen \
         automake \
-        bash \
         bison \
+        bison-devel \
         cmake \
         cups-devel \
         curl \
@@ -24,19 +23,21 @@ RUN dnf distro-sync -y --nodocs && \
         elfutils-libelf-devel \
         findutils \
         flex \
-        freeipmi-devel \
+        flex-devel \
         gcc \
         gcc-c++ \
         git-core \
         json-c-devel \
         libyaml-devel \
-        Judy-devel \
         libatomic \
         libmnl-devel \
-        libnetfilter_acct-devel \
+        # FIXME: broken / Missing
+        # XXX: Can't (currently) find an AL2023 package for this :/
+        # libnetfilter_acct-devel \
         libtool \
         libuuid-devel \
         libuv-devel \
+        lm_sensors \
         lz4-devel \
         make \
         openssl-devel \

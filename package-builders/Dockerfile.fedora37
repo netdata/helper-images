@@ -37,7 +37,6 @@ RUN dnf distro-sync -y --nodocs && \
         libtool \
         libuuid-devel \
         libuv-devel \
-        libwebsockets-devel \
         lz4-devel \
         make \
         openssl-devel \
