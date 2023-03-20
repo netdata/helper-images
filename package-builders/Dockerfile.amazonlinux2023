@@ -10,7 +10,7 @@ ENV VERSION=$VERSION
 
 RUN dnf distro-sync -y --nodocs && \
     dnf clean packages && \
-    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
+    dnf install -y --nodocs --allowerasing --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         autoconf \
         autoconf-archive \
         automake \
