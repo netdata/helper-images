@@ -20,6 +20,7 @@ sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /root/rpmbu
 
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
+sed -i "s/@GO_PACKAGE_VERSION@/$(cat /netdata/packaging/go.d.version)/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # Properly mark the installation type.
 cat > "/root/rpmbuild/SOURCES/netdata-${pkg_version}/system/.install-type" <<-EOF
