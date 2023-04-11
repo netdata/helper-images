@@ -27,6 +27,7 @@ RUN yum update -y && \
                    gcc \
                    gcc-c++ \
                    git-core \
+                   golang \
                    json-c-devel \
                    libyaml-devel \
                    libatomic \

@@ -28,6 +28,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         gcc \
         gcc-c++ \
         git \
+        golang \
         json-c-devel \
         libyaml-devel \
         libatomic \

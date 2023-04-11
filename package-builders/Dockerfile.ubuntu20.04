@@ -32,6 +32,7 @@ RUN apt-get update && \
                        gcc \
                        git-buildpackage \
                        git-core \
+                       golang \
                        libatomic1 \
                        libcups2-dev \
                        libdistro-info-perl \

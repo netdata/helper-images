@@ -28,6 +28,7 @@ RUN dnf distro-sync -y --nodocs && \
         gcc \
         gcc-c++ \
         git-core \
+        golang \
         json-c-devel \
         libyaml-devel \
         Judy-devel \
