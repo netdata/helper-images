@@ -20,6 +20,7 @@ sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /usr/src/pa
 
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
+sed -i "s/@GO_PACKAGE_VERSION@/$(cat /netdata/packaging/go.d.version)/g" /usr/src/packages/SPECS/netdata.spec || exit 1
 
 # Properly mark the installation type.
 cat > "/usr/src/packages/SOURCES/netdata-${pkg_version}/system/.install-type" <<-EOF

@@ -30,6 +30,7 @@ RUN dnf distro-sync -y --nodocs && \
         gcc \
         gcc-c++ \
         git \
+        golang \
         json-c-devel \
         libyaml-devel \
         libatomic \
