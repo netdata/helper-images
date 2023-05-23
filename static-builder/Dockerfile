@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     bison \
     cmake \
     curl \
+    curl-static \
     elfutils-dev \
     flex \
     gcc \
