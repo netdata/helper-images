@@ -22,6 +22,7 @@ RUN apk add --no-cache \
     gnutls-dev \
     gzip \
     jq \
+    libcap-dev \
     libelf-static \
     libmnl-dev \
     libmnl-static \

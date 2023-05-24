@@ -25,6 +25,7 @@ RUN apk --no-cache add alpine-sdk \
                        jq \
                        json-c-dev \
                        yaml-dev \
+                       libcap-dev \ 
                        libgcrypt-dev \
                        libmnl-dev \
                        libtool \
