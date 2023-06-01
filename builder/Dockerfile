@@ -46,7 +46,8 @@ RUN apk --no-cache add alpine-sdk \
                        python3-dev \
                        snappy-dev \
                        util-linux-dev \
-                       zlib-dev && \
+                       zlib-dev \
+                       zstd-dev && \
     mkdir -p /deps/etc && \
     if [ "$(uname -m)" != "ppc64le" ]; then \
         apk --no-cache add freeipmi-dev || exit 1 ; \
