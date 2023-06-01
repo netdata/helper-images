@@ -45,7 +45,8 @@ RUN apk --no-cache add apcupsd \
                        shadow \
                        snappy \
                        util-linux \
-                       zlib && \
+                       zlib \
+                       zstd-libs && \
     if [ "$(uname -m)" != "ppc64le" ]; then \
         apk --no-cache add freeipmi freeipmi-libs || exit 1 ; \
     fi

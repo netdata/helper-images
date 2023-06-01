@@ -45,4 +45,6 @@ RUN apk add --no-cache \
     wget \
     xz \
     zlib-dev \
-    zlib-static
+    zlib-static \
+    zstd-dev \
+    zstd-static
