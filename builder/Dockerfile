@@ -4,7 +4,7 @@
 
 # This image is used to speed up build process for official netdata images.
 
-FROM alpine:3.17 as builder
+FROM alpine:3.18 as builder
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
