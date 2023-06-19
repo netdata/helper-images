@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 ENV VERSION=0.1
 
 RUN zypper update -y && \
-    zypper install -y --allow-downgrading \
+    zypper install -y --allow-downgrade \
                       autoconf \
                       autoconf-archive \
                       autogen \
