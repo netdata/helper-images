@@ -14,13 +14,13 @@ rm -rf "/root/rpmbuild/SOURCES/netdata-${pkg_version}/.git" || exit 1
 #
 # We still use release tarballs for release builds, but that's handled
 # outside of the container.
-sed -i 's/^Source.*$//g' /root/rpmbuild/SPECS/netdata.spec || exit 1
+sed -i 's/^Source0.*$//g' /root/rpmbuild/SPECS/netdata.spec || exit 1
 sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rfT %{_topdir}\/SOURCES\/netdata-%{version} BUILD/g' /root/rpmbuild/SPECS/netdata.spec || exit 1
 sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
-sed -i "s/@GO_PACKAGE_VERSION@/$(cat /netdata/packaging/go.d.version)/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
+sed -i "s/@GO_PACKAGE_VERSION@/$(< /netdata/packaging/go.d.version sed -e 's|v||g')/g" /root/rpmbuild/SPECS/netdata.spec || exit 1
 
 # Properly mark the installation type.
 cat > "/root/rpmbuild/SOURCES/netdata-${pkg_version}/system/.install-type" <<-EOF
@@ -28,6 +28,12 @@ cat > "/root/rpmbuild/SOURCES/netdata-${pkg_version}/system/.install-type" <<-EO
 	PREBUILT_ARCH='$(uname -m)'
 	PREBUILT_DISTRO='${DISTRO} ${DISTRO_VERSION}'
 	EOF
+
+# Download Sources
+rpmbuild --nobuild --define "_topdir /root/rpmbuild/SOURCES" \
+--define "_sourcedir /root/rpmbuild/SOURCES" \
+--define "source_date_epoch_from_changelog false" \
+--undefine "_disable_source_fetch" "/root/rpmbuild/SPECS/netdata.spec" || exit 1
 
 rpmbuild -bb --rebuild /root/rpmbuild/SPECS/netdata.spec || exit 1
 
