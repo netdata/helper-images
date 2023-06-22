@@ -31,6 +31,7 @@ RUN dnf distro-sync -y --nodocs && \
         json-c-devel \
         libyaml-devel \
         libatomic \
+        libcurl-devel \
         libmnl-devel \
         # FIXME: broken / Missing
         # XXX: Can't (currently) find an AL2023 package for this :/

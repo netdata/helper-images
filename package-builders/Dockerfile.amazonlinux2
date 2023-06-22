@@ -31,6 +31,7 @@ RUN yum update -y && \
                    json-c-devel \
                    libyaml-devel \
                    libatomic \
+                   libcurl-devel \
                    libmnl-devel \
                    libnetfilter_acct-devel \
                    libtool \

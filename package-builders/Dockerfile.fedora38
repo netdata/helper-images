@@ -33,6 +33,7 @@ RUN dnf distro-sync -y --nodocs && \
         libyaml-devel \
         Judy-devel \
         libatomic \
+        libcurl-devel \
         libmnl-devel \
         libnetfilter_acct-devel \
         libtool \
