@@ -32,6 +32,7 @@ RUN dnf distro-sync -y --nodocs && \
         git \
         golang \
         json-c-devel \
+        libcurl-devel \
         libyaml-devel \
         libatomic \
         libmnl-devel \

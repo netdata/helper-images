@@ -34,6 +34,7 @@ RUN apt-get update && \
                        golang \
                        libatomic1 \
                        libcups2-dev \
+                       libcurl4-openssl-dev \
                        libdistro-info-perl \
                        libelf-dev \
                        libipmimonitoring-dev \

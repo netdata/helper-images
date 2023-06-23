@@ -33,6 +33,7 @@ RUN apt-get update && \
                        git-core \
                        golang \
                        libatomic1 \
+                       libcurl4-openssl-dev\
                        libcups2-dev \
                        libdistro-info-perl \
                        libelf-dev \

@@ -22,6 +22,7 @@ RUN dnf distro-sync -y --nodocs && \
         cmake \
         cups-devel \
         curl \
+        libcurl-devel \
         diffutils \
         elfutils-libelf-devel \
         findutils \
@@ -32,8 +33,8 @@ RUN dnf distro-sync -y --nodocs && \
         git \
         golang \
         json-c-devel \
-        libyaml-devel \
         libatomic \
+        libcurl-devel \
         libmnl-devel \
         # FIXME: broken / Missing
         # XXX: Can't (currently) find a CentOS 8 package for this :/
@@ -41,6 +42,7 @@ RUN dnf distro-sync -y --nodocs && \
         libtool \
         libuuid-devel \
         libuv-devel \
+        libyaml-devel \
         lm_sensors \
         lz4-devel \
         make \

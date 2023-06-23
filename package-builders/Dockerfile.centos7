@@ -33,6 +33,7 @@ RUN yum install -y epel-release && \
                    json-c-devel \
                    libyaml-devel \
                    libatomic \
+                   libcurl-devel \
                    libmnl-devel \
                    libnetfilter_acct-devel \
                    libtool \
