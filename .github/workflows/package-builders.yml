@@ -36,7 +36,6 @@ jobs:
           - oraclelinux9
           - ubuntu20.04
           - ubuntu22.04
-          - ubuntu22.10
           - ubuntu23.04
       max-parallel: 8
       fail-fast: false
@@ -78,7 +77,6 @@ jobs:
           - oraclelinux9
           - ubuntu20.04
           - ubuntu22.04
-          - ubuntu22.10
           - ubuntu23.04
         platform:
           - linux/i386
@@ -112,7 +110,6 @@ jobs:
           - {os: oraclelinux9, platform: linux/arm/v7}
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
-          - {os: ubuntu22.10, platform: linux/i386}
           - {os: ubuntu23.04, platform: linux/i386}
       max-parallel: 8
       fail-fast: false
@@ -157,7 +154,6 @@ jobs:
           - oraclelinux9
           - ubuntu20.04
           - ubuntu22.04
-          - ubuntu22.10
           - ubuntu23.04
         include:
           - os: almalinux8
@@ -193,8 +189,6 @@ jobs:
           - os: ubuntu20.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu22.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu22.10
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu23.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
