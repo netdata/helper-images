@@ -1,0 +1,43 @@
+# This image is used to speed up the testing process for Netdata Ansible-docker images.
+# This image is for testing purposes only and is not verified for production use.
+#
+# Copyright: 2023 and later Netdata Incorporated
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : Netdata packaging team <agent-sre@netdata.cloud>
+
+# This image is used to speed up test process for netdata ansible-docker images.
+
+FROM ubuntu:18.04 as builder
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Ansible-Docker Base Image"
+LABEL org.opencontainers.image.description="Base image for official Netdata Ansible-Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ARG RELEASE
+ARG LAUNCHPAD_BUILD_ARCH
+ARG DEBIAN_FRONTEND=noninteractive
+ARG container=docker
+ARG LANG=en_US.UTF-8
+ARG LC_ALL=en_US.UTF-8
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+                apt-utils \
+                curl \
+                gpg-agent \
+                nano \
+                python3 \
+                software-properties-common \
+                rsyslog \
+                systemd \
+                systemd-cron \
+                sudo \
+                && apt-get clean \
+                && rm -Rf /var/lib/apt/lists/* \
+                && rm -Rf /usr/share/doc \
+                && rm -Rf /usr/share/man
+
+VOLUME [/sys/fs/cgroup]
+CMD ["/lib/systemd/systemd"]
