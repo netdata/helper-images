@@ -4,5 +4,7 @@
 # see https://github.com/hadolint/hadolint#rules for a list of available rules.
 ---
 ignored:
-  - DL3041
   - DL3008
+  - DL3033
+  - DL3037
+  - DL3041
