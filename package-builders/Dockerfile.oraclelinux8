@@ -22,6 +22,7 @@ RUN dnf distro-sync -y --nodocs && \
         cmake \
         cups-devel \
         curl \
+        libcurl-devel \
         diffutils \
         elfutils-libelf-devel \
         findutils \
@@ -32,7 +33,6 @@ RUN dnf distro-sync -y --nodocs && \
         git \
         golang \
         json-c-devel \
-        libcurl-devel \
         libyaml-devel \
         libatomic \
         libmnl-devel \
