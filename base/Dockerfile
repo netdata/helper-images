@@ -23,7 +23,7 @@ RUN apk --no-cache add apcupsd \
                        iproute2 \
                        jq \
                        json-c \
-                       yaml \
+                       libelogind \
                        libgcrypt \
                        libmnl \
                        libuuid \
@@ -45,6 +45,7 @@ RUN apk --no-cache add apcupsd \
                        shadow \
                        snappy \
                        util-linux \
+                       yaml \
                        zlib \
                        zstd-libs && \
     if [ "$(uname -m)" != "ppc64le" ]; then \
