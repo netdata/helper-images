@@ -52,6 +52,7 @@ RUN yum update -y && \
                    rpm-devel \
                    rpmdevtools \
                    snappy-devel \
+                   systemd-devel \
                    wget \
                    zlib-devel && \
     yum clean all && \

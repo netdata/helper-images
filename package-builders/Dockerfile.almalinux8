@@ -61,6 +61,7 @@ RUN dnf distro-sync -y --nodocs && \
         rpm-devel \
         rpmdevtools \
         snappy-devel \
+        systemd-devel \
         wget \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
