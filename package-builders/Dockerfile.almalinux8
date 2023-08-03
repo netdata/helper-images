@@ -34,7 +34,6 @@ RUN dnf distro-sync -y --nodocs && \
         golang \
         json-c-devel \
         libatomic \
-        libcurl-devel \
         libmnl-devel \
         # FIXME: broken / Missing
         # XXX: Can't (currently) find a CentOS 8 package for this :/
