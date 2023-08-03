@@ -48,6 +48,7 @@ RUN apt-get update && \
                        libprotobuf-dev \
                        libprotoc-dev \
                        libsnappy-dev \
+                       libsystemd-dev \
                        libssl-dev \
                        libtool \
                        libuv1-dev \

@@ -55,6 +55,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         rpm-devel \
         rpmdevtools \
         snappy-devel \
+        systemd-devel \
         wget \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
