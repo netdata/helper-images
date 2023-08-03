@@ -21,6 +21,7 @@ RUN apk --no-cache add alpine-sdk \
                        bison \
                        cmake \
                        curl \
+                       elogind-dev \
                        flex \
                        jq \
                        json-c-dev \
