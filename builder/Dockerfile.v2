@@ -1,0 +1,59 @@
+# This image is used to speed up build process for official netdata images.
+#
+# Copyright: 2019 and later Netdata Incorporated
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
+# Author : Austin S. Hemmelgarn <austiN@netdata.cloud>
+
+FROM debian:12 as builder
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Docker Builder Image"
+LABEL org.opencontainers.image.description="Builder image for official Netdata Agent Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN chown _apt:root /var/cache/apt /var/lib/apt && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+                    autoconf \
+                    autoconf-archive \
+                    automake \
+                    bison \
+                    build-essential \
+                    cmake \
+                    curl \
+                    flex \
+                    git \
+                    jq \
+                    libgcrypt-dev \
+                    libjson-c-dev \
+                    liblz4-dev \
+                    libmariadb-dev \
+                    libmnl-dev \
+                    libmongoc-dev \
+                    libprotobuf-dev \
+                    libsnappy-dev \
+                    libssl-dev \
+                    libsystemd-dev \
+                    libtool \
+                    libuv1-dev \
+                    libvirt-dev \
+                    libyaml-dev \
+                    libzstd-dev \
+                    openssl \
+                    pkgconf \
+                    protobuf-compiler \
+                    python3 \
+                    python3-dev \
+                    uuid-dev \
+                    zlib1g-dev && \
+    if [ "$(uname -m)" != "ppc64le" ]; then \
+        apt-get install -y --no-install-recommends libfreeipmi-dev libipmimonitoring-dev || exit 1 ; \
+    fi && \
+    mkdir -p /deps/etc && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
