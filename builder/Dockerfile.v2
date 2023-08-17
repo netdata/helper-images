@@ -44,7 +44,6 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     libsystemd-dev \
                     libtool \
                     libuv1-dev \
-                    libvirt-dev \
                     libyaml-dev \
                     libzstd-dev \
                     openssl \
