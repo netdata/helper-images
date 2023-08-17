@@ -19,12 +19,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN chown _apt:root /var/cache/apt /var/lib/apt && \
     apt-get update && \
     apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends apt-utils && \
     apt-get install -y --no-install-recommends \
                     autoconf \
                     autoconf-archive \
                     automake \
                     bison \
                     build-essential \
+                    ca-certificates \
                     cmake \
                     curl \
                     flex \
