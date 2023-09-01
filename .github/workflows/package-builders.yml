@@ -19,8 +19,6 @@ jobs:
     strategy:
       matrix:
         os:
-          - almalinux8
-          - almalinux9
           - amazonlinux2
           - amazonlinux2023
           - centos-stream8
@@ -36,6 +34,8 @@ jobs:
           - opensuse15.5
           - oraclelinux8
           - oraclelinux9
+          - rockylinux8
+          - rockylinux9
           - ubuntu20.04
           - ubuntu22.04
           - ubuntu23.04
@@ -62,23 +62,23 @@ jobs:
     strategy:
       matrix:
         os:
-          - almalinux8
-          - almalinux9
           - amazonlinux2
           - amazonlinux2023
+          - centos7
           - centos-stream8
           - centos-stream9
-          - centos7
           - debian10
           - debian11
           - debian12
           - fedora37
           - fedora38
-          - opensusetumbleweed
           - opensuse15.4
           - opensuse15.5
+          - opensusetumbleweed
           - oraclelinux8
           - oraclelinux9
+          - rockylinux8
+          - rockylinux9
           - ubuntu20.04
           - ubuntu22.04
           - ubuntu23.04
@@ -87,35 +87,35 @@ jobs:
           - linux/arm/v7
           - linux/arm64/v8
         exclude: # don’t try to run these specific combinations
-          - {os: almalinux8, platform: linux/i386}
-          - {os: almalinux8, platform: linux/arm/v7}
-          - {os: almalinux9, platform: linux/i386}
-          - {os: almalinux9, platform: linux/arm/v7}
-          - {os: amazonlinux2, platform: linux/i386}
-          - {os: amazonlinux2, platform: linux/arm/v7}
-          - {os: amazonlinux2023, platform: linux/i386}
           - {os: amazonlinux2023, platform: linux/arm/v7}
-          - {os: centos-stream8, platform: linux/i386}
-          - {os: centos-stream8, platform: linux/arm/v7}
-          - {os: centos-stream9, platform: linux/i386}
-          - {os: centos-stream9, platform: linux/arm/v7}
-          - {os: centos7, platform: linux/i386}
-          - {os: centos7, platform: linux/arm/v7}
+          - {os: amazonlinux2023, platform: linux/i386}
+          - {os: amazonlinux2, platform: linux/arm/v7}
+          - {os: amazonlinux2, platform: linux/i386}
           - {os: centos7, platform: linux/arm64/v8}
-          - {os: fedora37, platform: linux/i386}
+          - {os: centos7, platform: linux/arm/v7}
+          - {os: centos7, platform: linux/i386}
+          - {os: centos-stream8, platform: linux/arm/v7}
+          - {os: centos-stream8, platform: linux/i386}
+          - {os: centos-stream9, platform: linux/arm/v7}
+          - {os: centos-stream9, platform: linux/i386}
           - {os: fedora37, platform: linux/arm/v7}
-          - {os: fedora38, platform: linux/i386}
+          - {os: fedora37, platform: linux/i386}
           - {os: fedora38, platform: linux/arm/v7}
-          - {os: opensuse15.4, platform: linux/i386}
+          - {os: fedora38, platform: linux/i386}
           - {os: opensuse15.4, platform: linux/arm/v7}
-          - {os: opensuse15.5, platform: linux/i386}
+          - {os: opensuse15.4, platform: linux/i386}
           - {os: opensuse15.5, platform: linux/arm/v7}
-          - {os: opensusetumbleweed, platform: linux/i386}
+          - {os: opensuse15.5, platform: linux/i386}
           - {os: opensusetumbleweed, platform: linux/arm/v7}
-          - {os: oraclelinux8, platform: linux/i386}
+          - {os: opensusetumbleweed, platform: linux/i386}
           - {os: oraclelinux8, platform: linux/arm/v7}
-          - {os: oraclelinux9, platform: linux/i386}
+          - {os: oraclelinux8, platform: linux/i386}
           - {os: oraclelinux9, platform: linux/arm/v7}
+          - {os: oraclelinux9, platform: linux/i386}
+          - {os: rockylinux8, platform: linux/arm/v7}
+          - {os: rockylinux8, platform: linux/i386}
+          - {os: rockylinux9, platform: linux/arm/v7}
+          - {os: rockylinux9, platform: linux/i386}
           - {os: ubuntu20.04, platform: linux/i386}
           - {os: ubuntu22.04, platform: linux/i386}
           - {os: ubuntu23.04, platform: linux/i386}
@@ -145,31 +145,27 @@ jobs:
     strategy:
       matrix:
         os:
-          - almalinux8
-          - almalinux9
           - amazonlinux2
           - amazonlinux2023
+          - centos7
           - centos-stream8
           - centos-stream9
-          - centos7
           - debian10
           - debian11
           - debian12
           - fedora37
           - fedora38
-          - opensusetumbleweed
           - opensuse15.4
           - opensuse15.5
+          - opensusetumbleweed
           - oraclelinux8
           - oraclelinux9
+          - rockylinux8
+          - rockylinux9
           - ubuntu20.04
           - ubuntu22.04
           - ubuntu23.04
         include:
-          - os: almalinux8
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
-          - os: almalinux9
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: amazonlinux2
             arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: amazonlinux2023
@@ -200,6 +196,10 @@ jobs:
             arches: linux/amd64,linux/arm64/v8 # No other platforms
           - os: oraclelinux9
             arches: linux/amd64,linux/arm64/v8 # No other platforms
+          - os: rockylinux8
+            arches: linux/amd64,linux/arm64/v8 # No other platforms
+          - os: rockylinux9
+            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu20.04
             arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
           - os: ubuntu22.04
