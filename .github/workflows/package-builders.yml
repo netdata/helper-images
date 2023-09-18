@@ -126,7 +126,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup QEMU
         if: matrix.platform != 'linux/i386'
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build
@@ -212,7 +212,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
       - name: Docker Hub Login
