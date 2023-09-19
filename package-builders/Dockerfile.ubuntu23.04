@@ -52,6 +52,7 @@ RUN apt-get update && \
                        libtool \
                        libuv1-dev \
                        make \
+                       ninja-build \
                        pkg-config \
                        protobuf-compiler \
                        systemd \

@@ -41,6 +41,7 @@ RUN dnf distro-sync -y --nodocs && \
         libuv-devel \
         lz4-devel \
         make \
+        ninja-build \
         openssl-devel \
         openssl-perl \
         patch \

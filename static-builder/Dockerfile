@@ -37,6 +37,7 @@ RUN apk add --no-cache \
     musl-fts-dev \
     ncurses \
     netcat-openbsd \
+    ninja \
     openssh \
     pkgconfig \
     protobuf-dev \

@@ -41,6 +41,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         lz4-devel \
         make \
         nc \
+        ninja-build \
         openssl-devel \
         openssl-perl \
         patch \
