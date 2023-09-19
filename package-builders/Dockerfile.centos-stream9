@@ -41,6 +41,7 @@ RUN dnf distro-sync -y --nodocs && \
         lm_sensors \
         lz4-devel \
         make \
+        ninja \
         nc \
         openssl-devel \
         openssl-perl \

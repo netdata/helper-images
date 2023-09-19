@@ -43,6 +43,7 @@ RUN dnf distro-sync -y --nodocs && \
         lz4-devel \
         make \
         nc \
+        ninja \
         openssl-devel \
         openssl-perl \
         patch \

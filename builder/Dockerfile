@@ -33,10 +33,12 @@ RUN apk --no-cache add alpine-sdk \
                        libuv-dev \
                        lm_sensors \
                        lz4-dev \
+                       make \
                        mariadb-dev \
                        mongo-c-driver-dev \
                        musl-dev \
                        musl-fts-dev \
+                       ninja \
                        netcat-openbsd \
                        openssl-dev \
                        pkgconfig \
