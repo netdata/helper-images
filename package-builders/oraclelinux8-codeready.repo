@@ -1,6 +1,0 @@
-[ol8_codeready_builder]
-name=Oracle Linux $releasever CodeReady Builder ($basearch)
-baseurl=http://yum.oracle.com/repo/OracleLinux/OL8/codeready/builder/$basearch
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
-gpgcheck=1
-enabled=1
