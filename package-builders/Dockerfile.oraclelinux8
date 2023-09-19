@@ -8,9 +8,8 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV VERSION=$VERSION
 
-COPY package-builders/oraclelinux8-codeready.repo /etc/yum.repos.d/codeready_builder.repo
-
-RUN dnf distro-sync -y --nodocs && \
+RUN dnf config-manager --set-enabled ol8_codeready_builder && \
+    dnf distro-sync -y --nodocs && \
     dnf clean packages && \
     dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         autoconf \
