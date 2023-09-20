@@ -56,6 +56,7 @@ RUN dnf distro-sync -y --nodocs && \
         snappy-devel \
         systemd-devel \
         wget \
+        xen-devel \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
     c_rehash && \
