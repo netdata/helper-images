@@ -45,7 +45,6 @@ RUN apt-get update && \
                        libssl-dev \
                        libtool \
                        libuv1-dev \
-                       libxen-dev \
                        make \
                        ninja-build \
                        pkg-config \
@@ -54,6 +53,9 @@ RUN apt-get update && \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
+    if ! dpkg-architecture --is 'i386'; then \
+        apt-get install -y --no-install-recommends libxen-dev \
+    fi && \
     apt-get clean && \
     c_rehash && \
     rm -rf /var/lib/apt/lists/*
