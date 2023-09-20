@@ -46,6 +46,7 @@ RUN dnf distro-sync -y --nodocs && \
         openssl-perl \
         patch \
         pkgconfig \
+        'pkgconfig(libmongoc-1.0)' \
         procps \
         protobuf-c-devel \
         protobuf-compiler \

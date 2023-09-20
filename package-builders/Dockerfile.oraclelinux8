@@ -8,6 +8,8 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV VERSION=$VERSION
 
+COPY package-builders/ol8-epel.repo /etc/yum.repos.d/ol8-epel.repo
+
 RUN dnf config-manager --set-enabled ol8_codeready_builder && \
     dnf distro-sync -y --nodocs && \
     dnf clean packages && \
@@ -47,6 +49,7 @@ RUN dnf config-manager --set-enabled ol8_codeready_builder && \
         openssl-perl \
         patch \
         pkgconfig \
+        'pkgconfig(libmongoc-1.0)' \
         procps \
         protobuf-c-devel \
         protobuf-compiler \

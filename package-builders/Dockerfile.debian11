@@ -43,6 +43,7 @@ RUN apt-get update && \
                        libjudy-dev \
                        liblz4-dev \
                        libmnl-dev \
+                       libmongoc-dev \
                        libnetfilter-acct-dev \
                        libprotobuf-dev \
                        libprotoc-dev \
