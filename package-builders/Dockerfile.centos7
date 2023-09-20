@@ -42,7 +42,7 @@ RUN yum install -y epel-release && \
                    lm_sensors \
                    lz4-devel \
                    make \
-                   ninja \
+                   ninja-build \
                    openssl-devel \
                    openssl-perl \
                    patch \
