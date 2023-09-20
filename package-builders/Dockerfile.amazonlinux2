@@ -40,7 +40,7 @@ RUN yum update -y && \
                    lm_sensors \
                    lz4-devel \
                    make \
-                   ninja \
+                   ninja-build \
                    openssl-devel \
                    openssl-perl \
                    patch \
