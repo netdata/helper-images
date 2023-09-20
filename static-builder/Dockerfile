@@ -45,7 +45,6 @@ RUN apk add --no-cache \
     snappy-static \
     util-linux-dev \
     wget \
-    xen-dev \
     xz \
     zlib-dev \
     zlib-static \
