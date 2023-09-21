@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ -d /cmake/bin ]; then
+    PATH="/cmake/bin:${PATH}"
+fi
+
 fail() {
   printf "FAIL: %s\n" "$1"
   if [ -t 1 ]; then
