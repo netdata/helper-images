@@ -51,6 +51,7 @@ RUN apt-get update && \
                        libssl-dev \
                        libtool \
                        libuv1-dev \
+                       libxen-dev \
                        make \
                        ninja-build \
                        pkg-config \

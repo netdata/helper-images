@@ -54,7 +54,8 @@ RUN zypper update -y && \
                       snappy-devel \
                       systemd-devel \
                       tar \
-                      wget && \
+                      wget \
+                      xen-devel && \
     zypper clean && \
     rm -rf /var/cache/zypp/*/* && \
     c_rehash && \
