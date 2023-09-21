@@ -15,6 +15,7 @@ RUN yum update -y && \
                    automake \
                    bison \
                    bison-devel \
+                   cmake \
                    cups-devel \
                    curl \
                    diffutils \
