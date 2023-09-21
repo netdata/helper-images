@@ -31,9 +31,9 @@ RUN apk add --no-cache \
     libuv-static \
     lz4-dev \
     lz4-static \
-    yaml-dev \
-    yaml-static \
     make \
+    mongo-c-driver-dev \
+    mongo-c-driver-static \
     musl-fts-dev \
     ncurses \
     netcat-openbsd \
@@ -46,6 +46,8 @@ RUN apk add --no-cache \
     util-linux-dev \
     wget \
     xz \
+    yaml-dev \
+    yaml-static \
     zlib-dev \
     zlib-static \
     zstd-dev \

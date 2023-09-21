@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 ENV VERSION=$VERSION
 
 RUN dnf distro-sync -y --nodocs && \
-    dnf install -y --nodocs 'dnf-command(config-manager)' && \
+    dnf install -y --nodocs 'dnf-command(config-manager)' epel-release && \
     dnf config-manager --set-enabled powertools && \
     dnf clean packages && \
     dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
@@ -51,6 +51,7 @@ RUN dnf distro-sync -y --nodocs && \
         openssl-perl \
         patch \
         pkgconfig \
+        'pkgconfig(libmongoc-1.0)' \
         procps \
         protobuf-c-devel \
         protobuf-compiler \
