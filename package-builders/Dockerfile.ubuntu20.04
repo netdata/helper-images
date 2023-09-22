@@ -14,6 +14,7 @@ ENV VERSION=0.1
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends autoconf \
                        autoconf-archive \
                        autogen \
@@ -65,6 +66,15 @@ RUN apt-get update && \
     apt-get clean && \
     c_rehash && \
     rm -rf /var/lib/apt/lists/*
+
+RUN if dpkg-architecture --is 'armhf'; then \
+        wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
+        echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee -a /etc/apt/sources.list.d/kitware.list >/dev/null && \
+        apt-get update && \
+        rm /usr/share/keyrings/kitware-archive-keyring.gpg && \
+        apt-get install -y --no-install-recommends kitware-archive-keyring && \
+        apt-get upgrade -y ; \
+    fi
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/debian-build.sh /build.sh
