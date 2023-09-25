@@ -64,14 +64,20 @@ RUN yum install -y epel-release && \
     mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
 
 # Fetch a newer version of CMake, because the system-provided one is _ancient_.
-# It’s safe to just pull the x86_64 copy, because that's the only arch we build for on this platform.
 # The hash is hard-coded here to mitigate the risk of supply-chain attacks.
-RUN curl --fail -sSL --connect-timeout 20 --retry 3 --output cmake-linux-x86_64.sh \
-         https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-x86_64.sh && \
-    echo '8c449dabb2b2563ec4e6d5e0fb0ae09e729680efab71527b59015131cea4a042  cmake-linux-x86_64.sh' | sha256sum -c - && \
-    chmod +x ./cmake-linux-x86_64.sh && \
+RUN curl --fail -sSL --connect-timeout 20 --retry 3 --output cmake-linux-$(uname -m).sh \
+         https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-$(uname -m).sh && \
+    if [ "$(uname -m)" = "x86_64" ]; then \
+        echo '8c449dabb2b2563ec4e6d5e0fb0ae09e729680efab71527b59015131cea4a042  cmake-linux-x86_64.sh' | sha256sum -c - ; \
+    elif [ "$(uname -m)" = "aarch64" ]; then \
+        echo 'a83e01ed1cdf44c2e33e0726513b9a35a8c09e3b5a126fd720b3c8a9d5552368  cmake-linux-aarch64.sh' | sha256sum -c - ; \
+    else \
+        echo "ARCH NOT SUPPORTED BY CMAKE" ; \
+        exit 1 ; \
+    fi && \
+    chmod +x ./cmake-linux-$(uname -m).sh && \
     mkdir -p /cmake && \
-    ./cmake-linux-x86_64.sh --skip-license --prefix=/cmake
+    ./cmake-linux-$(uname -m).sh --skip-license --prefix=/cmake
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/fedora-build.sh /build.sh
