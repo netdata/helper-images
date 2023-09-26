@@ -104,7 +104,7 @@ jobs:
         with:
           load: false
           push: false
-          file: ./package-builders/Dockerfile.${{ matrix.os }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
           tags: netdata/package-builders:${{ matrix.os }}
 
   pr-checks:
@@ -140,7 +140,7 @@ jobs:
           platforms: ${{ matrix.platform }}
           load: false
           push: false
-          file: ./package-builders/Dockerfile.${{ matrix.os }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
           tags: netdata/package-builders:${{ matrix.os }}
 
   publish:
@@ -182,5 +182,5 @@ jobs:
         with:
           platforms: ${{ matrix.platforms }}
           push: true
-          file: ./package-builders/Dockerfile.${{ matrix.os }}-${{ matrix.revision }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
           tags: ${{ matrix.tags }}
