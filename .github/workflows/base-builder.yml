@@ -43,19 +43,49 @@ jobs:
             echo 'run=false' >> "${GITHUB_OUTPUT}"
           fi
 
+  matrix:
+    name: Prepare Build Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      build-matrix: ${{ steps.build.outputs.matrix }}
+      pr-matrix: ${{ steps.pr.outputs.matrix }}
+      publish-matrix: ${{ steps.publish.outputs.matrix }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: Prepare tools
+        id: prepare
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-ruamel.yaml
+      - name: Prepare Build Check Matrix
+        id: build
+        run: |
+          matrix="$(.github/scripts/gen-matrix-base.py build)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare PR Check Matrix
+        id: pr
+        run: |
+          matrix="$(.github/scripts/gen-matrix-base.py pr)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare Publish Matrix
+        id: publish
+        run: |
+          matrix="$(.github/scripts/gen-matrix-base.py publish)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+
   build-check:
     name: Build Check
     if: github.event_name == 'pull_request'
     needs:
       - file-check
+      - matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        image:
-          - base
-          - builder
-        revision:
-          - v1
+      matrix: ${{ fromJson(needs.matrix.outputs.build-matrix) }}
     steps:
       - name: Skip Check
         id: skip
@@ -84,17 +114,7 @@ jobs:
       - build-check
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        image:
-          - base
-          - builder
-        platforms:
-          - linux/i386
-          - linux/arm/v7
-          - linux/arm64/v8
-          - linux/ppc64le
-        revision:
-          - v1
+      matrix: ${{ fromJson(needs.matrix.outputs.pr-matrix) }}
     steps:
       - name: Skip Check
         id: skip
@@ -124,20 +144,7 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        include:
-          - image: base
-            revision: v1
-            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
-          - image: builder
-            revision: v1
-            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
-          - image: base
-            revision: latest
-            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
-          - image: builder
-            revision: latest
-            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
+      matrix: ${{ fromJson(needs.matrix.outputs.publish-matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -173,5 +180,5 @@ jobs:
         with:
           platforms: ${{ matrix.platforms }}
           push: true
-          file: ./${{ matrix.image }}/Dockerfile
-          tags: netdata/${{ matrix.image }}:${{ matrix.revision }},ghcr.io/netdata/${{ matrix.image }}:${{ matrix.revision }},quay.io/netdata/${{ matrix.image }}:${{ matrix.revision }}
+          file: ./${{ matrix.image }}/Dockerfile.${{ matrix.revision }}
+          tags: ${{ matrix.tags }}
