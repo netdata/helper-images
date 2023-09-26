@@ -42,36 +42,49 @@ jobs:
             echo 'run=false' >> "${GITHUB_OUTPUT}"
           fi
 
+  matrix:
+    name: Prepare Build Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      build-matrix: ${{ steps.build.outputs.matrix }}
+      pr-matrix: ${{ steps.pr.outputs.matrix }}
+      publish-matrix: ${{ steps.publish.outputs.matrix }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: Prepare tools
+        id: prepare
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-ruamel.yaml
+      - name: Prepare Build Check Matrix
+        id: build
+        run: |
+          matrix="$(.github/scripts/gen-matrix-pkgs.py build)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare PR Check Matrix
+        id: pr
+        run: |
+          matrix="$(.github/scripts/gen-matrix-pkgs.py pr)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare Publish Matrix
+        id: publish
+        run: |
+          matrix="$(.github/scripts/gen-matrix-pkgs.py publish)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+
   build-check:
     name: Build Check
     if: github.event_name == 'pull_request'
     needs:
       - file-check
+      - matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        os:
-          - amazonlinux2
-          - amazonlinux2023
-          - centos-stream8
-          - centos-stream9
-          - centos7
-          - debian10
-          - debian11
-          - debian12
-          - fedora37
-          - fedora38
-          - fedora39
-          - opensusetumbleweed
-          - opensuse15.4
-          - opensuse15.5
-          - oraclelinux8
-          - oraclelinux9
-          - rockylinux8
-          - rockylinux9
-          - ubuntu20.04
-          - ubuntu22.04
-          - ubuntu23.04
+      matrix: ${{ fromJson(needs.matrix.outputs.build-matrix) }}
       max-parallel: 8
       fail-fast: false
     steps:
@@ -91,7 +104,7 @@ jobs:
         with:
           load: false
           push: false
-          file: ./package-builders/Dockerfile.${{ matrix.os }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
           tags: netdata/package-builders:${{ matrix.os }}
 
   pr-checks:
@@ -100,70 +113,10 @@ jobs:
     needs:
       - file-check
       - build-check
+      - matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        os:
-          - amazonlinux2
-          - amazonlinux2023
-          - centos7
-          - centos-stream8
-          - centos-stream9
-          - debian10
-          - debian11
-          - debian12
-          - fedora37
-          - fedora38
-          - fedora39
-          - opensuse15.4
-          - opensuse15.5
-          - opensusetumbleweed
-          - oraclelinux8
-          - oraclelinux9
-          - rockylinux8
-          - rockylinux9
-          - ubuntu20.04
-          - ubuntu22.04
-          - ubuntu23.04
-        platform:
-          - linux/i386
-          - linux/arm/v7
-          - linux/arm64/v8
-        exclude: # don’t try to run these specific combinations
-          - {os: amazonlinux2023, platform: linux/arm/v7}
-          - {os: amazonlinux2023, platform: linux/i386}
-          - {os: amazonlinux2, platform: linux/arm/v7}
-          - {os: amazonlinux2, platform: linux/i386}
-          - {os: centos7, platform: linux/arm64/v8}
-          - {os: centos7, platform: linux/arm/v7}
-          - {os: centos7, platform: linux/i386}
-          - {os: centos-stream8, platform: linux/arm/v7}
-          - {os: centos-stream8, platform: linux/i386}
-          - {os: centos-stream9, platform: linux/arm/v7}
-          - {os: centos-stream9, platform: linux/i386}
-          - {os: fedora37, platform: linux/arm/v7}
-          - {os: fedora37, platform: linux/i386}
-          - {os: fedora38, platform: linux/arm/v7}
-          - {os: fedora38, platform: linux/i386}
-          - {os: fedora39, platform: linux/arm/v7}
-          - {os: fedora39, platform: linux/i386}
-          - {os: opensuse15.4, platform: linux/arm/v7}
-          - {os: opensuse15.4, platform: linux/i386}
-          - {os: opensuse15.5, platform: linux/arm/v7}
-          - {os: opensuse15.5, platform: linux/i386}
-          - {os: opensusetumbleweed, platform: linux/arm/v7}
-          - {os: opensusetumbleweed, platform: linux/i386}
-          - {os: oraclelinux8, platform: linux/arm/v7}
-          - {os: oraclelinux8, platform: linux/i386}
-          - {os: oraclelinux9, platform: linux/arm/v7}
-          - {os: oraclelinux9, platform: linux/i386}
-          - {os: rockylinux8, platform: linux/arm/v7}
-          - {os: rockylinux8, platform: linux/i386}
-          - {os: rockylinux9, platform: linux/arm/v7}
-          - {os: rockylinux9, platform: linux/i386}
-          - {os: ubuntu20.04, platform: linux/i386}
-          - {os: ubuntu22.04, platform: linux/i386}
-          - {os: ubuntu23.04, platform: linux/i386}
+      matrix: ${{ fromJson(needs.matrix.outputs.pr-matrix) }}
       max-parallel: 8
       fail-fast: false
     steps:
@@ -187,80 +140,17 @@ jobs:
           platforms: ${{ matrix.platform }}
           load: false
           push: false
-          file: ./package-builders/Dockerfile.${{ matrix.os }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
           tags: netdata/package-builders:${{ matrix.os }}
 
   publish:
     name: Publish Images
     if: github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
     runs-on: ubuntu-latest
+    needs:
+      - matrix
     strategy:
-      matrix:
-        os:
-          - amazonlinux2
-          - amazonlinux2023
-          - centos7
-          - centos-stream8
-          - centos-stream9
-          - debian10
-          - debian11
-          - debian12
-          - fedora37
-          - fedora38
-          - fedora39
-          - opensuse15.4
-          - opensuse15.5
-          - opensusetumbleweed
-          - oraclelinux8
-          - oraclelinux9
-          - rockylinux8
-          - rockylinux9
-          - ubuntu20.04
-          - ubuntu22.04
-          - ubuntu23.04
-        include:
-          - os: amazonlinux2
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: amazonlinux2023
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: centos-stream8
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
-          - os: centos-stream9
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: centos7
-            arches: linux/amd64 # Unable to provide alternate arches due to our dependence on OKay.
-          - os: debian10
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
-          - os: debian11
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
-          - os: debian12
-            arches: linux/amd64,linux/i386,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linuxs390x,linux/mips64le,linux/arm/v5
-          - os: fedora37
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: fedora38
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: fedora39
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: opensuse15.4
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
-          - os: opensuse15.5
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le
-          - os: opensusetumbleweed
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/arm/v7, linux/ppc64le
-          - os: oraclelinux8
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: oraclelinux9
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: rockylinux8
-            arches: linux/amd64,linux/arm64/v8 # No other platforms
-          - os: rockylinux9
-            arches: linux/amd64,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu20.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu22.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
-          - os: ubuntu23.04
-            arches: linux/amd64,linux/arm/v7,linux/arm64/v8 # possibly linux/ppc64le,linux/s390x
+      matrix: ${{ fromJson(needs.matrix.outputs.publish-matrix) }}
       max-parallel: 8
       fail-fast: false
     steps:
@@ -290,7 +180,7 @@ jobs:
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
-          platforms: ${{ matrix.arches }}
+          platforms: ${{ matrix.platforms }}
           push: true
-          file: ./package-builders/Dockerfile.${{ matrix.os }}
-          tags: netdata/package-builders:${{ matrix.os }},ghcr.io/netdata/package-builders:${{ matrix.os }},quay.io/netdata/package-builders:${{ matrix.os }}
+          file: ./package-builders/Dockerfile.${{ matrix.os }}.${{ matrix.revision }}
+          tags: ${{ matrix.tags }}

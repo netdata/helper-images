@@ -1,0 +1,116 @@
+---
+meta:
+  latest-rev: v1
+  native-platform: linux/amd64
+  image-prefix: netdata/
+  registries:
+    - ''
+    - 'ghcr.io/'
+    - 'quay.io/'
+anchors:
+  pkg-builder-revs: &pkg-builder-revs
+    - v1
+static:
+  image: static-builder
+  revisions:
+    - v1
+  platforms:
+    - linux/amd64
+    - linux/386
+    - linux/arm/v7
+    - linux/arm64/v8
+    - linux/ppc64le
+base:
+  images:
+    - base
+    - builder
+  revisions:
+    - v1
+  platforms:
+    - linux/amd64
+    - linux/386
+    - linux/arm/v7
+    - linux/arm64/v8
+    - linux/ppc64le
+package-builders:
+  image: package-builders
+  distros:
+    - &amzn
+      os: amazonlinux2023
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *amzn
+      os: amazonlinux2
+    - &centos-stream
+      os: centos-stream9
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *centos-stream
+      os: centos-stream8
+    - os: centos7
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+    - &debian
+      os: debian12
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/386
+        - linux/arm/v7
+        - linux/arm64/v8
+    - <<: *debian
+      os: debian11
+    - <<: *debian
+      os: debian10
+    - &fedora
+      os: fedora39
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *fedora
+      os: fedora38
+    - <<: *fedora
+      os: fedora37
+    - &opensuse
+      os: opensusetumbleweed
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *opensuse
+      os: opensuse15.5
+    - <<: *opensuse
+      os: opensuse15.4
+    - &oracle
+      os: oraclelinux9
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *oracle
+      os: oraclelinux8
+    - &rocky
+      os: rockylinux9
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+    - <<: *rocky
+      os: rockylinux8
+    - &ubuntu
+      os: ubuntu23.04
+      revisions: *pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm/v7
+        - linux/arm64/v8
+    - <<: *ubuntu
+      os: ubuntu22.04
+    - <<: *ubuntu
+      os: ubuntu20.04
