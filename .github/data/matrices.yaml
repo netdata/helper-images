@@ -109,7 +109,7 @@ package-builders:
       platforms:
         - linux/amd64
         - linux/arm/v7
-        - linux/arm/64/v8
+        - linux/arm64/v8
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
