@@ -54,6 +54,8 @@ jobs:
         image:
           - base
           - builder
+        revision:
+          - v1
     steps:
       - name: Skip Check
         id: skip
@@ -72,7 +74,7 @@ jobs:
           load: false
           push: false
           tags: netdata/${{ matrix.image }}:test
-          file: ./${{ matrix.image }}/Dockerfile
+          file: ./${{ matrix.image }}/Dockerfile.${{ matrix.revision }}
 
   pr-checks:
     name: PR Checks
@@ -91,6 +93,8 @@ jobs:
           - linux/arm/v7
           - linux/arm64/v8
           - linux/ppc64le
+        revision:
+          - v1
     steps:
       - name: Skip Check
         id: skip
@@ -113,7 +117,7 @@ jobs:
           load: false
           push: false
           tags: netdata/${{ matrix.image }}:test
-          file: ./${{ matrix.image }}/Dockerfile
+          file: ./${{ matrix.image }}/Dockerfile.${{ matrix.revision }}
 
   publish:
     name: Publish Images
@@ -121,9 +125,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image:
-          - base
-          - builder
+        include:
+          - image: base
+            revision: v1
+            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
+          - image: builder
+            revision: v1
+            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
+          - image: base
+            revision: latest
+            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
+          - image: builder
+            revision: latest
+            platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -157,7 +171,7 @@ jobs:
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/i386,linux/arm/v7,linux/arm64,linux/ppc64le
+          platforms: ${{ matrix.platforms }}
           push: true
           file: ./${{ matrix.image }}/Dockerfile
-          tags: netdata/${{ matrix.image }}:latest,ghcr.io/netdata/${{ matrix.image }}:latest,quay.io/netdata/${{ matrix.image }}:latest
+          tags: netdata/${{ matrix.image }}:${{ matrix.revision }},ghcr.io/netdata/${{ matrix.image }}:${{ matrix.revision }},quay.io/netdata/${{ matrix.image }}:${{ matrix.revision }}
