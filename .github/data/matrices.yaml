@@ -26,6 +26,7 @@ base:
     - builder
   revisions:
     - v1
+    - v2
   platforms:
     - linux/amd64
     - linux/386
