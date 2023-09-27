@@ -36,9 +36,7 @@ RUN dnf distro-sync -y --nodocs && \
         'pkgconfig(libelf)' \
         'pkgconfig(libipmimonitoring)' \
         'pkgconfig(liblz4)' \
-        'pkgconfig(libmnl)' \
         'pkgconfig(libmongoc-1.0)' \
-        'pkgconfig(libnetfilter_acct)' \
         'pkgconfig(libsystemd)' \
         'pkgconfig(libuv)' \
         'pkgconfig(openssl)' \

@@ -38,9 +38,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         'pkgconfig(libelf)' \
         'pkgconfig(libipmimonitoring)' \
         'pkgconfig(liblz4)' \
-        'pkgconfig(libmnl)' \
         'pkgconfig(libmongoc-1.0)' \
-        'pkgconfig(libnetfilter_acct)' \
         'pkgconfig(libsystemd)' \
         'pkgconfig(libuv)' \
         'pkgconfig(openssl)' \

@@ -34,7 +34,6 @@ RUN dnf distro-sync -y --nodocs && \
         pkgconfig \
         'pkgconfig(json-c)' \
         'pkgconfig(libelf)' \
-        'pkgconfig(libipmimonitoring)' \
         'pkgconfig(libsystemd)' \
         'pkgconfig(libuv)' \
         'pkgconfig(liblz4)' \

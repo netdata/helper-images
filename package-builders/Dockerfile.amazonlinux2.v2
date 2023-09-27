@@ -32,7 +32,6 @@ RUN yum update -y && \
                    pkgconfig \
                    'pkgconfig(json-c)' \
                    'pkgconfig(libelf)' \
-                   'pkgconfig(libipmimonitoring)' \
                    'pkgconfig(liblz4)' \
                    'pkgconfig(libmnl)' \
                    'pkgconfig(libmongoc-1.0)' \
