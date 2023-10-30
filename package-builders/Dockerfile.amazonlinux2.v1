@@ -37,6 +37,7 @@ RUN yum update -y && \
                    libtool \
                    libuuid-devel \
                    libuv-devel \
+                   libzstd-devel \
                    lm_sensors \
                    lz4-devel \
                    make \

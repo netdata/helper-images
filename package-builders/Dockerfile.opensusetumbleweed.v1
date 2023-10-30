@@ -42,6 +42,7 @@ RUN zypper update -y && \
                       libtool \
                       libuv-devel \
                       libuuid-devel \
+                      libzstd-devel \
                       make \
                       ninja \
                       patch \

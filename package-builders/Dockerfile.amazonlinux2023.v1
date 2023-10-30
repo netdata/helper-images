@@ -39,6 +39,7 @@ RUN dnf distro-sync -y --nodocs && \
         libtool \
         libuuid-devel \
         libuv-devel \
+        libzstd-devel \
         lm_sensors \
         lz4-devel \
         make \
