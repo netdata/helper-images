@@ -54,6 +54,7 @@ RUN apt-get update && \
                        libtool \
                        libuv1-dev \
                        libxen-dev \
+                       libzstd-dev \
                        make \
                        ninja-build \
                        pkg-config \
