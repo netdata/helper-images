@@ -39,6 +39,7 @@ RUN apk add --no-cache \
     netcat-openbsd \
     ninja \
     openssh \
+    pcre2-dev \
     pkgconfig \
     protobuf-dev \
     snappy-dev \
