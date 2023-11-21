@@ -49,6 +49,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         openssl-devel \
         openssl-perl \
         patch \
+        pcre2 \
         pkgconfig \
         'pkgconfig(libmongoc-1.0)' \
         procps \

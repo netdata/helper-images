@@ -51,6 +51,7 @@ RUN dnf distro-sync -y --nodocs && \
         openssl-devel \
         openssl-perl \
         patch \
+        pcre2 \
         pkgconfig \
         'pkgconfig(libmongoc-1.0)' \
         procps \
