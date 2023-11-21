@@ -38,7 +38,7 @@ RUN zypper update -y && \
                       libmnl-devel \
                       libnetfilter_acct1 \
                       libnetfilter_acct-devel \
-                      libpcre2-8-0 \
+                      libpcre2-devel \
                       libopenssl-devel \
                       libtool \
                       libuv-devel \
