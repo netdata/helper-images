@@ -36,6 +36,7 @@ RUN apk add --no-cache \
     mongo-c-driver-static \
     musl-fts-dev \
     ncurses \
+    ncurses-static \
     netcat-openbsd \
     ninja \
     openssh \
