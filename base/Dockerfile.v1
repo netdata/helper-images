@@ -19,6 +19,7 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 # Install some prerequisites
 RUN apk --no-cache add apcupsd \
                        curl \
+                       curl-dev \
                        fping \
                        iproute2 \
                        jq \
