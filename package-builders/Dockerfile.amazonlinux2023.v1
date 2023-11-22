@@ -47,7 +47,7 @@ RUN dnf distro-sync -y --nodocs && \
         openssl-devel \
         openssl-perl \
         patch \
-        pcre2 \
+        pcre2-devel \
         pkgconfig \
         procps \
         protobuf-c-devel \

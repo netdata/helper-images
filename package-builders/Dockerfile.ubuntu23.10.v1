@@ -46,7 +46,7 @@ RUN apt-get update && \
                        libmnl-dev \
                        libmongoc-dev \
                        libnetfilter-acct-dev \
-                       libpcre2-8-0 \
+                       libpcre2-dev \
                        libprotobuf-dev \
                        libprotoc-dev \
                        libsnappy-dev \

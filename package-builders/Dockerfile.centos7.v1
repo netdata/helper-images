@@ -47,7 +47,7 @@ RUN yum install -y epel-release && \
                    openssl-devel \
                    openssl-perl \
                    patch \
-                   pcre2 \
+                   pcre2-devel \
                    pkgconfig \
                    'pkgconfig(libmongoc-1.0)' \
                    procps \
