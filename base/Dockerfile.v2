@@ -26,6 +26,7 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     fping \
                     iproute2 \
                     jq \
+                    libcurl4-openssl-dev \
                     libgcrypt20 \
                     libjson-c5 \
                     liblz4-1 \
