@@ -32,12 +32,14 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     flex \
                     git \
                     jq \
+                    libcurl4-openssl-dev \
                     libgcrypt-dev \
                     libjson-c-dev \
                     liblz4-dev \
                     libmariadb-dev \
                     libmnl-dev \
                     libmongoc-dev \
+                    libpcre2-dev \
                     libprotobuf-dev \
                     libsnappy-dev \
                     libssl-dev \
