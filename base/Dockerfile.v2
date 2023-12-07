@@ -44,6 +44,7 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     libzstd1 \
                     lm-sensors \
                     msmtp \
+                    vim-tiny \
                     ncurses-base \
                     netcat-openbsd \
                     openssl \
