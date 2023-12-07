@@ -50,7 +50,6 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     openssl \
                     procps \
                     python3 \
-                    vim \
                     zlib1g && \
     if [ "$(uname -m)" != "ppc64le" ]; then \
         apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 || exit 1 ; \
