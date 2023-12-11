@@ -28,7 +28,6 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     build-essential \
                     ca-certificates \
                     cmake \
-                    ninja-build \
                     curl \
                     flex \
                     git \
@@ -49,6 +48,7 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     libuv1-dev \
                     libyaml-dev \
                     libzstd-dev \
+                    ninja-build \
                     openssl \
                     pkgconf \
                     protobuf-compiler \
