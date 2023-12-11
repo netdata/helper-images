@@ -28,6 +28,7 @@ RUN chown _apt:root /var/cache/apt /var/lib/apt && \
                     build-essential \
                     ca-certificates \
                     cmake \
+                    ninja-build \
                     curl \
                     flex \
                     git \
