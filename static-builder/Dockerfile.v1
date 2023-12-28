@@ -55,4 +55,4 @@ RUN apk add --no-cache \
     zstd-dev \
     zstd-static
 
-COPY snappy.pc /usr/lib/pkgconfig
+COPY static-builder/snappy.pc /usr/lib/pkgconfig/snappy.pc
