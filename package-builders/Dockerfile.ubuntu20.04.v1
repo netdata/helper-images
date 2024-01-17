@@ -78,6 +78,8 @@ RUN if dpkg-architecture --is 'armhf'; then \
         apt-get upgrade -y ; \
     fi
 
+RUN curl -sL https://sentry.io/get-cli/ | sh
+
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/debian-build.sh /build.sh
 

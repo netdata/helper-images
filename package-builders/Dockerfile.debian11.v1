@@ -68,6 +68,8 @@ RUN apt-get update && \
     c_rehash && \
     rm -rf /var/lib/apt/lists/*
 
+RUN curl -sL https://sentry.io/get-cli/ | sh
+
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/debian-build.sh /build.sh
 
