@@ -31,7 +31,6 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         gcc \
         gcc-c++ \
         git \
-        golang \
         json-c-devel \
         libcurl-devel \
         libyaml-devel \
@@ -71,6 +70,13 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/fedora-build.sh /build.sh
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/build.sh"]
