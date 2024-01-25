@@ -56,3 +56,10 @@ RUN apk add --no-cache \
     zstd-static
 
 COPY static-builder/snappy.pc /usr/lib/pkgconfig/snappy.pc
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
