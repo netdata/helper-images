@@ -77,8 +77,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *fedora
       os: fedora38
-    - <<: *fedora
-      os: fedora37
     - &opensuse
       os: opensusetumbleweed
       revisions: *pkg-builder-revs
@@ -114,7 +112,5 @@ package-builders:
         - linux/arm64/v8
     - <<: *ubuntu
       os: ubuntu23.10
-    - <<: *ubuntu
-      os: ubuntu23.04
     - <<: *ubuntu
       os: ubuntu20.04
