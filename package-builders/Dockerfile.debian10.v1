@@ -12,6 +12,8 @@ ENV VERSION=0.1
 
 # This is needed to ensure package installs don't prompt for any user input.
 ENV DEBIAN_FRONTEND=noninteractive
+# Dummy Sentry DSN
+ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
 RUN apt-get update && \
     apt-get upgrade -y && \
