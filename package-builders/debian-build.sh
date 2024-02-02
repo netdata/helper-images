@@ -29,7 +29,10 @@ cp -a /netdata /usr/src || exit 1
 rm -rf /usr/src/netdata/.git || exit 1
 cd /usr/src/netdata || exit 1
 
-cp -a contrib/debian debian || exit 1
+# If the `debian` directory is not in the root of the source tree, copy it there.
+if [ ! -d debian ]; then
+    cp -a contrib/debian debian || exit 1
+fi
 
 # If there's a specific control file for this OS release, use it
 if [ -e "debian/control.${CODENAME}" ]; then
