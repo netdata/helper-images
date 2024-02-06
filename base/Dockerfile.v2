@@ -16,6 +16,8 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN echo 'deb http://deb.debian.org/debian bookworm-backports main' > /etc/apt/sources.list.d/backports.list
+
 RUN chown _apt:root /var/cache/apt /var/lib/apt && \
     apt-get update && \
     apt-get upgrade -y && \
