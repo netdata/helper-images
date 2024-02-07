@@ -16,7 +16,9 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN chown _apt:root /var/cache/apt /var/lib/apt && \
+RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" && \
+    echo "deb http://deb.debian.org/debian ${DISTRO_CODENAME}-backports main" > /etc/apt/sources.list.d/backports.list && \
+    chown _apt:root /var/cache/apt /var/lib/apt && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends apt-utils && \
