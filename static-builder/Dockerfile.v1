@@ -29,6 +29,7 @@ RUN apk add --no-cache \
     libtool \
     libuv-dev \
     libuv-static \
+    libpsl-dev \
     libpsl-static \
     lz4-dev \
     lz4-static \
