@@ -24,6 +24,8 @@ RUN apk add --no-cache \
     gzip \
     jq \
     libelf-static \
+    libidn2-dev \ 
+    libidn2-static \
     libmnl-dev \
     libmnl-static \
     libtool \
