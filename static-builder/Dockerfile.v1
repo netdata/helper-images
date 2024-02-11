@@ -33,6 +33,8 @@ RUN apk add --no-cache \
     libuv-static \
     libpsl-dev \
     libpsl-static \
+    libunistring-dev \
+    libunistring-static \
     lz4-dev \
     lz4-static \
     make \
