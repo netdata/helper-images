@@ -30,12 +30,15 @@ cat > "/usr/src/packages/SOURCES/netdata-${pkg_version}/system/.install-type" <<
 	EOF
 
 # Download Sources
-rpmbuild --nobuild --define "_topdir /usr/src/packages/SOURCES" \
---define "_sourcedir /usr/src/packages/SOURCES" \
---define "source_date_epoch_from_changelog false" \
---undefine "_disable_source_fetch" "/usr/src/packages/SPECS/netdata.spec" || exit 1
+rpmbuild --nobuild \
+         --define "_upstream_go_toolchain 1" \
+         --define "_topdir /usr/src/packages/SOURCES" \
+         --define "_sourcedir /usr/src/packages/SOURCES" \
+         --define "source_date_epoch_from_changelog false" \
+         --undefine "_disable_source_fetch" \
+         "/usr/src/packages/SPECS/netdata.spec" || exit 1
 
-rpmbuild -bb --rebuild /usr/src/packages/SPECS/netdata.spec || exit 1
+rpmbuild -bb --define "_upstream_go_toolchain 1" --rebuild /usr/src/packages/SPECS/netdata.spec || exit 1
 
 # Copy the built packages to /netdata/artifacts (which may be bind-mounted)
 # Also ensure /netdata/artifacts exists and create it if it doesn't
