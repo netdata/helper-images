@@ -39,6 +39,10 @@ if [ -e "debian/control.${CODENAME}" ]; then
   cp "debian/control.${CODENAME}" debian/control || exit 1
 fi
 
+# Remove the build dependency on Golang, since we provide our own
+# toolchain for that independent of the distro packages.
+sed -i -e '/^ *golang.*,$/d' debian/control
+
 # If the changelog was not updated on the host, assume this is a
 # development build and update the changelog appropriately.
 # shellcheck disable=SC2153
