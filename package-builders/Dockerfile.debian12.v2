@@ -1,0 +1,63 @@
+FROM debian:bookworm
+
+ENV EMAIL=bot@netdata.cloud
+ENV FULLNAME="Netdata Builder"
+ENV VERSION=0.1
+
+# This is needed to ensure package installs don't prompt for any user input.
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends bison \
+                       build-essential \
+                       ca-certificates \
+                       cmake \
+                       curl \
+                       dpkg-dev \
+                       flex \
+                       g++ \
+                       gcc \
+                       git-buildpackage \
+                       git-core \
+                       golang \
+                       libatomic1 \
+                       libcurl4-openssl-dev\
+                       libcups2-dev \
+                       libdistro-info-perl \
+                       libelf-dev \
+                       libipmimonitoring-dev \
+                       libjson-c-dev \
+                       libyaml-dev \
+                       libjudy-dev \
+                       liblz4-dev \
+                       libmnl-dev \
+                       libmongoc-dev \
+                       libnetfilter-acct-dev \
+                       libprotobuf-dev \
+                       libprotoc-dev \
+                       libsnappy-dev \
+                       libsystemd-dev \
+                       libssl-dev \
+                       libtool \
+                       libuv1-dev \
+                       make \
+                       ninja-build \
+                       pkg-config \
+                       protobuf-compiler \
+                       systemd \
+                       uuid-dev \
+                       wget \
+                       zlib1g-dev && \
+    if ! dpkg-architecture --is 'i386'; then \
+        apt-get install -y --no-install-recommends libxen-dev ; \
+    fi && \
+    apt-get clean && \
+    c_rehash && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/debian-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]

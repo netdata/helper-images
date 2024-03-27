@@ -1,0 +1,77 @@
+FROM ubuntu:20.04
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Ubuntu 20.04"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official DEB packages for Ubuntu 20.04"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV EMAIL=bot@netdata.cloud
+ENV FULLNAME="Netdata Builder"
+ENV VERSION=0.1
+
+# This is needed to keep package installs from prompting about configuration.
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends bison \
+                       build-essential \
+                       ca-certificates \
+                       cmake \
+                       curl \
+                       dh-systemd \
+                       dpkg-dev \
+                       flex \
+                       g++ \
+                       gcc \
+                       git-buildpackage \
+                       git-core \
+                       golang \
+                       libatomic1 \
+                       libcurl4-openssl-dev \
+                       libcups2-dev \
+                       libdistro-info-perl \
+                       libelf-dev \
+                       libipmimonitoring-dev \
+                       libjson-c-dev \
+                       libyaml-dev \
+                       libjudy-dev \
+                       liblz4-dev \
+                       libmnl-dev \
+                       libmongoc-dev \
+                       libnetfilter-acct-dev \
+                       libprotobuf-dev \
+                       libprotoc-dev \
+                       libsnappy-dev \
+                       libsystemd-dev \
+                       libssl-dev \
+                       libtool \
+                       libuv1-dev \
+                       libxen-dev \
+                       make \
+                       ninja-build \
+                       pkg-config \
+                       protobuf-compiler \
+                       systemd \
+                       uuid-dev \
+                       wget \
+                       zlib1g-dev && \
+    apt-get clean && \
+    c_rehash && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN if dpkg-architecture --is 'armhf'; then \
+        wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
+        echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee -a /etc/apt/sources.list.d/kitware.list >/dev/null && \
+        apt-get update && \
+        rm /usr/share/keyrings/kitware-archive-keyring.gpg && \
+        apt-get install -y --no-install-recommends kitware-archive-keyring && \
+        apt-get upgrade -y ; \
+    fi
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/debian-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]

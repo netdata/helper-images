@@ -10,6 +10,7 @@ meta:
 anchors:
   pkg-builder-revs: &pkg-builder-revs
     - v1
+    - v2
 static:
   image: static-builder
   revisions:
