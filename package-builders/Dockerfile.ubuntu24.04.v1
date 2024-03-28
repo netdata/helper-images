@@ -23,6 +23,7 @@ RUN apt-get update && \
                        ca-certificates \
                        cmake \
                        curl \
+                       debhelper \
                        dpkg-dev \
                        flex \
                        g++ \
