@@ -1,0 +1,62 @@
+FROM fedora:38
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Fedora 38"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Fedora 38"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV VERSION=$VERSION
+
+RUN dnf distro-sync -y --nodocs && \
+    dnf clean -y packages && \
+    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
+        bison \
+        cmake \
+        cups-devel \
+        curl \
+        diffutils \
+        findutils \
+        flex \
+        gcc \
+        gcc-c++ \
+        git-core \
+        golang \
+        libatomic \
+        libcurl-devel \
+        make \
+        ninja-build \
+        openssl-perl \
+        patch \
+        pkgconfig \
+        'pkgconfig(json-c)' \
+        'pkgconfig(libelf)' \
+        'pkgconfig(libipmimonitoring)' \
+        'pkgconfig(liblz4)' \
+        'pkgconfig(libmnl)' \
+        'pkgconfig(libmongoc-1.0)' \
+        'pkgconfig(libnetfilter_acct)' \
+        'pkgconfig(libsystemd)' \
+        'pkgconfig(libuv)' \
+        'pkgconfig(openssl)' \
+        'pkgconfig(snappy)' \
+        'pkgconfig(uuid)' \
+        'pkgconfig(yaml-0.1)' \
+        'pkgconfig(zlib)' \
+        procps \
+        protobuf-c-devel \
+        protobuf-compiler \
+        protobuf-devel \
+        rpm-build \
+        rpm-devel \
+        rpmdevtools \
+        wget && \
+    rm -rf /var/cache/dnf && \
+    c_rehash && \
+    mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/fedora-build.sh /build.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]
