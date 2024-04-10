@@ -26,6 +26,7 @@ RUN apt-get update && \
                        ca-certificates \
                        cmake \
                        curl \
+                       debhelper \
                        dh-autoreconf \
                        dh-make \
                        dpkg-dev \
