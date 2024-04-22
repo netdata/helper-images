@@ -59,7 +59,9 @@ package-builders:
         - linux/amd64
     - &debian
       os: debian12
-      revisions: *pkg-builder-revs
+      revisions: &deb-pkg-builder-revs
+        - v1
+        - v2
       platforms:
         - linux/amd64
         - linux/386
@@ -107,7 +109,7 @@ package-builders:
       os: rockylinux8
     - &ubuntu
       os: ubuntu24.04
-      revisions: *pkg-builder-revs
+      revisions: *deb-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
