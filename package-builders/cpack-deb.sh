@@ -15,23 +15,21 @@ cat > "${SRC_DIR}/system/.install-type" <<-EOF
 
 "${SRC_DIR}/packaging/build-package.sh" DEB "${BUILD_DIR}"
 
+[ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
+
 # Embed distro info in package name.
 # This is required to make the repo actually standards compliant wthout packageclouds hacks.
 distid="${DISTNAME}${DISTVERS}"
-for pkg in "${BUILD_DIR}"/*.deb; do
-  pkgname="$(basename "${pkg}" .deb)"
+for pkg in "${BUILD_DIR}"/*.deb "${BUILD_DIR}"/*.ddeb; do
+  extension="${pkg##*.}"
+  pkgname="$(basename "${pkg}" "${extension}")"
   name="$(echo "${pkgname}" | cut -f 1 -d '_')"
   version="$(echo "${pkgname}" | cut -f 2 -d '_')"
   arch="$(echo "${pkgname}" | cut -f 3 -d '_')"
 
-  newname="$(dirname "${pkgname}")/${name}_${version}+${distid}_${arch}.deb"
-  mv "${pkg}" "${newname}"
+  newname="/netdata/artifacts/${name}_${version}+${distid}_${arch}.${extension}"
+  mv "${pkg}" "${newname}" || exit 1
 done
-
-# Copy the built packages to /netdata/artifacts (which may be bind-mounted)
-# Also ensure /netdata/artifacts exists and create it if it doesn't
-[ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
-cp -a "${BUILD_DIR}"/*.deb /netdata/artifacts/ || exit 1
 
 # Correct ownership of the artifacts.
 # Without this, the artifacts directory and it's contents end up owned
