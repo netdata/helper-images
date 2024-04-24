@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 SRC_DIR=/usr/src/netdata
 BUILD_DIR=/build
 
