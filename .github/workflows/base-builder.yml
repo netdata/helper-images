@@ -57,7 +57,8 @@ jobs:
       - name: Prepare tools
         id: prepare
         run: |
-          sudo apt-get update && sudo apt-get install -y python3-ruamel.yaml
+          sudo apt-get update || true
+          sudo apt-get install -y python3-ruamel.yaml
       - name: Prepare Build Check Matrix
         id: build
         run: |
