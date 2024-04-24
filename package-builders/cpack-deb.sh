@@ -22,14 +22,14 @@ cat > "${SRC_DIR}/system/.install-type" <<-EOF
 # Embed distro info in package name.
 # This is required to make the repo actually standards compliant wthout packageclouds hacks.
 distid="${DISTNAME}${DISTVERS}"
-for pkg in "${BUILD_DIR}"/*.deb "${BUILD_DIR}"/*.ddeb; do
+for pkg in "${BUILD_DIR}"/packages/*.deb "${BUILD_DIR}"/packages/*.ddeb; do
   extension="${pkg##*.}"
   pkgname="$(basename "${pkg}" "${extension}")"
   name="$(echo "${pkgname}" | cut -f 1 -d '_')"
   version="$(echo "${pkgname}" | cut -f 2 -d '_')"
   arch="$(echo "${pkgname}" | cut -f 3 -d '_')"
 
-  newname="/netdata/artifacts/${name}_${version}+${distid}_${arch}.${extension}"
+  newname="/netdata/artifacts/${name}_${version}+${distid}_${arch}${extension}"
   mv "${pkg}" "${newname}" || exit 1
 done
 

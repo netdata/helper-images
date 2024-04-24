@@ -23,12 +23,11 @@ RUN apt-get update && \
                        ca-certificates \
                        cmake \
                        curl \
-                       debhelper \
                        dpkg-dev \
+                       file \
                        flex \
                        g++ \
                        gcc \
-                       git-buildpackage \
                        git-core \
                        libatomic1 \
                        libcups2-dev \

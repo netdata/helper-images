@@ -24,6 +24,7 @@ RUN apt-get update && \
                        cmake \
                        curl \
                        dpkg-dev \
+                       file \
                        flex \
                        gpg \
                        g++ \
