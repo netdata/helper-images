@@ -23,7 +23,9 @@ RUN apt-get update && \
                        ca-certificates \
                        cmake \
                        curl \
+                       dpkg-dev \
                        flex \
+                       gpg \
                        g++ \
                        gcc \
                        git-core \
