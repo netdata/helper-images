@@ -16,6 +16,7 @@ RUN apt-get update && \
                        ca-certificates \
                        cmake \
                        curl \
+                       file \
                        flex \
                        g++ \
                        gcc \
