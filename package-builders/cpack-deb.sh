@@ -4,6 +4,8 @@ set -e
 
 SRC_DIR=/usr/src/netdata
 BUILD_DIR=/build
+DISTRO="$(awk -F'=' '/^ID=/ {print $2}' /etc/os-release)"
+DISTRO_VERSION="$(awk -F'"' '/VERSION_ID=/ {print $2}' /etc/os-release)"
 
 cp -a /netdata "${SRC_DIR}" || exit 1
 rm -rf "${SRC_DIR}/.git" || exit 1
@@ -20,8 +22,8 @@ cat > "${SRC_DIR}/system/.install-type" <<-EOF
 [ -d /netdata/artifacts ] || mkdir -p /netdata/artifacts
 
 # Embed distro info in package name.
-# This is required to make the repo actually standards compliant wthout packageclouds hacks.
-distid="${DISTNAME}${DISTVERS}"
+# This is required to make the repo actually standards compliant wthout packagecloud's hacks.
+distid="${DISTRO}${DISTRO_VERSION}"
 for pkg in "${BUILD_DIR}"/packages/*.deb "${BUILD_DIR}"/packages/*.ddeb; do
   extension="${pkg##*.}"
   pkgname="$(basename "${pkg}" "${extension}")"
