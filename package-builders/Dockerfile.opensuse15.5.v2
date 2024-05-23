@@ -23,6 +23,7 @@ RUN zypper update -y && \
                       gcc \
                       gcc-c++ \
                       git-core \
+                      gzip \
                       json-glib-devel \
                       judy-devel \
                       libatomic1 \

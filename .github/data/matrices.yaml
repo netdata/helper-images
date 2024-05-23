@@ -80,6 +80,8 @@ package-builders:
       os: fedora39
     - <<: *fedora
       os: fedora38
+      revisions:
+        - v1
     - &opensuse
       os: opensusetumbleweed
       revisions: *pkg-builder-revs
@@ -90,6 +92,8 @@ package-builders:
       os: opensuse15.5
     - <<: *opensuse
       os: opensuse15.4
+      revisions:
+        - v1
     - &oracle
       os: oraclelinux9
       revisions: *pkg-builder-revs
