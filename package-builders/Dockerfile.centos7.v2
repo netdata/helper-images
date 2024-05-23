@@ -1,0 +1,89 @@
+FROM centos:7
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for CentOS 7"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for CentOS 7"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV VERSION=$VERSION
+# Dummy Sentry DSN
+ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
+
+RUN yum install -y epel-release && \
+    yum update -y && \
+    yum install -y bash \
+                   bison \
+                   bison-devel \
+                   cmake \
+                   cups-devel \
+                   curl \
+                   diffutils \
+                   elfutils-libelf-devel \
+                   findutils \
+                   flex \
+                   flex-devel \
+                   freeipmi-devel \
+                   gcc \
+                   gcc-c++ \
+                   git-core \
+                   json-c-devel \
+                   libyaml-devel \
+                   libatomic \
+                   libcurl-devel \
+                   libmnl-devel \
+                   libnetfilter_acct-devel \
+                   libuuid-devel \
+                   libuv-devel \
+                   libzstd-devel \
+                   lm_sensors \
+                   lz4-devel \
+                   make \
+                   ninja-build \
+                   openssl-devel \
+                   openssl-perl \
+                   patch \
+                   pcre2-devel \
+                   pkgconfig \
+                   'pkgconfig(libmongoc-1.0)' \
+                   procps \
+                   protobuf-c-devel \
+                   protobuf-compiler \
+                   protobuf-devel \
+                   rpmdevtools \
+                   snappy-devel \
+                   systemd-devel \
+                   systemd-rpm-macros \
+                   wget \
+                   zlib-devel && \
+    yum clean all && \
+    c_rehash
+
+# Fetch a newer version of CMake, because the system-provided one is _ancient_.
+# The hash is hard-coded here to mitigate the risk of supply-chain attacks.
+RUN curl --fail -sSL --connect-timeout 20 --retry 3 --output cmake-linux-$(uname -m).sh \
+         https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-$(uname -m).sh && \
+    if [ "$(uname -m)" = "x86_64" ]; then \
+        echo '8c449dabb2b2563ec4e6d5e0fb0ae09e729680efab71527b59015131cea4a042  cmake-linux-x86_64.sh' | sha256sum -c - ; \
+    elif [ "$(uname -m)" = "aarch64" ]; then \
+        echo 'a83e01ed1cdf44c2e33e0726513b9a35a8c09e3b5a126fd720b3c8a9d5552368  cmake-linux-aarch64.sh' | sha256sum -c - ; \
+    else \
+        echo "ARCH NOT SUPPORTED BY CMAKE" ; \
+        exit 1 ; \
+    fi && \
+    chmod +x ./cmake-linux-$(uname -m).sh && \
+    mkdir -p /cmake && \
+    ./cmake-linux-$(uname -m).sh --skip-license --prefix=/cmake
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/cpack-rpm.sh /build.sh
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]
