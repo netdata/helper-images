@@ -1,0 +1,76 @@
+FROM rockylinux:8
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Rocky Linux 8"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Rocky Linux 8"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV VERSION=$VERSION
+# Dummy Sentry DSN
+ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
+
+RUN dnf distro-sync -y --nodocs && \
+    dnf install -y --nodocs 'dnf-command(config-manager)' epel-release && \
+    dnf config-manager --set-enabled powertools && \
+    dnf clean packages && \
+    dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
+        bash \
+        bison \
+        cmake \
+        cups-devel \
+        curl \
+        libcurl-devel \
+        diffutils \
+        elfutils-libelf-devel \
+        findutils \
+        flex \
+        freeipmi-devel \
+        gcc \
+        gcc-c++ \
+        git \
+        json-c-devel \
+        libatomic \
+        libmnl-devel \
+        libuuid-devel \
+        libuv-devel \
+        libyaml-devel \
+        libzstd-devel \
+        lm_sensors \
+        lz4-devel \
+        make \
+        nc \
+        ninja-build \
+        openssl-devel \
+        openssl-perl \
+        patch \
+        pcre2-devel \
+        pkgconfig \
+        'pkgconfig(libmongoc-1.0)' \
+        procps \
+        protobuf-c-devel \
+        protobuf-compiler \
+        protobuf-devel \
+        python3 \
+        python3-pyyaml \
+        rpmdevtools \
+        snappy-devel \
+        systemd-devel \
+        systemd-rpm-macros \
+        wget \
+        zlib-devel && \
+    rm -rf /var/cache/dnf && \
+    c_rehash
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/cpack-rpm.sh /build.sh
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]

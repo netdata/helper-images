@@ -10,6 +10,7 @@ meta:
 anchors:
   pkg-builder-revs: &pkg-builder-revs
     - v1
+    - v2
 static:
   image: static-builder
   revisions:
@@ -59,9 +60,7 @@ package-builders:
         - linux/amd64
     - &debian
       os: debian12
-      revisions: &deb-pkg-builder-revs
-        - v1
-        - v2
+      revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/386
@@ -109,7 +108,7 @@ package-builders:
       os: rockylinux8
     - &ubuntu
       os: ubuntu24.04
-      revisions: *deb-pkg-builder-revs
+      revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
