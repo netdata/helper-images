@@ -46,6 +46,7 @@ RUN apk add --no-cache \
     ncurses-static \
     netcat-openbsd \
     openssh \
+    patch \
     pcre2-dev \
     pkgconfig \
     protobuf-dev \
