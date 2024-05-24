@@ -52,6 +52,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     libzstd-dev \
                     ninja-build \
                     openssl \
+                    patch \
                     pkgconf \
                     protobuf-compiler \
                     python3 \

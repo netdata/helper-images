@@ -60,6 +60,7 @@ RUN apt-get update && \
                        libzstd-dev \
                        make \
                        ninja-build \
+                       patch \
                        pkg-config \
                        protobuf-compiler \
                        systemd \
