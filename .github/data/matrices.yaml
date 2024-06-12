@@ -83,6 +83,8 @@ package-builders:
         - linux/amd64
         - linux/arm64/v8
     - <<: *opensuse
+      os: opensuse15.6
+    - <<: *opensuse
       os: opensuse15.5
     - &oracle
       os: oraclelinux9
