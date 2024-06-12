@@ -52,8 +52,6 @@ package-builders:
       platforms:
         - linux/amd64
         - linux/arm64/v8
-    - <<: *centos-stream
-      os: centos-stream8
     - os: centos7
       revisions: *pkg-builder-revs
       platforms:
@@ -78,10 +76,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *fedora
       os: fedora39
-    - <<: *fedora
-      os: fedora38
-      revisions:
-        - v1
     - &opensuse
       os: opensusetumbleweed
       revisions: *pkg-builder-revs
@@ -90,10 +84,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *opensuse
       os: opensuse15.5
-    - <<: *opensuse
-      os: opensuse15.4
-      revisions:
-        - v1
     - &oracle
       os: oraclelinux9
       revisions: *pkg-builder-revs
@@ -117,8 +107,6 @@ package-builders:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
-    - <<: *ubuntu
-      os: ubuntu23.10
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
