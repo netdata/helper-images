@@ -101,7 +101,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Docker Build
         if: needs.file-check.outputs.run == 'true'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           load: false
           push: false
@@ -136,7 +136,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Build
         if: needs.file-check.outputs.run == 'true'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           platforms: ${{ matrix.platform }}
           load: false
@@ -179,7 +179,7 @@ jobs:
           username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
           password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
       - name: Docker Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           platforms: ${{ matrix.platforms }}
           push: true
