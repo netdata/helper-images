@@ -44,6 +44,6 @@ match sys.argv[1]:
     case _:
         raise ValueError(f'Unrecognized matrix type {sys.argv[1]}')
 
-entries.sort(key=lambda k: k['revision'])
+entries.sort(key=lambda k: k['os'])
 matrix = json.dumps({'include': entries}, sort_keys=True)
 print(matrix)
