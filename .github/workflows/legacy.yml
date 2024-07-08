@@ -1,0 +1,188 @@
+---
+# Builds our legacy Docker images.
+name: Legacy Images
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - 'master'
+  pull_request:
+concurrency:
+  group: legacy-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  file-check: # Check what files changed if we’re being run in a PR or on a push.
+    name: Check Modified Files
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    outputs:
+      run: ${{ steps.check-run.outputs.run }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Check files
+        id: check-files
+        uses: tj-actions/changed-files@v43
+        with:
+          since_last_remote_commit: ${{ github.event_name != 'pull_request' }}
+          files: |
+            .github/data/matrices.yml
+            .github/workflows/legacy.yml
+            legacy/**
+      - name: Check Run
+        id: check-run
+        run: |
+          if [ "${{ steps.check-files.outputs.any_modified }}" == "true" ] || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo 'run=true' >> "${GITHUB_OUTPUT}"
+          else
+            echo 'run=false' >> "${GITHUB_OUTPUT}"
+          fi
+
+  matrix:
+    name: Prepare Build Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      build-matrix: ${{ steps.build.outputs.matrix }}
+      pr-matrix: ${{ steps.pr.outputs.matrix }}
+      publish-matrix: ${{ steps.publish.outputs.matrix }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: Prepare tools
+        id: prepare
+        run: |
+          sudo apt-get update || true
+          sudo apt-get install -y python3-ruamel.yaml
+      - name: Prepare Build Check Matrix
+        id: build
+        run: |
+          matrix="$(.github/scripts/gen-matrix-legacy.py build)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare PR Check Matrix
+        id: pr
+        run: |
+          matrix="$(.github/scripts/gen-matrix-legacy.py pr)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+      - name: Prepare Publish Matrix
+        id: publish
+        run: |
+          matrix="$(.github/scripts/gen-matrix-legacy.py publish)"
+          echo "Generated matrix: ${matrix}"
+          echo "matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+
+  build-check:
+    name: Build Check
+    if: github.event_name == 'pull_request'
+    needs:
+      - file-check
+      - matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.matrix.outputs.build-matrix) }}
+      max-parallel: 8
+      fail-fast: false
+    steps:
+      - name: Skip Check
+        id: skip
+        if: needs.file-check.outputs.run != 'true'
+        run: echo "SKIPPED"
+      - name: Checkout
+        if: needs.file-check.outputs.run == 'true'
+        uses: actions/checkout@v4
+      - name: Setup Buildx
+        if: needs.file-check.outputs.run == 'true'
+        uses: docker/setup-buildx-action@v3
+      - name: Docker Build
+        if: needs.file-check.outputs.run == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          load: false
+          push: false
+          file: ./legacy/Dockerfile.${{ matrix.os }}
+          tags: netdata/package-builders:${{ matrix.os }}
+
+  pr-checks:
+    name: PR Checks
+    if: github.event_name == 'pull_request'
+    needs:
+      - file-check
+      - build-check
+      - matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.matrix.outputs.pr-matrix) }}
+      max-parallel: 8
+      fail-fast: false
+    steps:
+      - name: Skip Check
+        id: skip
+        if: needs.file-check.outputs.run != 'true'
+        run: echo "SKIPPED"
+      - name: Checkout
+        if: needs.file-check.outputs.run == 'true'
+        uses: actions/checkout@v4
+      - name: Setup QEMU
+        if: matrix.platform != 'linux/i386' && needs.file-check.outputs.run == 'true'
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Buildx
+        if: needs.file-check.outputs.run == 'true'
+        uses: docker/setup-buildx-action@v3
+      - name: Build
+        if: needs.file-check.outputs.run == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          platforms: ${{ matrix.platform }}
+          load: false
+          push: false
+          file: ./legacy/Dockerfile.${{ matrix.os }}
+          tags: netdata/package-builders:${{ matrix.os }}
+
+  publish:
+    name: Publish Images
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.repository == 'netdata/helper-images')
+    runs-on: ubuntu-latest
+    needs:
+      - matrix
+    strategy:
+      matrix: ${{ fromJson(needs.matrix.outputs.publish-matrix) }}
+      max-parallel: 8
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Docker Hub Login
+        uses: docker/login-action@v3
+        with:
+          username: netdatabot
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: GitHub Container Registry Login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Quay.io Login
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.NETDATABOT_QUAY_USERNAME }}
+          password: ${{ secrets.NETDATABOT_QUAY_TOKEN }}
+      - name: Docker Build
+        uses: docker/build-push-action@v6
+        with:
+          platforms: ${{ matrix.platforms }}
+          push: true
+          file: ./legacy/Dockerfile.${{ matrix.os }}
+          tags: ${{ matrix.tags }}

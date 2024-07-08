@@ -1,0 +1,9 @@
+FROM centos:7
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata CentOS 7 Legacy image"
+LABEL org.opencontainers.image.description="Base image for CentOS 7 with core repositories updated to use vault.centos.org"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+COPY legacy/centos-7.repo /etc/yum.repos.d/CentOS-Base.repo
