@@ -33,6 +33,7 @@ RUN dnf config-manager --set-enabled ol8_codeready_builder && \
         json-c-devel \
         libyaml-devel \
         libatomic \
+        libcurl-devel \
         libmnl-devel \
         libuuid-devel \
         libuv-devel \
