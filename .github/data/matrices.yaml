@@ -69,11 +69,13 @@ package-builders:
     - <<: *debian
       os: debian10
     - &fedora
-      os: fedora40
+      os: fedora41
       revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *fedora
+      os: fedora40
     - <<: *fedora
       os: fedora39
     - &opensuse
@@ -103,12 +105,14 @@ package-builders:
     - <<: *rocky
       os: rockylinux8
     - &ubuntu
-      os: ubuntu24.04
+      os: ubuntu24.10
       revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
+    - <<: *ubuntu
+      os: ubuntu24.04
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
