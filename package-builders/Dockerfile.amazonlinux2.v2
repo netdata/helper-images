@@ -9,12 +9,17 @@ LABEL org.opencontainers.image.vendor="Netdata Inc."
 ENV VERSION=$VERSION
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
+COPY package-builders/centos-7-scl.repo /etc/yum.repos.d/centos-7-scl.repo
+COPY package-builders/RPM-GPG-KEY-CentOS-SIG-SCLo /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
 RUN yum update -y && \
     yum install -y bison \
                    bison-devel \
                    cmake \
                    cups-devel \
                    curl \
+                   devtoolset-11-gcc \
+                   devtoolset-11-gcc-c++ \
                    diffutils \
                    elfutils-libelf-devel \
                    findutils \
