@@ -10,6 +10,9 @@ ENV VERSION=$VERSION
 # Dummy Sentry DSN
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
+COPY package-builders/centos-7-scl.repo /etc/yum.repos.d/centos-7-scl.repo
+COPY package-builders/RPM-GPG-KEY-CentOS-SIG-SCLo /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
 RUN yum install -y epel-release && \
     yum update -y && \
     yum install -y autoconf \
@@ -22,6 +25,7 @@ RUN yum install -y epel-release && \
                    cmake \
                    cups-devel \
                    curl \
+                   devtoolset-11 \
                    diffutils \
                    elfutils-libelf-devel \
                    findutils \
@@ -65,6 +69,7 @@ RUN yum install -y epel-release && \
     yum clean all && \
     c_rehash && \
     mkdir -p /root/rpmbuild/BUILD /root/rpmbuild/RPMS /root/rpmbuild/SOURCES /root/rpmbuild/SPECS /root/rpmbuild/SRPMS
+
 
 # Fetch a newer version of CMake, because the system-provided one is _ancient_.
 # The hash is hard-coded here to mitigate the risk of supply-chain attacks.
