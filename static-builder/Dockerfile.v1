@@ -36,6 +36,8 @@ RUN apk add --no-cache \
     libpsl-static \
     libunistring-dev \
     libunistring-static \
+    libunwind-dev \
+    libunwind-static \
     lz4-dev \
     lz4-static \
     make \

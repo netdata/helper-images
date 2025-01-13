@@ -32,6 +32,7 @@ RUN dnf distro-sync -y --nodocs && \
         json-c-devel \
         libatomic \
         libmnl-devel \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libyaml-devel \

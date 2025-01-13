@@ -39,6 +39,7 @@ RUN zypper update -y && \
                       libpcre2-8-0 \
                       libopenssl-devel \
                       libprotobuf-c-devel \
+                      libunwind-devel \
                       libuv-devel \
                       libuuid-devel \
                       libzstd-devel \

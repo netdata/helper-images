@@ -49,6 +49,7 @@ RUN apt-get update && \
                        libsystemd-dev \
                        libssl-dev \
                        libtool \
+                       libunwind-dev \
                        libuv1-dev \
                        libzstd-dev \
                        make \

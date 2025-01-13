@@ -38,6 +38,7 @@ RUN dnf distro-sync -y --nodocs && \
         # XXX: Can't (currently) find an AL2023 package for this :/
         # libnetfilter_acct-devel \
         libtool \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libzstd-devel \

@@ -37,6 +37,7 @@ RUN yum install -y epel-release && \
                    libcurl-devel \
                    libmnl-devel \
                    libnetfilter_acct-devel \
+                   libunwind-devel \
                    libuuid-devel \
                    libuv-devel \
                    libzstd-devel \

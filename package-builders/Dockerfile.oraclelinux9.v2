@@ -35,6 +35,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
         libyaml-devel \
         libatomic \
         libmnl-devel \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libzstd-devel \

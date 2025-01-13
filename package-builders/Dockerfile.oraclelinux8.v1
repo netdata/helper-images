@@ -39,6 +39,7 @@ RUN dnf config-manager --set-enabled ol8_codeready_builder && \
         libatomic \
         libmnl-devel \
         libtool \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libzstd-devel \
