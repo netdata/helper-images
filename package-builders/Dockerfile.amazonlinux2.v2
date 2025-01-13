@@ -30,6 +30,7 @@ RUN yum update -y && \
                    libcurl-devel \
                    libmnl-devel \
                    libnetfilter_acct-devel \
+                   libunwind-devel \
                    libuuid-devel \
                    libuv-devel \
                    libzstd-devel \

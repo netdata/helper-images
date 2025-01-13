@@ -33,6 +33,7 @@ RUN dnf distro-sync -y --nodocs && \
         libyaml-devel \
         libatomic \
         libmnl-devel \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libzstd-devel \

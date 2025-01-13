@@ -35,6 +35,7 @@ RUN yum update -y && \
                    libmnl-devel \
                    libnetfilter_acct-devel \
                    libtool \
+                   libunwind-devel \
                    libuuid-devel \
                    libuv-devel \
                    libzstd-devel \

@@ -43,6 +43,7 @@ RUN zypper update -y && \
                       libopenssl-devel \
                       libprotobuf-c-devel \
                       libtool \
+                      libunwind-devel \
                       libuv-devel \
                       libuuid-devel \
                       libzstd-devel \

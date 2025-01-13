@@ -33,6 +33,7 @@ RUN dnf distro-sync -y --nodocs && \
         libcurl-devel \
         libmnl-devel \
         libnetfilter_acct-devel \
+        libunwind-devel \
         libuuid-devel \
         libuv-devel \
         libzstd-devel \

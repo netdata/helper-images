@@ -48,6 +48,7 @@ RUN apt-get update && \
                        libsnappy-dev \
                        libsystemd-dev \
                        libssl-dev \
+                       libunwind-dev \
                        libuv1-dev \
                        libxen-dev \
                        libzstd-dev \

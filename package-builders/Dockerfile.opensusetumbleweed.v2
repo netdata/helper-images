@@ -37,6 +37,7 @@ RUN zypper update -y && \
                       libnetfilter_acct-devel \
                       libpcre2-8-0  \
                       libopenssl-devel \
+                      libunwind-devel \
                       libuv-devel \
                       libuuid-devel \
                       libzstd-devel \
