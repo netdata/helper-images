@@ -25,6 +25,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
     apt-get install -y --no-install-recommends \
                     ca-certificates \
                     curl \
+                    dpkg-dev \
                     fping \
                     iproute2 \
                     jq \
@@ -40,7 +41,6 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     libssl3 \
                     libsystemd0 \
                     libuuid1 \
-                    libunwind8 \
                     libuv1 \
                     libvirt-clients \
                     libyaml-0-2 \
@@ -55,7 +55,12 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     procps \
                     python3 \
                     zlib1g && \
-    if [ "$(uname -m)" != "ppc64le" ]; then \
-        apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 || exit 1 ; \
+    if ! dpkg-architecture --equal ppc64el; then \
+        apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \
     fi && \
+    if ! dpkg-architecture --equal i386; then \
+        apt-get install -y --no-install-recommends libunwind8 ; \
+    fi && \
+    apt-get purge -y dpkg-dev && \
+    apt-get autoremove --purge -y && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
