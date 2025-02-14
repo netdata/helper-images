@@ -23,29 +23,29 @@ match sys.argv[1]:
                 'revision': rev,
             })
     case 'pr':
-        for rev in static['revisions']:
-            for platform in [x for x in static['platforms'] if x != meta['native-platform']]:
+        for rev, platforms in static['revisions'].items():
+            for platform in [x for x in platforms if x != meta['native-platform']]:
                 entries.append({
                     'revision': rev,
                     'platform': platform,
                 })
     case 'publish':
-        for rev in static['revisions']:
+        for rev, platforms in static['revisions'].items():
             tags = []
 
             for registry in meta['registries']:
-                tags.append(f'{ registry }{ meta["image-prefix"] }{ static["image"] }:{ rev }')
+                tags.append(f'{registry}{meta["image-prefix"]}{static["image"]}:{rev}')
 
                 if rev == meta['latest-rev']:
-                    tags.append(f'{ registry }{ meta["image-prefix"] }{ static["image"] }:latest')
+                    tags.append(f'{registry}{meta["image-prefix"]}{static["image"]}:latest')
 
             entries.append({
                 'revision': rev,
-                'platforms': ','.join(static['platforms']),
+                'platforms': ','.join(platforms),
                 'tags': ','.join(tags)
             })
     case _:
-        raise ValueError(f'Unrecognized matrix type { sys.argv[1] }')
+        raise ValueError(f'Unrecognized matrix type {sys.argv[1]}')
 
 entries.sort(key=lambda k: k['revision'])
 matrix = json.dumps({'include': entries}, sort_keys=True)
