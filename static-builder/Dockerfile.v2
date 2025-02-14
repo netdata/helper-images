@@ -1,0 +1,68 @@
+FROM debian:trixie
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Static Builder Image"
+LABEL org.opencontainers.image.description="Builder image for creating static builds of the Netdata Agent"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+            autoconf \
+            automake \
+            autopoint \
+            bison \
+            build-essential \
+            ca-certificates \
+            cmake \
+            curl \
+            dpkg-dev \
+            file \
+            flex \
+            g++ \
+            gawk \
+            gcc \
+            git-core \
+            jq \
+            libatomic1 \
+            libbrotli-dev \
+            libcurl4-openssl-dev \
+            libdistro-info-perl \
+            libidn2-dev \
+            libjson-c-dev \
+            libyaml-dev \
+            libjudy-dev \
+            liblz4-dev \
+            libpcre2-dev \
+            libprotobuf-dev \
+            libprotoc-dev \
+            libreadline-dev \
+            libsnappy-dev \
+            libsystemd-dev \
+            libssl-dev \
+            libtool \
+            libunwind-dev \
+            libuv1-dev \
+            libzstd-dev \
+            make \
+            netcat-openbsd \
+            ninja-build \
+            patch \
+            pkg-config \
+            protobuf-compiler \
+            uuid-dev \
+            wget \
+            zlib1g-dev && \
+    apt-get clean && \
+    c_rehash && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
