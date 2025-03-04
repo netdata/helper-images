@@ -30,6 +30,8 @@ RUN apk add --no-cache \
     libmnl-dev \
     libmnl-static \
     libtool \
+    libunwind-dev \
+    libunwind-static \
     libuv-dev \
     libuv-static \
     libpsl-dev \
@@ -42,7 +44,7 @@ RUN apk add --no-cache \
     mongo-c-driver-dev \
     mongo-c-driver-static \
     musl-fts-dev \
-    ncurses \
+    ncurses-dev \
     ncurses-static \
     netcat-openbsd \
     openssh \
