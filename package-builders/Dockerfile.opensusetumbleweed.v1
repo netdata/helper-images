@@ -75,5 +75,9 @@ RUN . /tmp/check-for-go-toolchain.sh && \
         echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
     fi
 
+COPY scripts/install-rust.sh /install-rust.sh
+RUN /install-rust.sh
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/build.sh"]
