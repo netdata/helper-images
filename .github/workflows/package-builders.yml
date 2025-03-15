@@ -12,36 +12,6 @@ concurrency:
   group: package-builders-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  file-check: # Check what files changed if we’re being run in a PR or on a push.
-    name: Check Modified Files
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    outputs:
-      run: ${{ steps.check-run.outputs.run }}
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
-      - name: Check files
-        id: check-files
-        uses: tj-actions/changed-files@v45
-        with:
-          since_last_remote_commit: ${{ github.event_name != 'pull_request' }}
-          files: |
-            .github/workflows/package-builders.yml
-            package-builders/**
-      - name: Check Run
-        id: check-run
-        run: |
-          if [ "${{ steps.check-files.outputs.any_modified }}" == "true" ] || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo 'run=true' >> "${GITHUB_OUTPUT}"
-          else
-            echo 'run=false' >> "${GITHUB_OUTPUT}"
-          fi
-
   matrix:
     name: Prepare Build Matrix
     runs-on: ubuntu-latest
@@ -81,7 +51,6 @@ jobs:
     name: Build Check
     if: github.event_name == 'pull_request'
     needs:
-      - file-check
       - matrix
     runs-on: ubuntu-latest
     strategy:
@@ -89,18 +58,11 @@ jobs:
       max-parallel: 8
       fail-fast: false
     steps:
-      - name: Skip Check
-        id: skip
-        if: needs.file-check.outputs.run != 'true'
-        run: echo "SKIPPED"
       - name: Checkout
-        if: needs.file-check.outputs.run == 'true'
         uses: actions/checkout@v4
       - name: Setup Buildx
-        if: needs.file-check.outputs.run == 'true'
         uses: docker/setup-buildx-action@v3
       - name: Docker Build
-        if: needs.file-check.outputs.run == 'true'
         uses: docker/build-push-action@v6
         with:
           load: false
@@ -112,7 +74,6 @@ jobs:
     name: PR Checks
     if: github.event_name == 'pull_request'
     needs:
-      - file-check
       - build-check
       - matrix
     runs-on: ubuntu-latest
@@ -121,21 +82,14 @@ jobs:
       max-parallel: 8
       fail-fast: false
     steps:
-      - name: Skip Check
-        id: skip
-        if: needs.file-check.outputs.run != 'true'
-        run: echo "SKIPPED"
       - name: Checkout
-        if: needs.file-check.outputs.run == 'true'
         uses: actions/checkout@v4
       - name: Setup QEMU
-        if: matrix.platform != 'linux/i386' && needs.file-check.outputs.run == 'true'
+        if: matrix.platform != 'linux/i386'
         uses: docker/setup-qemu-action@v3
       - name: Setup Buildx
-        if: needs.file-check.outputs.run == 'true'
         uses: docker/setup-buildx-action@v3
       - name: Build
-        if: needs.file-check.outputs.run == 'true'
         uses: docker/build-push-action@v6
         with:
           platforms: ${{ matrix.platform }}
