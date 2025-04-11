@@ -18,6 +18,8 @@ ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
+                       dpkg-dev && \
+    apt-get install -y --no-install-recommends \
                        bison \
                        build-essential \
                        ca-certificates \
@@ -50,7 +52,6 @@ RUN apt-get update && \
                        libssl-dev \
                        libunwind-dev \
                        libuv1-dev \
-                       libxen-dev \
                        libzstd-dev \
                        make \
                        ninja-build \
@@ -61,8 +62,10 @@ RUN apt-get update && \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
-    apt-get clean && \
     c_rehash && \
+    dpkg-architecture --equal armhf || apt-get install -y --no-install-recommends \
+                       libxen-dev && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl --fail -sSL --connect-timeout 10 --retry 3 https://sentry.io/get-cli/ > /tmp/get-sentry.sh && \
