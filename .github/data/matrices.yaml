@@ -8,8 +8,10 @@ meta:
     - 'ghcr.io/'
     - 'quay.io/'
 anchors:
-  pkg-builder-revs: &pkg-builder-revs
+  rpm-pkg-builder-revs: &rpm-pkg-builder-revs
     - v1
+    - v2
+  deb-pkg-builder-revs: &deb-pkg-builder-revs
     - v2
 static:
   image: static-builder
@@ -45,7 +47,7 @@ package-builders:
   distros:
     - &amzn
       os: amazonlinux2023
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -53,19 +55,19 @@ package-builders:
       os: amazonlinux2
     - &centos-stream
       os: centos-stream10
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *centos-stream
       os: centos-stream9
     - os: centos7
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
     - &debian
       os: debian12
-      revisions: *pkg-builder-revs
+      revisions: *deb-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/386
@@ -75,7 +77,7 @@ package-builders:
       os: debian11
     - &fedora
       os: fedora42
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -85,7 +87,7 @@ package-builders:
       os: fedora40
     - &opensuse
       os: opensusetumbleweed
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -93,7 +95,7 @@ package-builders:
       os: opensuse15.6
     - &oracle
       os: oraclelinux9
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -101,7 +103,7 @@ package-builders:
       os: oraclelinux8
     - &rocky
       os: rockylinux9
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -109,7 +111,7 @@ package-builders:
       os: rockylinux8
     - &ubuntu
       os: ubuntu24.04
-      revisions: *pkg-builder-revs
+      revisions: *deb-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
