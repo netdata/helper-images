@@ -8,8 +8,10 @@ meta:
     - 'ghcr.io/'
     - 'quay.io/'
 anchors:
-  pkg-builder-revs: &pkg-builder-revs
+  rpm-pkg-builder-revs: &rpm-pkg-builder-revs
     - v1
+    - v2
+  deb-pkg-builder-revs: &deb-pkg-builder-revs
     - v2
 static:
   image: static-builder
@@ -45,25 +47,27 @@ package-builders:
   distros:
     - &amzn
       os: amazonlinux2023
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *amzn
       os: amazonlinux2
     - &centos-stream
-      os: centos-stream9
-      revisions: *pkg-builder-revs
+      os: centos-stream10
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *centos-stream
+      os: centos-stream9
     - os: centos7
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
     - &debian
       os: debian12
-      revisions: *pkg-builder-revs
+      revisions: *deb-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/386
@@ -71,31 +75,27 @@ package-builders:
         - linux/arm64/v8
     - <<: *debian
       os: debian11
-    - <<: *debian
-      os: debian10
     - &fedora
-      os: fedora41
-      revisions: *pkg-builder-revs
+      os: fedora42
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *fedora
-      os: fedora40
+      os: fedora41
     - <<: *fedora
-      os: fedora39
+      os: fedora40
     - &opensuse
       os: opensusetumbleweed
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *opensuse
       os: opensuse15.6
-    - <<: *opensuse
-      os: opensuse15.5
     - &oracle
       os: oraclelinux9
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
@@ -103,21 +103,23 @@ package-builders:
       os: oraclelinux8
     - &rocky
       os: rockylinux9
-      revisions: *pkg-builder-revs
+      revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *rocky
       os: rockylinux8
     - &ubuntu
-      os: ubuntu24.10
-      revisions: *pkg-builder-revs
+      os: ubuntu24.04
+      revisions: *deb-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
     - <<: *ubuntu
-      os: ubuntu24.04
+      os: ubuntu25.04
+    - <<: *ubuntu
+      os: ubuntu24.10
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
