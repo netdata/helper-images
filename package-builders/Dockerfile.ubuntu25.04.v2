@@ -1,0 +1,87 @@
+FROM ubuntu:25.04
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Ubuntu 25.04"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official DEB packages for Ubuntu 25.04"
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV EMAIL=bot@netdata.cloud
+ENV FULLNAME="Netdata Builder"
+ENV VERSION=0.1
+
+# This is needed to keep package installs from prompting about configuration.
+ENV DEBIAN_FRONTEND=noninteractive
+# Dummy Sentry DSN
+ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+                       bison \
+                       build-essential \
+                       ca-certificates \
+                       cmake \
+                       curl \
+                       dpkg-dev \
+                       file \
+                       flex \
+                       g++ \
+                       gcc \
+                       git-core \
+                       libatomic1 \
+                       libcups2-dev \
+                       libcurl4-openssl-dev \
+                       libdistro-info-perl \
+                       libelf-dev \
+                       libipmimonitoring-dev \
+                       libjson-c-dev \
+                       libyaml-dev \
+                       libjudy-dev \
+                       liblz4-dev \
+                       libmnl-dev \
+                       libmongoc-dev \
+                       libnetfilter-acct-dev \
+                       libpcre2-dev \
+                       libprotobuf-dev \
+                       libprotoc-dev \
+                       libsnappy-dev \
+                       libsystemd-dev \
+                       libssl-dev \
+                       libunwind-dev \
+                       libuv1-dev \
+                       libxen-dev \
+                       libzstd-dev \
+                       make \
+                       ninja-build \
+                       patch \
+                       pkg-config \
+                       protobuf-compiler \
+                       systemd \
+                       uuid-dev \
+                       wget \
+                       zlib1g-dev && \
+    apt-get clean && \
+    c_rehash && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl --fail -sSL --connect-timeout 10 --retry 3 https://sentry.io/get-cli/ > /tmp/get-sentry.sh && \
+    sh /tmp/get-sentry.sh && \
+    rm -f /tmp/get-sentry.sh
+
+COPY package-builders/entrypoint.sh /entrypoint.sh
+COPY package-builders/cpack-deb.sh /build.sh
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
+
+COPY scripts/install-rust.sh /install-rust.sh
+RUN /install-rust.sh
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/build.sh"]

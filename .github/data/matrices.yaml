@@ -52,11 +52,13 @@ package-builders:
     - <<: *amzn
       os: amazonlinux2
     - &centos-stream
-      os: centos-stream9
+      os: centos-stream10
       revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *centos-stream
+      os: centos-stream9
     - os: centos7
       revisions: *pkg-builder-revs
       platforms:
@@ -71,18 +73,16 @@ package-builders:
         - linux/arm64/v8
     - <<: *debian
       os: debian11
-    - <<: *debian
-      os: debian10
     - &fedora
-      os: fedora41
+      os: fedora42
       revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *fedora
-      os: fedora40
+      os: fedora41
     - <<: *fedora
-      os: fedora39
+      os: fedora40
     - &opensuse
       os: opensusetumbleweed
       revisions: *pkg-builder-revs
@@ -91,8 +91,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *opensuse
       os: opensuse15.6
-    - <<: *opensuse
-      os: opensuse15.5
     - &oracle
       os: oraclelinux9
       revisions: *pkg-builder-revs
@@ -110,14 +108,16 @@ package-builders:
     - <<: *rocky
       os: rockylinux8
     - &ubuntu
-      os: ubuntu24.10
+      os: ubuntu24.04
       revisions: *pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
     - <<: *ubuntu
-      os: ubuntu24.04
+      os: ubuntu25.04
+    - <<: *ubuntu
+      os: ubuntu24.10
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
