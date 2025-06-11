@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.22
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
@@ -13,6 +13,7 @@ RUN apk add --no-cache \
     bash \
     binutils \
     bison \
+    cargo \
     cmake \
     coreutils \
     curl \
@@ -48,12 +49,14 @@ RUN apk add --no-cache \
     openssh \
     patch \
     pcre2-dev \
+    pcre2-static \
     pkgconfig \
-    protobuf-dev \
+    rust \
     samurai \
     snappy-dev \
     snappy-static \
     util-linux-dev \
+    util-linux-static \
     wget \
     xz \
     xz-static \
@@ -72,7 +75,3 @@ RUN . /tmp/check-for-go-toolchain.sh && \
     if ! ensure_go_toolchain; then \
         echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
     fi
-
-COPY scripts/install-rust.sh /install-rust.sh
-RUN /install-rust.sh
-ENV PATH="/root/.cargo/bin:${PATH}"
