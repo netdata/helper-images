@@ -102,11 +102,13 @@ package-builders:
     - <<: *oracle
       os: oraclelinux8
     - &rocky
-      os: rockylinux9
+      os: rockylinux10
       revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *rocky
+      os: rockylinux9
     - <<: *rocky
       os: rockylinux8
     - &ubuntu
