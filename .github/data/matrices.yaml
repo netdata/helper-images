@@ -18,30 +18,20 @@ static:
   revisions:
     v1:
       - linux/amd64
-      - linux/386
       - linux/arm/v6
       - linux/arm/v7
       - linux/arm64/v8
-      - linux/ppc64le
-    v2:
-      - linux/amd64
-      - linux/arm/v5
-      - linux/arm/v7
-      - linux/arm64/v8
-      - linux/ppc64le
 base:
   images:
     - base
     - builder
   revisions:
-    - v1
     - v2
   platforms:
     - linux/amd64
     - linux/386
     - linux/arm/v7
     - linux/arm64/v8
-    - linux/ppc64le
 package-builders:
   image: package-builders
   distros:
@@ -83,8 +73,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *fedora
       os: fedora41
-    - <<: *fedora
-      os: fedora40
     - &opensuse
       os: opensusetumbleweed
       revisions: *rpm-pkg-builder-revs
@@ -135,4 +123,3 @@ legacy:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
-        - linux/ppc64le
