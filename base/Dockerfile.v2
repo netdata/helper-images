@@ -54,6 +54,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     openssl \
                     procps \
                     python3 \
+                    unixodbc \
                     zlib1g && \
     if ! dpkg-architecture --equal ppc64el; then \
         apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \

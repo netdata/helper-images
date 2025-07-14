@@ -49,6 +49,7 @@ RUN yum update -y && \
                    pcre2-devel \
                    pkgconfig \
                    'pkgconfig(libmongoc-1.0)' \
+                   'pkgconfig(odbc)' \
                    procps \
                    protobuf-c-devel \
                    protobuf-compiler \

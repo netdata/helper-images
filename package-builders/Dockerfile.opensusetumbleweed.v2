@@ -52,6 +52,7 @@ RUN zypper update -y && \
                       systemd-devel \
                       systemd-rpm-macros \
                       tar \
+                      unixODBC-devel \
                       wget \
                       xen-devel && \
     zypper clean && \

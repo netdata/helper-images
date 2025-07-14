@@ -34,9 +34,6 @@ RUN dnf distro-sync -y --nodocs && \
         libatomic \
         libcurl-devel \
         libmnl-devel \
-        # FIXME: broken / Missing
-        # XXX: Can't (currently) find an AL2023 package for this :/
-        # libnetfilter_acct-devel \
         libtool \
         libunwind-devel \
         libuuid-devel \
@@ -51,6 +48,7 @@ RUN dnf distro-sync -y --nodocs && \
         patch \
         pcre2-devel \
         pkgconfig \
+        'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
         protobuf-compiler \

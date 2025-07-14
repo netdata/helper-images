@@ -58,6 +58,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     protobuf-compiler \
                     python3 \
                     python3-dev \
+                    unixodbc-dev \
                     uuid-dev \
                     zlib1g-dev && \
     if ! dpkg-architecture --equals ppc64el; then \
