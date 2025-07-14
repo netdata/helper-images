@@ -36,9 +36,6 @@ RUN dnf distro-sync -y --nodocs && \
         libyaml-devel \
         libatomic \
         libmnl-devel \
-        # FIXME: broken / Missing
-        # XXX: Can't (currently) find a CentOS 8 package for this :/
-        #libnetfilter_acct-devel \
         libtool \
         libunwind-devel \
         libuuid-devel \
@@ -55,6 +52,7 @@ RUN dnf distro-sync -y --nodocs && \
         pcre2-devel \
         pkgconfig \
         'pkgconfig(libmongoc-1.0)' \
+        'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
         protobuf-compiler \

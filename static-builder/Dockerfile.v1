@@ -55,6 +55,8 @@ RUN apk add --no-cache \
     samurai \
     snappy-dev \
     snappy-static \
+    unixodbc-dev \
+    unixodbc-static \
     util-linux-dev \
     util-linux-static \
     wget \

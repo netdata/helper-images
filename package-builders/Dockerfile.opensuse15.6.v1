@@ -58,6 +58,7 @@ RUN zypper update -y && \
                       snappy-devel \
                       systemd-devel \
                       tar \
+                      unixODBC-devel \
                       wget \
                       xen-devel && \
     zypper clean && \

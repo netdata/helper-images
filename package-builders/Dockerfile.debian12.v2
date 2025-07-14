@@ -50,6 +50,7 @@ RUN apt-get update && \
                        pkg-config \
                        protobuf-compiler \
                        systemd \
+                       unixodbc-dev \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
