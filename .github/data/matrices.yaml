@@ -82,11 +82,13 @@ package-builders:
     - <<: *opensuse
       os: opensuse15.6
     - &oracle
-      os: oraclelinux9
+      os: oraclelinux10
       revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *oracle
+      os: oraclelinux9
     - <<: *oracle
       os: oraclelinux8
     - &rocky
