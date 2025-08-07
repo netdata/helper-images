@@ -54,7 +54,7 @@ RUN apt-get update && \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
-    if ! dpkg-architecture --is 'i386'; then \
+    if dpkg-architecture --is 'amd64' || dpkg-architecture --is 'arm64' ; then \
         apt-get install -y --no-install-recommends libxen-dev ; \
     fi && \
     apt-get clean && \
