@@ -56,8 +56,14 @@ package-builders:
       platforms:
         - linux/amd64
     - &debian
-      os: debian12
+      os: debian13
       revisions: *deb-pkg-builder-revs
+      platforms:
+        - linux/amd64
+        - linux/arm/v7
+        - linux/arm64/v8
+    - <<: *debian
+      os: debian12
       platforms:
         - linux/amd64
         - linux/386
@@ -65,6 +71,11 @@ package-builders:
         - linux/arm64/v8
     - <<: *debian
       os: debian11
+      platforms:
+        - linux/amd64
+        - linux/386
+        - linux/arm/v7
+        - linux/arm64/v8
     - &fedora
       os: fedora42
       revisions: *rpm-pkg-builder-revs
