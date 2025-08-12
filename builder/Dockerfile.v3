@@ -1,0 +1,82 @@
+# This image is used to speed up build process for official netdata images.
+#
+# Copyright: 2019 and later Netdata Incorporated
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
+# Author : Austin S. Hemmelgarn <austiN@netdata.cloud>
+
+FROM debian:trixie as builder
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Docker Builder Image"
+LABEL org.opencontainers.image.description="Builder image for official Netdata Agent Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" && \
+    echo "deb http://deb.debian.org/debian ${DISTRO_CODENAME}-backports main" > /etc/apt/sources.list.d/backports.list && \
+    chown _apt:root /var/cache/apt /var/lib/apt && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y --no-install-recommends \
+                    autoconf \
+                    autoconf-archive \
+                    automake \
+                    bison \
+                    build-essential \
+                    ca-certificates \
+                    cmake \
+                    curl \
+                    dpkg-dev \
+                    flex \
+                    git \
+                    jq \
+                    libcurl4-openssl-dev \
+                    libgcrypt-dev \
+                    libjson-c-dev \
+                    liblz4-dev \
+                    libmariadb-dev \
+                    libmnl-dev \
+                    libmongoc-dev \
+                    libpcre2-dev \
+                    libprotobuf-dev \
+                    libsnappy-dev \
+                    libssl-dev \
+                    libsystemd-dev \
+                    libtool \
+                    libuv1-dev \
+                    libyaml-dev \
+                    libzstd-dev \
+                    ninja-build \
+                    openssl \
+                    patch \
+                    pkgconf \
+                    protobuf-compiler \
+                    python3 \
+                    python3-dev \
+                    unixodbc-dev \
+                    uuid-dev \
+                    zlib1g-dev && \
+    if ! dpkg-architecture --equals ppc64el; then \
+        apt-get install -y --no-install-recommends libfreeipmi-dev libipmimonitoring-dev ; \
+    fi && \
+    if ! dpkg-architecture --equals i386; then \
+        apt-get install -y --no-install-recommends libunwind-dev ; \
+    fi && \
+    mkdir -p /deps/etc && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ADD https://raw.githubusercontent.com/netdata/netdata/master/packaging/check-for-go-toolchain.sh /tmp/check-for-go-toolchain.sh
+RUN . /tmp/check-for-go-toolchain.sh && \
+    if ! ensure_go_toolchain; then \
+        echo "ERROR: ${GOLANG_FAILURE_REASON}" && exit 1 ; \
+    fi
+
+COPY scripts/install-rust.sh /install-rust.sh
+RUN /install-rust.sh
+ENV PATH="/root/.cargo/bin:${PATH}"
