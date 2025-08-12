@@ -18,40 +18,40 @@ entries = []
 
 match sys.argv[1]:
     case 'build':
-        for rev in base['revisions']:
+        for rev, _ in base['revisions'].items():
             for image in base['images']:
                 entries.append({
                     'revision': rev,
                     'image': image,
                 })
     case 'pr':
-        for rev in base['revisions']:
+        for rev, platform in base['revisions'].items():
             for image in base['images']:
-                for platform in [x for x in base['platforms'] if x != meta['native-platform']]:
+                if platform != meta['native-platform']:
                     entries.append({
                         'revision': rev,
                         'image': image,
                         'platform': platform,
                     })
     case 'publish':
-        for rev in base['revisions']:
+        for rev in base['revisions'].keys():
             for image in base['images']:
                 tags = []
 
                 for registry in meta['registries']:
-                    tags.append(f'{ registry }{ meta["image-prefix"] }{ image }:{ rev }')
+                    tags.append(f'{registry}{meta["image-prefix"]}{image}:{rev}')
 
                     if rev == meta['latest-rev']:
-                        tags.append(f'{ registry }{ meta["image-prefix"] }{ image }:latest')
+                        tags.append(f'{registry}{meta["image-prefix"]}{image}:latest')
 
                 entries.append({
                     'revision': rev,
                     'image': image,
-                    'platforms': ','.join(base['platforms']),
+                    'platforms': ','.join(base['revisions'][rev]),
                     'tags': ','.join(tags)
                 })
     case _:
-        raise ValueError(f'Unrecognized matrix type { sys.argv[1] }')
+        raise ValueError(f'Unrecognized matrix type {sys.argv[1]}')
 
 entries.sort(key=lambda k: k['revision'])
 matrix = json.dumps({'include': entries}, sort_keys=True)

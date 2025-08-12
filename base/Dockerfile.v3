@@ -1,0 +1,67 @@
+# This image is used to speed up build process for official netdata images.
+#
+# Copyright: 2019 and later Netdata Incorporated
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
+# Author : Austin S. Hemmelgarn <austiN@netdata.cloud>
+
+FROM debian:trixie as builder
+
+LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
+LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
+LABEL org.opencontainers.image.title="Netdata Agent Docker Base Image"
+LABEL org.opencontainers.image.description="Base image for official Netdata Agent Docker images."
+LABEL org.opencontainers.image.vendor="Netdata Inc."
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" && \
+    echo "deb http://deb.debian.org/debian ${DISTRO_CODENAME}-backports main" > /etc/apt/sources.list.d/backports.list && \
+    chown _apt:root /var/cache/apt /var/lib/apt && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y --no-install-recommends \
+                    ca-certificates \
+                    curl \
+                    dpkg-dev \
+                    fping \
+                    iproute2 \
+                    jq \
+                    libcurl4 \
+                    libgcrypt20 \
+                    libjson-c5 \
+                    liblz4-1 \
+                    libmariadb3 \
+                    libmnl0 \
+                    libmongoc-1.0-0 \
+                    libprotobuf32 \
+                    libsnappy1v5 \
+                    libssl3 \
+                    libsystemd0 \
+                    libuuid1 \
+                    libuv1 \
+                    libvirt-clients \
+                    libyaml-0-2 \
+                    libzstd1 \
+                    lm-sensors \
+                    msmtp \
+                    msmtp-mta \
+                    vim-tiny \
+                    ncurses-base \
+                    netcat-openbsd \
+                    openssl \
+                    procps \
+                    python3 \
+                    unixodbc \
+                    zlib1g && \
+    if ! dpkg-architecture --equal ppc64el; then \
+        apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \
+    fi && \
+    if ! dpkg-architecture --equal i386; then \
+        apt-get install -y --no-install-recommends libunwind8 ; \
+    fi && \
+    apt-get purge -y dpkg-dev && \
+    apt-get autoremove --purge -y && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
