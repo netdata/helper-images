@@ -25,14 +25,15 @@ match sys.argv[1]:
                     'image': image,
                 })
     case 'pr':
-        for rev, platform in base['revisions'].items():
+        for rev, platforms in base['revisions'].items():
             for image in base['images']:
-                if platform != meta['native-platform']:
-                    entries.append({
-                        'revision': rev,
-                        'image': image,
-                        'platform': platform,
-                    })
+                for platform in platforms:
+                    if platform != meta['native-platform']:
+                        entries.append({
+                            'revision': rev,
+                            'image': image,
+                            'platform': platform,
+                        })
     case 'publish':
         for rev in base['revisions'].keys():
             for image in base['images']:
