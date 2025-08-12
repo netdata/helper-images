@@ -29,19 +29,14 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     fping \
                     iproute2 \
                     jq \
-                    libcurl4 \
                     libgcrypt20 \
                     libjson-c5 \
                     liblz4-1 \
                     libmariadb3 \
                     libmnl0 \
-                    libmongoc-1.0-0 \
-                    libprotobuf32 \
                     libsnappy1v5 \
-                    libssl3 \
                     libsystemd0 \
                     libuuid1 \
-                    libuv1 \
                     libvirt-clients \
                     libyaml-0-2 \
                     libzstd1 \
@@ -56,6 +51,21 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     python3 \
                     unixodbc \
                     zlib1g && \
+    if dpkg-architecutre --equal armhf || dpkg-architecture --equal armel ; \
+        apt-get install -y --no-install-recommends \
+                        libcurl4t32 \
+                        libmongoc-1.0-0t64 \
+                        libprotobuf32t64 \
+                        libssl3t64 \
+                        libuv1t64 \
+    else \
+        apt-get install -y --no-install-recommends \
+                        libcurl4 \
+                        libmongoc-1.0-0 \
+                        libprotobuf32 \
+                        libssl3 \
+                        libuv1 \
+    fi \
     if ! dpkg-architecture --equal ppc64el; then \
         apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \
     fi && \
