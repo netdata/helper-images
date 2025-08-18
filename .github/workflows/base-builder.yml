@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Prepare tools
         id: prepare
         run: |
@@ -57,7 +57,7 @@ jobs:
       matrix: ${{ fromJson(needs.matrix.outputs.build-matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
       - name: Test Build
@@ -79,7 +79,7 @@ jobs:
       matrix: ${{ fromJson(needs.matrix.outputs.pr-matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup QEMU
         if: matrix.platforms != 'linux/i386'
         uses: docker/setup-qemu-action@v3
@@ -104,7 +104,7 @@ jobs:
       matrix: ${{ fromJson(needs.matrix.outputs.publish-matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
       - name: Setup Buildx
