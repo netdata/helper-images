@@ -6,7 +6,7 @@
 # Author : Paul Emm. Katsoulakis <paul@netdata.rocks>
 # Author : Austin S. Hemmelgarn <austiN@netdata.cloud>
 
-FROM debian:12
+FROM debian:13
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
