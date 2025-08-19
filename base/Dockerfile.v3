@@ -36,6 +36,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     libmnl0 \
                     libsnappy1v5 \
                     libsystemd0 \
+                    libunwind8 \
                     libuuid1 \
                     libvirt-clients \
                     libyaml-0-2 \
@@ -51,26 +52,23 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     python3 \
                     unixodbc \
                     zlib1g && \
-    if dpkg-architecutre --equal armhf || dpkg-architecture --equal armel ; \
+    if dpkg-architecture --equal armhf || dpkg-architecture --equal armel ; then \
         apt-get install -y --no-install-recommends \
                         libcurl4t32 \
                         libmongoc-1.0-0t64 \
                         libprotobuf32t64 \
                         libssl3t64 \
-                        libuv1t64 \
+                        libuv1t64 ; \
     else \
         apt-get install -y --no-install-recommends \
-                        libcurl4 \
-                        libmongoc-1.0-0 \
-                        libprotobuf32 \
-                        libssl3 \
-                        libuv1 \
-    fi \
-    if ! dpkg-architecture --equal ppc64el; then \
-        apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \
+                        libcurl4t64 \
+                        libmongoc-1.0-0t64 \
+                        libprotobuf32t64 \
+                        libssl3t64 \
+                        libuv1t64 ; \
     fi && \
-    if ! dpkg-architecture --equal i386; then \
-        apt-get install -y --no-install-recommends libunwind8 ; \
+    if ! dpkg-architecture --equal ppc64el ; then \
+        apt-get install -y --no-install-recommends freeipmi libipmimonitoring6 ; \
     fi && \
     apt-get purge -y dpkg-dev && \
     apt-get autoremove --purge -y && \

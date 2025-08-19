@@ -48,6 +48,7 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     libssl-dev \
                     libsystemd-dev \
                     libtool \
+                    libunwind-dev \
                     libuv1-dev \
                     libyaml-dev \
                     libzstd-dev \
@@ -63,9 +64,6 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     zlib1g-dev && \
     if ! dpkg-architecture --equals ppc64el; then \
         apt-get install -y --no-install-recommends libfreeipmi-dev libipmimonitoring-dev ; \
-    fi && \
-    if ! dpkg-architecture --equals i386; then \
-        apt-get install -y --no-install-recommends libunwind-dev ; \
     fi && \
     mkdir -p /deps/etc && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
