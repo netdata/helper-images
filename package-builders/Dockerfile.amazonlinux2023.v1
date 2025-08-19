@@ -18,6 +18,7 @@ RUN dnf distro-sync -y --nodocs && \
         automake \
         bison \
         bison-devel \
+        clang \
         cmake \
         cups-devel \
         curl \

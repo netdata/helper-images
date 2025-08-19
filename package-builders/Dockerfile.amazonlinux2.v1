@@ -16,6 +16,7 @@ RUN yum update -y && \
                    automake \
                    bison \
                    bison-devel \
+                   clang \
                    cmake \
                    cups-devel \
                    curl \

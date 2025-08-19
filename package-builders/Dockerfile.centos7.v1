@@ -22,6 +22,7 @@ RUN yum install -y epel-release && \
                    bash \
                    bison \
                    bison-devel \
+                   clang \
                    cmake \
                    cups-devel \
                    curl \

@@ -12,6 +12,7 @@ ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 RUN yum update -y && \
     yum install -y bison \
                    bison-devel \
+                   clang \
                    cmake \
                    cups-devel \
                    curl \

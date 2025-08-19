@@ -21,6 +21,7 @@ RUN dnf distro-sync -y --nodocs && \
         automake \
         bash \
         bison \
+        clang \
         cmake \
         cups-devel \
         curl \

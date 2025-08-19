@@ -16,6 +16,7 @@ RUN zypper update -y && \
                       autoconf-archive \
                       autogen \
                       automake \
+                      clang \
                       bison \
                       cmake \
                       cups \
