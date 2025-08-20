@@ -20,6 +20,7 @@ RUN dnf config-manager --set-enabled ol10_codeready_builder && \
         automake \
         bash \
         bison \
+        clang \
         cmake \
         cups-devel \
         curl \

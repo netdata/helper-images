@@ -15,6 +15,7 @@ RUN dnf distro-sync -y --nodocs && \
     dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         bash \
         bison \
+        clang \
         cmake \
         cups-devel \
         curl \

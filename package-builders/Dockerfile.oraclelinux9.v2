@@ -19,6 +19,7 @@ RUN dnf config-manager --set-enabled ol9_codeready_builder && \
     dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False \
         bash \
         bison \
+        clang \
         cmake \
         cups-devel \
         curl \
