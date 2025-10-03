@@ -94,6 +94,8 @@ package-builders:
         - linux/amd64
         - linux/arm64/v8
     - <<: *opensuse
+      os: opensuse16.0
+    - <<: *opensuse
       os: opensuse15.6
     - &oracle
       os: oraclelinux10
@@ -122,6 +124,8 @@ package-builders:
         - linux/amd64
         - linux/arm/v7
         - linux/arm64/v8
+    - <<: *ubuntu
+      os: ubuntu25.10
     - <<: *ubuntu
       os: ubuntu25.04
     - <<: *ubuntu
