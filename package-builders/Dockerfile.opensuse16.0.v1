@@ -58,8 +58,7 @@ RUN zypper update -y && \
                       systemd-devel \
                       tar \
                       unixODBC-devel \
-                      wget \
-                      xen-devel && \
+                      wget && \
     zypper clean && \
     rm -rf /var/cache/zypp/*/* && \
     c_rehash && \
