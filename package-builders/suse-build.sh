@@ -7,6 +7,8 @@ pkg_version="$(echo "${VERSION}" | tr - .)"
 cp -a /netdata "/usr/src/packages/SOURCES/netdata-${pkg_version}" || exit 1
 rm -rf "/usr/src/packages/SOURCES/netdata-${pkg_version}/.git" || exit 1
 
+. /etc/os-release
+
 # These next few steps prep the spec file for building with local sources.
 # Without this, we would have to create a tarball of the local sources
 # that the RPM build process would then promptly extract, which is a waste
@@ -15,8 +17,13 @@ rm -rf "/usr/src/packages/SOURCES/netdata-${pkg_version}/.git" || exit 1
 # We still use release tarballs for release builds, but that's handled
 # outside of the container.
 sed -i 's/^Source0.*$//g' /usr/src/packages/SPECS/netdata.spec || exit 1
-sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rfT %{_topdir}\/SOURCES\/netdata-%{version} BUILD/g' /usr/src/packages/SPECS/netdata.spec || exit 1
-sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
+
+if [ "$(echo ${VERSION_ID} | cut -f 1 -d '.')" -ge 16 ]; then
+    sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rf %{_topdir}\/SOURCES\/netdata-%{version} BUILD\/netdata-%{version}-build/g' /usr/src/packages/SPECS/netdata.spec || exit 1
+else
+    sed -i 's/^%setup.*$/cd %{_topdir}\n rm -rf BUILD\n mkdir -p BUILD\n cp -rfT %{_topdir}\/SOURCES\/netdata-%{version} BUILD/g' /usr/src/packages/SPECS/netdata.spec || exit 1
+    sed -i "s/\${RPM_BUILD_DIR}\/%{name}-%{version}/\${RPM_BUILD_DIR}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
+fi
 
 # This updates the version in the spec file appropriately.
 sed -i "s/@PACKAGE_VERSION@/${pkg_version}/g" /usr/src/packages/SPECS/netdata.spec || exit 1
