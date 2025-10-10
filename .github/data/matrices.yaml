@@ -80,11 +80,13 @@ package-builders:
         - linux/arm/v7
         - linux/arm64/v8
     - &fedora
-      os: fedora42
+      os: fedora43
       revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
+    - <<: *fedora
+      os: fedora42
     - <<: *fedora
       os: fedora41
     - &opensuse
