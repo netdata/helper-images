@@ -44,13 +44,15 @@ RUN DISTRO_CODENAME="$(awk -F= '/VERSION_CODENAME/{print $2}' /etc/os-release)" 
                     lm-sensors \
                     msmtp \
                     msmtp-mta \
-                    vim-tiny \
                     ncurses-base \
                     netcat-openbsd \
+                    nvme-cli \
                     openssl \
                     procps \
                     python3 \
+                    smartmontools \
                     unixodbc \
+                    vim-tiny \
                     zlib1g && \
     if dpkg-architecture --equal armhf || dpkg-architecture --equal armel ; then \
         apt-get install -y --no-install-recommends \
