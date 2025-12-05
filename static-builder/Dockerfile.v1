@@ -13,6 +13,8 @@ RUN apk add --no-cache \
     bash \
     binutils \
     bison \
+    brotli-dev \
+    brotli-static \
     cargo \
     clang \
     cmake \
