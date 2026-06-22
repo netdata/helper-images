@@ -48,7 +48,6 @@ RUN dnf distro-sync -y --nodocs && \
         patch \
         pcre2-devel \
         pkgconfig \
-        'pkgconfig(libmongoc-1.0)' \
         'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
