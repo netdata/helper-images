@@ -47,6 +47,7 @@ RUN zypper update -y && \
                       pkgconf \
                       protobuf-devel \
                       protobuf-c-devel \
+                      rpm-build \
                       rpmdevtools \
                       snappy-devel \
                       systemd-devel \

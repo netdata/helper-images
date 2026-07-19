@@ -50,6 +50,7 @@ RUN yum update -y && \
                    protobuf-c-devel \
                    protobuf-compiler \
                    protobuf-devel \
+                   rpm-build \
                    rpmdevtools \
                    snappy-devel \
                    systemd-devel \
