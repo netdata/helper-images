@@ -10,6 +10,9 @@ ENV VERSION=$VERSION
 # Dummy Sentry DSN
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
+# Unlike the older EL images there is no libmongoc here: mongo-c-driver is
+# not available in EPEL 10, and netdata disables the MongoDB exporter on
+# EL >= 10 for the same reason.
 RUN dnf config-manager --set-enabled ol10_codeready_builder && \
     dnf install -y --nodocs --setopt=install_weak_deps=False --setopt=diskspacecheck=False oracle-epel-release-el10 && \
     dnf distro-sync -y --nodocs && \

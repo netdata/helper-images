@@ -10,6 +10,9 @@ ENV VERSION=$VERSION
 # Dummy Sentry DSN
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
+# Unlike the older EL images there is no libmongoc here: mongo-c-driver is
+# not available in EPEL 10, and netdata disables the MongoDB exporter on
+# EL >= 10 for the same reason.
 RUN dnf distro-sync -y --nodocs && \
     dnf install -y --nodocs 'dnf-command(config-manager)' epel-release && \
     dnf config-manager --set-enabled crb && \
