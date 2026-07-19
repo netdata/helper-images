@@ -66,14 +66,15 @@ RUN yum install -y epel-release && \
     yum clean all && \
     c_rehash
 
-# Fetch a newer version of CMake, because the system-provided one is _ancient_.
+# Fetch a newer version of CMake, because the system-provided one is _ancient_
+# (and CPack RPM support needs CMake >= 4.1 for weak-dependency emission).
 # The hash is hard-coded here to mitigate the risk of supply-chain attacks.
 RUN curl --fail -sSL --connect-timeout 20 --retry 3 --output cmake-linux-$(uname -m).sh \
-         https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-$(uname -m).sh && \
+         https://github.com/Kitware/CMake/releases/download/v4.1.6/cmake-4.1.6-linux-$(uname -m).sh && \
     if [ "$(uname -m)" = "x86_64" ]; then \
-        echo '8c449dabb2b2563ec4e6d5e0fb0ae09e729680efab71527b59015131cea4a042  cmake-linux-x86_64.sh' | sha256sum -c - ; \
+        echo 'd471e4d0d89a708b0a4d32eff2005b10484e2b28be5644d896ee8a584f670db9  cmake-linux-x86_64.sh' | sha256sum -c - ; \
     elif [ "$(uname -m)" = "aarch64" ]; then \
-        echo 'a83e01ed1cdf44c2e33e0726513b9a35a8c09e3b5a126fd720b3c8a9d5552368  cmake-linux-aarch64.sh' | sha256sum -c - ; \
+        echo '7e457ec8678e797188674a639b4cc7df6c27666eae3fd2e431eb0b0c49c24e70  cmake-linux-aarch64.sh' | sha256sum -c - ; \
     else \
         echo "ARCH NOT SUPPORTED BY CMAKE" ; \
         exit 1 ; \
