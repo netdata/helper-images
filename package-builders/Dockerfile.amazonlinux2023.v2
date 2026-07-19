@@ -60,6 +60,11 @@ RUN dnf distro-sync -y --nodocs && \
     rm -rf /var/cache/dnf && \
     c_rehash
 
+# CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
+# entrypoint prefers /cmake/bin when present.
+COPY scripts/install-cmake.sh /install-cmake.sh
+RUN /install-cmake.sh
+
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/cpack-rpm.sh /build.sh
 
@@ -73,18 +78,6 @@ RUN . /tmp/check-for-go-toolchain.sh && \
 COPY scripts/install-rust.sh /install-rust.sh
 RUN /install-rust.sh
 ENV PATH="/root/.cargo/bin:${PATH}"
-
-# CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
-# entrypoint prefers /cmake/bin when present.
-ARG CMAKE_VERSION=4.1.6
-RUN case "$(uname -m)" in \
-        x86_64) cmake_arch=x86_64 ;; \
-        aarch64) cmake_arch=aarch64 ;; \
-        *) echo "No CMake binary release for $(uname -m)" && exit 1 ;; \
-    esac && \
-    curl -fsSL "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${cmake_arch}.tar.gz" \
-      | tar -xz -C /opt && \
-    ln -s "/opt/cmake-${CMAKE_VERSION}-linux-${cmake_arch}" /cmake
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/build.sh"]
