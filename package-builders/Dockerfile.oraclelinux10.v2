@@ -48,7 +48,6 @@ RUN dnf config-manager --set-enabled ol10_codeready_builder && \
         patch \
         pcre2-devel \
         pkgconfig \
-        'pkgconfig(libmongoc-1.0)' \
         'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
