@@ -60,7 +60,6 @@ RUN yum install -y epel-release && \
                    rpmdevtools \
                    snappy-devel \
                    systemd-devel \
-                   systemd-rpm-macros \
                    wget \
                    zlib-devel && \
     yum clean all && \
