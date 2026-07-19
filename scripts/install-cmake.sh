@@ -25,11 +25,17 @@ esac
 
 tarball="cmake-${CMAKE_VERSION}-linux-${cmake_arch}.tar.gz"
 
-curl --fail -sSL --connect-timeout 20 --retry 3 --output "/tmp/${tarball}" \
+curl --fail -sSL --connect-timeout 20 --retry 3 --max-time 600 --output "/tmp/${tarball}" \
      "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${tarball}"
 echo "${cmake_sha256}  /tmp/${tarball}" | sha256sum -c -
 tar -xzf "/tmp/${tarball}" -C /opt
 rm -f "/tmp/${tarball}"
+
+# Fail the image build if a future release changes the tarball layout; a
+# dangling /cmake symlink would otherwise make the entrypoint silently fall
+# back to the distro CMake.
+test -x "/opt/cmake-${CMAKE_VERSION}-linux-${cmake_arch}/bin/cmake"
+
 # -T so a pre-existing /cmake directory fails the build instead of silently
 # nesting the symlink inside it.
 ln -sT "/opt/cmake-${CMAKE_VERSION}-linux-${cmake_arch}" /cmake
