@@ -47,6 +47,7 @@ RUN zypper update -y && \
                       pkgconf \
                       protobuf-devel \
                       protobuf-c-devel \
+                      rpm-build \
                       rpmdevtools \
                       snappy-devel \
                       systemd-devel \
@@ -57,6 +58,11 @@ RUN zypper update -y && \
     zypper clean && \
     rm -rf /var/cache/zypp/*/* && \
     c_rehash
+
+# CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
+# entrypoint prefers /cmake/bin when present.
+COPY scripts/install-cmake.sh /install-cmake.sh
+RUN /install-cmake.sh
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/cpack-rpm.sh /build.sh

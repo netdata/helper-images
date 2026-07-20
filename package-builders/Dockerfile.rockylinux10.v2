@@ -10,6 +10,9 @@ ENV VERSION=$VERSION
 # Dummy Sentry DSN
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 
+# Unlike the older EL images there is no libmongoc here: mongo-c-driver is
+# not available in EPEL 10, and netdata disables the MongoDB exporter on
+# EL >= 10 for the same reason.
 RUN dnf distro-sync -y --nodocs && \
     dnf install -y --nodocs 'dnf-command(config-manager)' epel-release && \
     dnf config-manager --set-enabled crb && \
@@ -48,7 +51,6 @@ RUN dnf distro-sync -y --nodocs && \
         patch \
         pcre2-devel \
         pkgconfig \
-        'pkgconfig(libmongoc-1.0)' \
         'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
@@ -64,6 +66,11 @@ RUN dnf distro-sync -y --nodocs && \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
     c_rehash
+
+# CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
+# entrypoint prefers /cmake/bin when present.
+COPY scripts/install-cmake.sh /install-cmake.sh
+RUN /install-cmake.sh
 
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/cpack-rpm.sh /build.sh

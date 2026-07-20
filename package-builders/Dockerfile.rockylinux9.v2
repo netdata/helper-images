@@ -65,6 +65,11 @@ RUN dnf distro-sync -y --nodocs && \
     rm -rf /var/cache/dnf && \
     c_rehash
 
+# CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
+# entrypoint prefers /cmake/bin when present.
+COPY scripts/install-cmake.sh /install-cmake.sh
+RUN /install-cmake.sh
+
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/cpack-rpm.sh /build.sh
 
