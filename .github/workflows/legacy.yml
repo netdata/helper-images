@@ -2,6 +2,7 @@
 # Builds our legacy Docker images.
 name: Legacy Images
 on:
+  workflow_dispatch: null
   schedule:
     - cron: '0 0 * * *'
   push:
