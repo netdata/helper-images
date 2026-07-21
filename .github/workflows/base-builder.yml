@@ -2,6 +2,7 @@
 # Builds our base and builder Docker iamges that it used to build the Production Docker Image(s)
 name: Base Builder
 on:
+  workflow_dispatch: null
   schedule:
     - cron: '0 0 * * *'
   push:

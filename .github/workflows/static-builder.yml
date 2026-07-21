@@ -2,6 +2,7 @@
 # Builds the Docker images we use for producing our static builds.
 name: Static Builder
 on:
+  workflow_dispatch: null
   schedule:
     - cron: '0 0 * * *'
   push:
