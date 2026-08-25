@@ -71,6 +71,9 @@ RUN curl --fail -sSL --connect-timeout 10 --retry 3 https://sentry.io/get-cli/ >
     sh /tmp/get-sentry.sh && \
     rm -f /tmp/get-sentry.sh
 
+COPY scripts/install-sccache.sh /install-sccache.sh
+RUN /install-sccache.sh
+
 COPY package-builders/entrypoint.sh /entrypoint.sh
 COPY package-builders/cpack-deb.sh /build.sh
 
