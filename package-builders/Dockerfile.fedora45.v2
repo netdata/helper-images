@@ -1,9 +1,9 @@
-FROM fedora:42
+FROM fedora:45
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
-LABEL org.opencontainers.image.title="Netdata Package Builder for Fedora 42"
-LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Fedora 42"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Fedora 45"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official RPM packages for Fedora 45"
 LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV VERSION=$VERSION
@@ -46,7 +46,6 @@ RUN dnf distro-sync -y --nodocs && \
         patch \
         pcre2-devel \
         pkgconfig \
-        'pkgconfig(libmongoc-1.0)' \
         'pkgconfig(odbc)' \
         procps \
         protobuf-c-devel \
