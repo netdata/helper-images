@@ -59,7 +59,7 @@ RUN zypper update -y && \
                       xen-devel && \
     zypper clean && \
     rm -rf /var/cache/zypp/*/* && \
-    c_rehash
+    openssl rehash
 
 # CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
 # entrypoint prefers /cmake/bin when present.

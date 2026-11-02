@@ -59,7 +59,7 @@ RUN apt-get update && \
         apt-get install -y --no-install-recommends libxen-dev ; \
     fi && \
     apt-get clean && \
-    c_rehash && \
+    openssl rehash && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl --fail -sSL --connect-timeout 10 --retry 3 https://sentry.io/get-cli/ > /tmp/get-sentry.sh && \

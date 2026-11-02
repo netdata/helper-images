@@ -70,7 +70,7 @@ RUN dnf distro-sync -y --nodocs && \
         wget \
         zlib-devel && \
     rm -rf /var/cache/dnf && \
-    c_rehash
+    openssl rehash
 
 # CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
 # entrypoint prefers /cmake/bin when present.

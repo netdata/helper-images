@@ -64,7 +64,7 @@ RUN apt-get update && \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
-    c_rehash && \
+    openssl rehash && \
     dpkg-architecture --equal armhf || apt-get install -y --no-install-recommends \
                        libxen-dev && \
     apt-get clean && \
