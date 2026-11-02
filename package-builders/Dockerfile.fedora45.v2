@@ -57,8 +57,7 @@ RUN dnf distro-sync -y --nodocs && \
         systemd-rpm-macros \
         xen-devel \
         zlib-devel && \
-    rm -rf /var/cache/dnf && \
-    c_rehash
+    rm -rf /var/cache/dnf
 
 # CPack RPM support needs CMake >= 4.1 (weak-dependency emission); the
 # entrypoint prefers /cmake/bin when present.
