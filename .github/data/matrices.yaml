@@ -9,7 +9,6 @@ meta:
     - 'quay.io/'
 anchors:
   rpm-pkg-builder-revs: &rpm-pkg-builder-revs
-    - v1
     - v2
   deb-pkg-builder-revs: &deb-pkg-builder-revs
     - v2
@@ -44,8 +43,6 @@ package-builders:
       platforms:
         - linux/amd64
         - linux/arm64/v8
-    - <<: *amzn
-      os: amazonlinux2
     - &centos-stream
       os: centos-stream10
       revisions: *rpm-pkg-builder-revs
@@ -54,10 +51,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *centos-stream
       os: centos-stream9
-    - os: centos7
-      revisions: *rpm-pkg-builder-revs
-      platforms:
-        - linux/amd64
     - &debian
       os: debian13
       revisions: *deb-pkg-builder-revs
@@ -72,23 +65,16 @@ package-builders:
         - linux/386
         - linux/arm/v7
         - linux/arm64/v8
-    - <<: *debian
-      os: debian11
-      platforms:
-        - linux/amd64
-        - linux/386
-        - linux/arm/v7
-        - linux/arm64/v8
     - &fedora
-      os: fedora44
+      os: fedora45
       revisions: *rpm-pkg-builder-revs
       platforms:
         - linux/amd64
         - linux/arm64/v8
     - <<: *fedora
-      os: fedora43
+      os: fedora44
     - <<: *fedora
-      os: fedora42
+      os: fedora43
     - &opensuse
       os: opensusetumbleweed
       revisions: *rpm-pkg-builder-revs
@@ -97,8 +83,6 @@ package-builders:
         - linux/arm64/v8
     - <<: *opensuse
       os: opensuse16.0
-    - <<: *opensuse
-      os: opensuse15.6
     - &oracle
       os: oraclelinux10
       revisions: *rpm-pkg-builder-revs
@@ -131,9 +115,7 @@ package-builders:
     - <<: *ubuntu
       os: ubuntu22.04
     - <<: *ubuntu
-      os: ubuntu20.04
-    - <<: *ubuntu
-      os: ubuntu25.10
+      os: ubuntu26.10
 legacy:
   image: legacy
   distros:

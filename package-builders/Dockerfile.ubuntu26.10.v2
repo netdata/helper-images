@@ -1,16 +1,16 @@
-FROM debian:bullseye
+FROM ubuntu:26.10
 
 LABEL org.opencontainers.image.authors="Netdatabot <bot@netdata.cloud>"
 LABEL org.opencontainers.image.source="https://github.com/netdata/helper-images"
-LABEL org.opencontainers.image.title="Netdata Package Builder for Debian 11"
-LABEL org.opencontainers.image.description="Package builder image for Netdata official DEB packages for Debian 11"
+LABEL org.opencontainers.image.title="Netdata Package Builder for Ubuntu 26.10"
+LABEL org.opencontainers.image.description="Package builder image for Netdata official DEB packages for Ubuntu 26.10"
 LABEL org.opencontainers.image.vendor="Netdata Inc."
 
 ENV EMAIL=bot@netdata.cloud
 ENV FULLNAME="Netdata Builder"
 ENV VERSION=0.1
 
-# This is needed to ensure package installs don't prompt for any user input.
+# This is needed to keep package installs from prompting about configuration.
 ENV DEBIAN_FRONTEND=noninteractive
 # Dummy Sentry DSN
 ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
@@ -18,20 +18,23 @@ ENV SENTRY_DSN="https://1ea0662a@o01e.ingest.sentry.io/dummy"
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
+                       dpkg-dev && \
+    apt-get install -y --no-install-recommends \
                        bison \
                        build-essential \
                        ca-certificates \
                        clang \
                        cmake \
                        curl \
+                       dpkg-dev \
                        file \
                        flex \
                        g++ \
                        gcc \
                        git-core \
                        libatomic1 \
-                       libcurl4-openssl-dev \
                        libcups2-dev \
+                       libcurl4-openssl-dev \
                        libdistro-info-perl \
                        libelf-dev \
                        libipmimonitoring-dev \
@@ -50,7 +53,6 @@ RUN apt-get update && \
                        libssl-dev \
                        libunwind-dev \
                        libuv1-dev \
-                       libxen-dev \
                        libzstd-dev \
                        make \
                        ninja-build \
@@ -62,8 +64,10 @@ RUN apt-get update && \
                        uuid-dev \
                        wget \
                        zlib1g-dev && \
+    openssl rehash && \
+    dpkg-architecture --equal armhf || apt-get install -y --no-install-recommends \
+                       libxen-dev && \
     apt-get clean && \
-    c_rehash && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl --fail -sSL --connect-timeout 10 --retry 3 https://sentry.io/get-cli/ > /tmp/get-sentry.sh && \
